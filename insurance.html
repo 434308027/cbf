@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="x5-orientation" content="portrait" />
+		<meta name="x5-fullscreen" content="true" />
+		<meta name="screen-orientation" content="portrait" />
+		<meta name="full-screen" content="yes" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/insurance.css" />
+		<link rel="stylesheet" type="text/css" href="css/swiper.min.css" />
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/swiper.min.js"></script>
+		<script type="text/javascript" src="js/vue1.0.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<title>保险</title>
+	</head>
+
+	<body>
+		<!-- header_头部  -->
+		<header>
+			<p>
+				<a href="index.html"></a>
+				<i>保险</i>
+			</p>
+		</header>
+		<!-- section_骨架 -->
+		<section>
+			<div class="title gold">您还有消费金{{ dott.rates }}<i>({{ dott.rates }}消费金抵扣1元)</i></div>
+			<div class="ss">
+				<img class="bg" src="images/logo/logo_Bg_1.jpg" alt="" />
+				<p class="title_expense"></p>
+				<div>
+					<a href="insurance-installment.html">
+						<span class="right">
+					<span style="font-style: normal;">商业险+交强险+车船险</span>
+						<em>试算保费</em>
+						</span>
+					</a>
+					<a href="insurance-installment2.html">
+						<span class="right">
+					<span style="font-style: normal;">商业险</span>
+						<em>试算保费</em>
+						</span>
+					</a>
+				</div>
+				<p class="title_apply"></p>
+				<span class="flow"></span>
+			</div>
+		</section>
+		<!-- footer_底部 -->
+		<footer class="footer">
+			<ul>
+				<li>
+					<a href="index.html"><img src="images/icon/icon_12.png" alt="" />首页</a>
+					<a href="javascript:;"><img src="images/icon/icon_31.png" alt="" />保险</a>
+					<a href="maintain.html"><img src="images/icon/icon_8.png" alt="" />保养</a>
+					<a href="store.html"><img src="images/icon/icon_9.png" alt="" />商城</a>
+					<a href="personal_center.html"><img src="images/icon/icon_10.png" alt="" />我的</a>
+				</li>
+			</ul>
+		</footer>
+	</body>
+
+</html>
+<script>
+	//ajax查询保险种类
+	$.ajax({
+		type: "post",
+		url: site + "/insurance/insurance",
+		dataType: 'json',
+		success: function(data) {
+			var jsons = data.data
+			var vue = new Vue({
+				el: '.ss',
+				data: {
+					dott: jsons,
+				}
+			})
+		}
+	});
+	//消费金差查询
+	if(loca_fetch('userid') == '') {
+		$('.gold').hide();
+	} else {
+		$('.gold').show();
+		$.ajax({
+			type: "get",
+			url: site + "/user/myIntegral",
+			data: {
+				userId: loca_fetch('userid'),
+				rateType: 3
+			},
+			dataType: 'json',
+			success: function(data) {
+				var jsons = data.data
+				var vue = new Vue({
+					el: '.gold',
+					data: {
+						dott: jsons
+					}
+				})
+			}
+		});
+	}
+</script>

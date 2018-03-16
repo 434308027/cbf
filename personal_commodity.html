@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="x5-orientation" content="portrait" />
+	<meta name="x5-fullscreen" content="true" />
+	<meta name="screen-orientation" content="portrait" />
+	<meta name="full-screen" content="yes" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="css/personal_maintain.css"/>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<title>个人商品</title>
+</head>
+<body>
+	<!-- header_头部 -->
+	<header>
+		<div>
+			<a href="personal_center.html"></a>
+			<form action="" method="post">		
+				<label><i></i><input type="text" value="" placeholder="搜索订单号" /></label>
+			</form>
+		</div>
+	</header>
+	<!-- nav_导航条 -->
+	<nav>
+		<div class="active">
+			<p>代付款</p>
+		</div>
+		<div>
+			<p>发货单</p>
+		</div>
+		<div>
+			<p>可兑换</p>
+		</div>
+		<div>
+			<p>待评价</p>
+		</div>
+		<div>
+			<p>退款</p>
+		</div>
+	</nav>
+	<!-- section_订单内容 -->
+	<section>
+		<!-- 代付款 -->
+		<ul class="ullist">
+			<li>
+				<div class="indent_title">
+					1
+					<img class="left" src="images/icon/icon_36.png" alt="" />
+					<i class="right">全部</i>
+				</div>
+				<div class="indent_main">
+					<em class="left"><img src="images/logo/logo_Bg_16.jpg" alt="" /></em>
+					<span class="left">
+						<i>德国艾迪生既润滑油</i>
+						<b>2017/6/10<i>15:03</i><strong>下单</strong></b>
+						<strong>实付:<i>￥336</i></strong>
+					</span>
+					<div class="right">
+						<p class="indent_num">X1</p>
+						<a href="javascript:;">去付款</a>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<!-- 发货单 -->
+		<ul class="ullist">
+			<li>
+				<div class="indent_title">
+					2
+					<img class="left" src="images/icon/icon_36.png" alt="" />
+					<i class="right">代付款</i>
+				</div>
+				<div class="indent_main">
+					<em class="left"><img src="images/logo/logo_Bg_15.jpg" alt="" /></em>
+					<span class="left">
+						<i>性能保养-1W公里</i>
+						<b>2017/6/10<i>15:03</i><strong>下单</strong></b>
+						<strong>实付:<i>￥336</i></strong>
+					</span>
+					<div class="right">
+						<p class="indent_num">X1</p>
+						<a href="javascript:;">待评价</a>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<!-- 可兑换 -->
+		<ul class="ullist">
+			<li>
+				<div class="indent_title">
+					3
+					<img class="left" src="images/icon/icon_36.png" alt="" />
+					<i class="right">代付款</i>
+				</div>
+				<div class="indent_main">
+					<em class="left"><img src="images/logo/logo_Bg_15.jpg" alt="" /></em>
+					<span class="left">
+						<i>性能保养-1W公里</i>
+						<b>2017/6/10<i>15:03</i><strong>下单</strong></b>
+						<strong>实付:<i>￥336</i></strong>
+					</span>
+					<div class="right">
+						<p class="indent_num">X1</p>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<!-- 待评价 -->
+		<ul class="ullist">
+			<li>
+				<div class="indent_title">
+					4
+					<img class="left" src="images/icon/icon_36.png" alt="" />
+					<i class="right">代付款</i>
+				</div>
+				<div class="indent_main">
+					<em class="left"><img src="images/logo/logo_Bg_15.jpg" alt="" /></em>
+					<span class="left">
+						<i>性能保养-1W公里</i>
+						<b>2017/6/10<i>15:03</i><strong>下单</strong></b>
+						<strong>实付:<i>￥336</i></strong>
+					</span>
+					<div class="right">
+						<p class="indent_num">X1</p>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<!-- 退款 -->
+		<ul class="ullist">
+			<li>
+				<div class="indent_title">
+					5
+					<img class="left" src="images/icon/icon_36.png" alt="" />
+					<i class="right">代付款</i>
+				</div>
+				<div class="indent_main">
+					<em class="left"><img src="images/logo/logo_Bg_16.jpg" alt="" /></em>
+					<span class="left">
+						<i>性能保养-1W公里</i>
+						<b>2017/6/10<i>15:03</i><strong>下单</strong></b>
+						<strong>实付:<i>￥336</i></strong>
+					</span>
+					<div class="right">
+						<p class="indent_num">X1</p>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</section>
+</body>
+</html>
+<script>
+	$(function(){
+		//选项卡切换
+		$('.ullist').eq(0).css({'opacity':'1'})
+		$('nav div').click(function(){
+			var that = $(this).index();
+			$(this).addClass('active').siblings().removeClass('active')	
+			$('.ullist').eq(that).css({'opacity':'1','transition':'1s'}).siblings().css({'opacity':'0','transtion':'1s'})
+		})
+	})
+</script>

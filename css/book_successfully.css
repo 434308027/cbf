@@ -1,0 +1,14 @@
+@charset "utf-8";
+
+body { background: #fff; }
+
+.book-title { text-align: center;margin-top: 2rem;font-size: 1.4rem;letter-spacing: 0.04rem;font-weight: normal; }
+.book-successfully { text-align: center;margin: 2rem; }
+.book-photo { width: 4rem;height: 4rem;display: block;border: 1px solid #ddd;overflow: hidden;margin: 0 auto; }
+.book-keep { font-size: 0.7rem;color: #000; }
+.book-price { font-size: 0.85rem;color: red; }
+.book-address { font-size: 0.56rem;color: #666;margin-bottom: 0.2rem;text-align: center; }
+.book-time { font-size: 0.56rem;color: #666;text-align: center; }
+.book-affirm { position: absolute;bottom: 2rem;left: 0;padding: 1.2rem;box-sizing: border-box;-webkit-box-sizing: border-box;width: 100%;height: 1.76rem; }
+.book-affirm button { width: 100%;height: 1.76rem;background: #FF7676;border-radius: 1rem;-webkit-border-radius: 1rem;color: #fff;font-size: 0.6rem; }
+.book-photo img { width: 4rem;height: 4rem; }

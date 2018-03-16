@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="x5-orientation" content="portrait" />
+		<meta name="x5-fullscreen" content="true" />
+		<meta name="screen-orientation" content="portrait" />
+		<meta name="full-screen" content="yes" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/maintain.css" />
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/vue1.0.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<title>保养</title>
+	</head>
+
+	<body>
+		<!-- header -->
+		<header>
+			<h3>保养</h3>
+		</header>
+		<!-- section -->
+		<section>
+			<span class="gold"><i>您还有消费金<b>{{ dott.experience }}</b>（{{ dott.rates }}消费金抵扣1元）</i></span>
+			<img src="images/banner/Bg_1.jpg" alt="" />
+			<div class="di_f1" v-cloak>
+				<div v-for="item in dott" :style="{backgroundImage: 'url( '+item.picture+' )'}">
+					<p class="right">
+						<i>{{ item.priceName }}</i>
+						<i>{{ item.price }}￥</i>
+						<a class="goto" href="javascript:;" :data-need="item.needTicketPrice" :data-order="item.orderNumber" :data-by="item.id" :data-pri="item.price" @click="goto($event)">马上预定</a>
+					</p>
+				</div>
+		</section>
+		<!-- footer -->
+		<footer class="footer">
+			<ul>
+				<li>
+					<a href="index.html"><img src="images/icon/icon_12.png" alt="" />首页</a>
+					<a href="insurance.html"><img src="images/icon/icon_7.png" alt="" />保险</a>
+					<a href="javascript:;"><img src="images/icon/icon_11.png" alt="" />保养</a>
+					<a href="store.html"><img src="images/icon/icon_9.png" alt="" />商城</a>
+					<a href="personal_center.html"><img src="images/icon/icon_10.png" alt="" />我的</a>
+				</li>
+			</ul>
+		</footer>
+	</body>
+
+</html>
+<script>
+	$(function() {
+		//查询保养套餐
+		$.ajax({
+			type: "get",
+			url: site + "/upkeep/upkeepPrice",
+			dataType: 'json',
+			beforeSend: function() {
+				$('section').css({
+					'display': 'none'
+				})
+				$("body").append('<div id="pload" style="position:fixed;top:50%;z-index:1200;background:url(images/icon/loading-2.gif) top center no-repeat;width:100%;height:142px;margin:auto auto;"></div>');
+			},
+			complete: function() {
+				$("#pload").remove();
+				$('section').css({
+					'display': 'block'
+				})
+			},
+			success: function(data) {
+				var jsons = data.data;
+				var vue = new Vue({
+					el: '.di_f1',
+					data: {
+						dott: jsons,
+					},
+					methods: {
+						goto(e) {
+							//字符串转整数
+							var str = e.srcElement.getAttribute('data-by');
+							var int = str * 1
+							//字符串转浮点数
+							var strs = e.srcElement.getAttribute('data-pri')
+							var int = strs * 1
+							//字符串转浮点数
+							var strss = e.srcElement.getAttribute('data-order')
+							var int = strs * 1
+							
+							var need = e.srcElement.getAttribute('data-need');
+							var int = need * 1
+							
+							console.log(e.srcElement.getAttribute('data-by'))
+							window.location.href = "./maintain_map.html"
+							loca_save('byid', parseInt(str))
+							loca_save('price', parseFloat(strs))
+							loca_save('order', strss)
+							loca_save('needTicketPrice',parseFloat(need))
+						}
+					}
+				})
+				console.log(jsons)
+			}
+		});
+
+		function GetQueryString(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+			var r = window.location.search.substr(1).match(reg);
+			if(r != null) return unescape(r[2]);
+			return null;
+		}
+		//消费金差查询
+		if(loca_fetch('userid') == '') {
+			$('.gold').hide();
+		} else {
+			$('.gold').show();
+			$.ajax({
+				type: "get",
+				url: site + "/user/myIntegral",
+				data: {
+					userId: loca_fetch('userid'),
+					rateType: 1
+				},
+				dataType: 'json',
+				success: function(data) {
+					var jsons = data.data
+					var vue = new Vue({
+						el: '.gold',
+						data: {
+							dott: jsons
+						}
+					})
+				}
+			});
+		}
+	})
+	$.ajax({
+		type: "get",
+		url: site + '/admin/getKeFuByRandom',
+		dataType: 'json',
+		success: function(data) {
+			console.log(data)
+		}
+	});
+</script>

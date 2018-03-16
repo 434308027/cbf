@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+/*header_头部*/
+header { width: 100%;height: 1.76rem;background: #ffffff;border-bottom: 1px solid #e2e3e4;line-height: 1.76rem; }
+header a { width: 1.2rem;height: 1.76rem;background: url(../images/icon/icon_14.png) no-repeat center;background-size: 0.46rem 0.58rem;float: left; }
+header i { text-align: center;display: block;font-size: 0.72rem;color: #000000;margin-right: 1.2rem; }
+
+/*section_骨架*/
+section	{ width: 100%;margin-top: 0.4rem;background: #fff; }
+section	div { width: 100%;height: 1.76rem;padding: 0 0.4rem;box-sizing: border-box;-webkit-box-sizing: border-box;border-bottom: 1px solid #e1e1e1; }
+section	div>label { width: 100%;height: 1.76rem;display: block; }
+section	div i { font-size: 0.6rem;color: #333;float: left;line-height: 1.76rem;text-indent: 1.12rem;background: url(../images/icon/icon_29.png) no-repeat left;background-size: 0.74rem 0.76rem; }
+section	div b { float: right;width: 0.84rem;height: 1.76rem;background: url(../images/icon/icon_28.png) no-repeat 0;background-size: 1.68rem 0.84rem; }
+section	div:nth-of-type(1) i { background: url(../images/icon/icon_30.png) no-repeat left;background-size: 0.9rem 0.7rem; }
+section	div input { opacity: 0; }
+section	div b.active { float: right;width: 0.84rem;height: 1.76rem;background: url(../images/icon/icon_28.png) no-repeat -0.84rem;background-size: 1.68rem 0.84rem; }
+section div  input[type='radio'].radio { opacity: 0;}
+section div label.radio { background:url(../images/icon/icon_28.png) no-repeat 0.03rem; height: 0.84rem; width: 0.84rem;background-size: 1.68rem 0.84rem;float: right;margin-top: 0.6rem;margin-right: 0.2rem;pointer-events: none;pointer-events: none; }
+section div input[type='radio'].radio:checked + .radio { background:url(../images/icon/icon_28.png) no-repeat -0.82rem;background-size: 1.68rem 0.84rem;height: 0.84rem; width: 0.84rem; }
+section>p { height: 1.76rem;width: 100%;padding: 0 1.2rem;box-sizing: border-box;-webkit-box-sizing: border-box;position: absolute;bottom: 0.88rem;left: 0; }
+section>p button { width: 100%;height: 1.76rem;border-radius: 1rem;-webkit-border-radius: 1rem;background: #FF7676;font-size: 0.6rem;color: #fff;font-weight: 600; }

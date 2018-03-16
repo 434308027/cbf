@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="x5-orientation" content="portrait" />
+	<meta name="x5-fullscreen" content="true" />
+	<meta name="screen-orientation" content="portrait" />
+	<meta name="full-screen" content="yes" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="css/shijian.css"/>
+	<link rel="stylesheet" type="text/css" href="css/mobileSelect.css">
+	<link rel="stylesheet" type="text/css" href="css/layer_mobile.css"/>
+	<link rel="stylesheet" type="text/css" href="css/submit_order.css"/>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/jquer_shijian.js"></script>
+	<script type="text/javascript" src="js/vue1.0.js"></script>
+    <script src="js/mobileSelect.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/layer_mobile.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<title>提交订单</title>
+</head>
+<body>
+	<!-- header_头部 -->
+	<header>
+		<p>
+			<a class="choose_go_back" href="maintain-goods.html"></a>
+			<i>提交订单</i>
+		</p>
+	</header>
+	<!-- section_骨架 -->
+	<section>
+		<ul>
+			<li class="f1">
+				<i>高级保养套餐</i>
+			</li>
+			<li>
+				<div class="car">
+					<i>车辆选择</i>
+					<span class="car_d1s"><b></b><input class="car_d1" readonly="" placeholder="请选择车辆" /></span>
+				</div>
+			</li>
+			<li>
+				<div>
+					<label><i>车辆识别号</i><input class="right vin" type="text" placeholder="请输入" /></label>
+				</div>
+			</li>
+			<li class="oil">
+				<div>
+					<i>机油数量(升)</i>
+					<span><b></b><em class="oilbox"></em><input readonly="" type="text" class="oil_f1" placeholder="请选择" /></span>
+				</div>
+			</li>
+			<li class="oil_num">
+				<div>
+					<i>机油格</i>
+					<span><b></b><input class="oil_f2" readonly="" type="text" placeholder="请选择" /></span>
+				</div>
+			</li>
+			<li class="bill">
+				<div>
+					<i>是否需要发票</i>
+					<span><b></b><em class="bill-need">不需要</em></span>
+				</div>
+			</li>
+		</ul>
+		<p class="details">*10消费金等于1元</p>
+		<div class="integrals" v-cloak><i>消费金</i><span><b></b><i class="integral">{{ dott.experience }}</i></span></div>
+		<div class="totalprice"><i>总计</i></div>
+		<div><label><i>上门时间</i><b></b><input class="time" type="text" placeholder="请选择上门时间" /></label></div>
+		<p class="bottom"><button>提交订单</button></p>
+	</section>
+	<!-- 汽车 -->
+    <div class="brand_type choice_car">
+    	<p class="title_top"><em class="back_f1"></em><i>选品牌</i></p>
+	    <div class="brand_list">
+	        <div id="char_nav_A" class="letter_title"><span>A</span></div>
+	    	<div id="char_nav_B" class="letter_title"><span>B</span></div>
+	    	<div id="char_nav_C" class="letter_title"><span>C</span></div>
+	    	<div id="char_nav_D" class="letter_title"><span>D</span></div>
+	    	<div id="char_nav_E" class="letter_title"><span>E</span></div>
+	        <div id="char_nav_F" class="letter_title"><span>F</span></div>
+	        <div id="char_nav_G" class="letter_title"><span>G</span></div>
+	        <div id="char_nav_H" class="letter_title"><span>H</span></div>
+	        <div id="char_nav_I" class="letter_title"><span>I</span></div>
+	        <div id="char_nav_J" class="letter_title"><span>J</span></div>
+	        <div id="char_nav_K" class="letter_title"><span>K</span></div>
+	        <div id="char_nav_L" class="letter_title"><span>L</span></div> 
+	        <div id="char_nav_M" class="letter_title"><span>M</span></div>
+	        <div id="char_nav_N" class="letter_title"><span>N</span></div>
+	        <div id="char_nav_O" class="letter_title"><span>O</span></div>                  
+	        <div id="char_nav_Q" class="letter_title"><span>Q</span></div>                               
+	        <div id="char_nav_R" class="letter_title"><span>R</span></div>
+	        <div id="char_nav_S" class="letter_title"><span>S</span></div>                    
+	        <div id="char_nav_T" class="letter_title"><span>T</span></div>
+	        <div id="char_nav_W" class="letter_title"><span>W</span></div>
+	        <div id="char_nav_X" class="letter_title"><span>X</span></div>
+	        <div id="char_nav_Y" class="letter_title"><span>Y</span></div>
+	        <div id="char_nav_Z" class="letter_title"><span>Z</span></div>            
+	    </div>
+	    <div class="letter_list">
+	        <ul>
+	            <li><a href="#char_nav_A">A</a></li>
+	            <li><a href="#char_nav_B">B</a></li>
+	            <li><a href="#char_nav_C">C</a></li>
+	            <li><a href="#char_nav_D">D</a></li>
+	            <li><a href="#char_nav_F">F</a></li>
+	            <li><a href="#char_nav_G">G</a></li>
+	            <li><a href="#char_nav_H">H</a></li>
+	            <li><a href="#char_nav_J">J</a></li>
+	            <li><a href="#char_nav_K">K</a></li>
+	            <li><a href="#char_nav_L">L</a></li>
+	            <li><a href="#char_nav_M">M</a></li>
+	            <li><a href="#char_nav_N">N</a></li>
+	            <li><a href="#char_nav_O">O</a></li>
+	            <li><a href="#char_nav_Q">Q</a></li>
+	            <li><a href="#char_nav_R">R</a></li>
+	            <li><a href="#char_nav_S">S</a></li>
+	            <li><a href="#char_nav_T">T</a></li>
+	            <li><a href="#char_nav_W">W</a></li>
+	            <li><a href="#char_nav_X">X</a></li>
+	            <li><a href="#char_nav_Y">Y</a></li>
+	            <li><a href="#char_nav_Z">Z</a></li>
+	        </ul>
+	    </div>
+    </div>
+	<!-- brand__品牌 -->
+	<div class="brand">
+		<p class="title_top"><em class="back_f2"></em><i>选系列</i></p>
+		<ul class="brand_lists">
+		</ul>
+	</div>
+	<!-- series__年份 -->
+	<div class="series">
+		<p class="title_top"><em class="back_f3"></em><i>选年份</i></p>
+		<ul class="series_lists">
+		</ul>
+	</div>
+	<!-- displacement_排量 -->
+	<div class="displacement">
+		<p class="title_top"><em class="back_f4"></em><i>选排量</i></p>
+		<ul class="displacement_list">
+		</ul>
+	</div>
+	<!-- specific_car_具体车型 -->
+	<div class="specific_car">
+		<p class="title_top"><em class="back_f5"></em><i>选具体车型</i></p>
+		<ul class="specific_car_list">
+		</ul>
+	</div>
+	<!-- 选择机油_select_the_oil -->
+	<div class="select_the_oil">
+		<div class="go_back go_f1">
+			<i></i>
+			<b>选择机油</b>
+		</div>
+		<ul>
+			<li v-for="item in dott">
+				<label>
+					<span><i class="act" :data-pri="item.price"></i><input class="dot" type="radio" name="b" /></span>
+					<div>
+						<h3 class="title_h3">{{ item.oil }}</h3>
+						<span class="clearfix">
+							<span class="11">
+								<button class="augment">-</button>
+								<input class="text" readonly type="text" value="1" />
+								<button class="subtract">+</button>
+							</span>
+							<em class="price">{{ item.price }}元</em>
+							<i>剩余:<b class="surplus">{{ item.oilNumber }}</b></i>
+						</span>
+					</div>
+				</label>
+			</li>
+		</ul>
+	</div>
+	<!-- 选择机油格_oil_filter -->
+	<div class="oil_filter">
+		<div class="go_back go_f2">
+			<i></i>
+			<b>选择机油格</b>
+		</div>
+		<ul>
+			<li v-for="item in dott">
+				<label>
+					<span><i class="at"></i><input class="dot" type="radio" name="b" /></span>
+					<div>
+						<h3 class="title_h3_f1">{{ item.oilBox }}</h3>
+						<i>剩余:<b class="surpluss">{{ item.boxNumber }}</b></i>
+					</div>
+				</label>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>
+<script>
+	loca_save('bill','0')
+	$('.totalprice').append('<strong class="ss">'+loca_fetch('price')+'元</strong>')
+	new MobileSelect({
+	    trigger: '.bill-need', 
+	    wheels:  [
+                {data:[	
+                    {
+                        id:'0',
+                        value:'不需要',
+                        price:0
+                    },    
+                    {
+                        id:'1',
+                        value:'需要',
+                        price:loca_fetch('needTicketPrice')
+                    },
+                ]}
+            ], 
+	    position:[0], //初始化定位
+	    callback:function(indexArr, data){
+	    	loca_save('bill',indexArr.toString())
+	    	loca_save('billPrice',data[0].price)
+			var c = addpirce() + parseInt(loca_fetch('billPrice'))
+			console.log(c)
+			if($('.oil_f1').val() == ''){
+				alerts('请先选择机油')
+			}else{
+				$('.ss').text(c+'元')
+			}
+    	}
+	});
+	$(document).ready(function(){
+		$(".vin").focus();
+	})
+	$('.f1').append('<b>'+loca_fetch('price')+'元</b>')
+	//不被软键盘顶起
+    var h=$(window).height();
+    $(window).resize(function() {
+        if($(window).height()<h){
+            $('.bottom').hide();
+        }
+        if($(window).height()>=h){
+            $('.bottom').show();
+        }
+    });
+	//消费金
+	if(loca_fetch('userid') == ''){
+		$('.ss').text(0)
+	}else{
+		$('.integral').show()
+		$('.car_d1').empty()
+		$.ajax({
+			type:"get",
+			url:site+"/user/myIntegral",
+			dataType:'json',
+			data:{userId:loca_fetch('userid'),rateType:1},
+			success:function(data){
+				var jsons =data.data
+				console.log(jsons)
+				loca_save('rate',jsons.rates)
+				loca_save('integral',jsons.experience)
+				var vue = new Vue({
+					el:'.integrals',
+					data:{
+						dott:jsons
+					}
+				})
+			}
+		});	
+	}
+	
+	//生成订单
+	$('.bottom button').on('click',function(){
+		if($('.car_d1').val() == ''){
+			alerts('请选择车辆型号')
+		}else if($('.vin').val() == ''){
+			alerts('请输入车辆识别号')
+		}else if($('.oil_f1').val() == ''){
+			alerts('请选择机油型号')
+		}else if($('.oil_f2').val() == ''){
+			alerts('请选择机油格')
+		}else if($('.time').val() == ''){
+			alerts('请选择时间')
+		}else{
+		    var str = $('.totalprice strong').text()
+			ipos = str.indexOf("元");
+			str1=str.substring(0,ipos);
+			var jsons = {
+				sellerId: loca_fetch('sjid'),
+				keepPackageId:loca_fetch('byid'),
+				userId:loca_fetch('userid'),
+				needTicket:loca_fetch('bill'),
+				car:$('.car_d1').val(),
+				vin:$('.vin').val(),
+				oil:$('.oil_f1').val(),
+				oilNumber:$('.oilbox').text(),
+				oilBox:$('.oil_f2').val(),
+				totalPrice:str1,
+				appointmentTime:$('.time').val()
+				
+			}
+			$.ajax({
+				type:"post",
+				url:site+"/upkeep/order",
+				dataType:'json',
+				data:jsons,
+				success:function(data){
+					if(data.code == 1){
+						alerts(data.msg)
+						console.log(data.data.morderId)
+						loca_save('moders',data.data.morderId)
+						window.location.href='book_successfully.html'
+					}else{
+						alerts(data.msg)
+					}
+				}
+			});	
+		}
+	})
+	//查询机油
+	$.ajax({
+		type:"get",
+		url:site+"/seller/findOil",
+		data:{sellerId:loca_fetch('sjid')},
+		dataType:'json',
+		success:function(data){
+			console.log(data);
+			var jsons = data.data;
+			var vue = new Vue({
+				el:'.select_the_oil',
+				data:{
+					dott:jsons,
+				},
+			})
+			//小圆点选中
+			$('.select_the_oil .dot').val(function(){	
+				var surplus = $(this).parent().siblings('div').find('.surplus').text() 
+//				if(surplus <= 0){
+//					$(this).attr('disabled',true)
+//				}		
+		})
+			$('.select_the_oil .dot').change(function(){
+				$('i.act').removeClass('active')
+				$(this).siblings('i').addClass('active')
+				$('.oil_f1').val($(this).parent().siblings('div').find('h3').text());
+				$('.oilbox').text($(this).parent().siblings('div').find('.text').val())
+			})
+
+		    $('.go_f1 i').on('click',function(){
+		        $('.ss').empty();
+		    	$('.select_the_oil').hide()
+		    	$('.ss').text(loca_fetch('price'))
+		        if(addpirce()){
+	         	 	var c = addpirce()
+	      		    var str = $('.totalprice strong').text()
+					ipos = str.indexOf("元");
+					str1=str.substring(0,ipos);
+		          	$('.ss').text(c+'元')
+		        }
+		    })
+			//加减
+			add()
+		}
+	});
+	//查询机油格
+	$.ajax({
+		type:"get",
+		url:site+"/seller/findOilBox",
+		dataType:'json',
+		data:{sellerId:loca_fetch('sjid')},
+		success:function(data){
+			console.log(data)
+			var jsons = data.data
+			var vue = new Vue({
+				el:".oil_filter",
+				data:{
+					dott:jsons
+				}
+			})
+			$('.oil_filter .dot').val(function(){				
+				var surplus = $(this).parent().siblings('div').find('.surpluss').text() 
+			})
+			$('.oil_filter .dot').change(function(){
+				$('i.at').removeClass('acti')
+				$(this).siblings('i').addClass('acti')
+				$('.oil_f2').val($(this).parent().siblings('div').find('h3').text());
+			})
+		}
+	});
+	//汽车选择
+	$('.car').click(function(){
+   		$('.choice_car').show()
+   	})
+    $.ajax({
+		url:site+'/upkeep/findCarList',
+		type:'get',
+		dataType:'json',
+		success:function(data){
+			$.each(data.data,function(i,val){
+				if(val.letter == 'A'){
+					$('#char_nav_A').append('<div class="brand_box" data-brand='+val.brand+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'B'){
+					$('#char_nav_B').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'C'){
+					$('#char_nav_C').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'D'){
+					$('#char_nav_D').append('<div class="brand_box" data-brand='+val.brand+'  data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'E'){
+					$('#char_nav_E').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'F'){
+					$('#char_nav_F').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'G'){
+					$('#char_nav_G').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'H'){
+					$('#char_nav_H').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'I'){
+					$('#char_nav_I').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'J'){
+					$('#char_nav_J').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'K'){
+					$('#char_nav_K').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'L'){
+					$('#char_nav_L').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'M'){
+					$('#char_nav_M').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'N'){
+					$('#char_nav_N').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'O'){
+					$('#char_nav_O').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'P'){
+					$('#char_nav_P').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'Q'){
+					$('#char_nav_Q').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'R'){
+					$('#char_nav_R').append('<div class="brand_box" data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'S'){
+					$('#char_nav_S').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'T'){
+					$('#char_nav_T').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'U'){
+					$('#char_nav_U').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'V'){
+					$('#char_nav_V').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'W'){
+					$('#char_nav_W').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'X'){
+					$('#char_nav_X').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'Y'){
+					$('#char_nav_Y').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}else if(val.letter == 'Z'){
+					$('#char_nav_Z').append('<div class="brand_box" data-brand='+val.brand+' data-qcid='+val.id+'><i>'+val.brand+'</i></div>')
+				}
+				if(val.brand == 'AC Schnitzer'){
+					$('.brand_box').eq(0).remove()
+					$('#char_nav_A').eq(0).append('<div class="brand_box" data-brand="AC Schnitzer"><i>'+val.brand+'</i></div>')
+				}
+			})	
+			$('.brand_box').on('click',function(){
+				var stt = $(this).attr('data-qcid')
+				var sttr = $(this).attr('data-brand')
+				loca_save('brand',sttr)
+				$('.brand_type').hide()
+				$('.brand').show()
+				$.ajax({
+					type:"get",
+					url:site+'/upkeep/findCarList',
+					data:{brand:sttr},
+					dataType:'json',
+					success:function(data){
+						console.log(data.data)
+						$('.brand_lists').empty()
+						$.each(data.data, function(i,val) {
+							$('.brand_lists').append('<li data-series='+val.series+'>'+val.series+'</li>')
+						});
+						$('.brand_lists li').on('click',function(){
+							$('.brand').hide()
+							$('.series').show()
+							var series = $(this).attr('data-series')
+							var serie = $(this).text()
+							loca_save('series',serie)
+							$.ajax({
+								type:"get",
+								url:site+'/upkeep/findCarList',
+								data:{brand:loca_fetch('brand'),series:serie},
+								dataType:'json',
+								success:function(data){
+									$('.series_lists').empty()
+									$.each(data.data, function(i,val) {
+										$('.series_lists').append('<li data-years='+val.years+'>'+val.years+'</li>')
+									});
+									$('.series_lists li').on('click',function(){
+										$('.series').hide()
+										$('.displacement').show()
+										var years = $(this).text()
+										loca_save('yrars',years)
+										$.ajax({
+											type:"get",
+											url:site+'/upkeep/findCarList',
+											data:{brand:loca_fetch('brand'),series:loca_fetch('series'),years:years},
+											dataType:'json',
+											success:function(data){
+												$('.displacement_list').empty()
+												$.each(data.data, function(i,val) {
+													$('.displacement_list').append('<li data-output='+val.output+'>'+val.output+'</li>')
+												});
+												$('.displacement_list li').on('click',function(){
+													$('.displacement').hide()
+													$('.specific_car').show()
+													var output = $(this).attr('data-output')
+													loca_save('output',output)
+													$.ajax({
+														type:"get",
+														url:site+'/upkeep/findCarList',
+														data:{brand:loca_fetch('brand'),series:loca_fetch('series'),years:loca_fetch('yrars'),output:output},
+														dataType:'json',
+														success:function(data){
+															console.log(data)
+															$('.specific_car_list').empty()
+															$.each(data.data, function(i,val) {
+																$('.specific_car_list').append('<li>'+val.name+'</li>')
+															});
+															$('.specific_car_list li').on('click',function(){
+																$('.specific_car').hide()
+																$('.car_d1').val($(this).text())
+															})
+														}
+													});
+												})
+											}
+										});
+									})
+								}
+							});
+						})
+
+					}
+				});
+			})
+		}
+	})
+    $('.back_f1').on('click',function(){
+    	$('.choice_car').hide()
+    })
+    $('.back_f2').on('click',function(){
+    	$('.choice_car').show()
+    	$('.brand').hide()
+    })
+    $('.back_f3').on('click',function(){
+    	$('.series').hide()
+    	$('.brand').show()
+    })
+     $('.back_f4').on('click',function(){
+    	$('.displacement').hide()
+    	$('.series').show()
+    })
+  $('.back_f5').on('click',function(){
+    	$('.specific_car').hide()
+    	$('.displacement').show()
+    })
+    //上门时间
+	$(".time").shijian({
+		startYear:1989,
+		val:1989,
+		endYear:2027,
+		Hour:true,
+		Minute:true,
+		Seconds:false,
+		yearText: "年", //顶部时间 年单位 文字
+		monthText: "月", //顶部时间 月单位 文字
+		dayText: '日', //顶部时间 日单位 文字
+		hourText: '时', //顶部时间 时单位 文字
+		okText: "确认",
+		cancelText: '',
+	})
+	//选择机油
+    $('.oil').on('click',function(){
+    	$('.select_the_oil').show()
+    })
+    $('.oil_num').on('click',function(){
+    	$('.oil_filter').show()
+    })
+    $('.go_f2 i').on('click',function(){
+    	$('.oil_filter').hide();
+    })
+    //计算
+    console.log(loca_fetch('rate'))
+    function addpirce(){   	
+     	//totalPrice=oil型号的价格*oilBumber+套餐价格
+     	var resulitprice //最终价格
+     	
+     	var resultsur //扣除积分
+     	
+     	var rate = loca_fetch('rate') //比例
+     	
+     	var oilprice = $('i.act.active').eq(0).attr('data-pri');
+     	var oilnum = $('i.act.active').parent().siblings('div').find('input').val();//机油类型
+     	var keepprice = loca_fetch('price');//套餐价格
+     	var integralprice = $('.integral').text();//消费金  
+     	
+     	var mys = oilprice*oilnum + keepprice //总价格
+     	
+     	var pricing = Math.ceil(mys*rate) //换算的价格
+     	
+     	var my_pri =  integralprice;//自己积分
+     	
+     	if( pricing <= my_pri ){
+     		resultsur = pricing
+     		resulitprice = 0.01
+     	}else{
+     		resultsur = my_pri
+     		resulitprice = mys - my_pri / rate
+     	}
+     	return resulitprice
+        //var my_pri=parseFloat($('i.act.active').eq(0).attr('data-pri'))*($('i.act.active').parent().siblings('div').find('input').val())+parseFloat($('.f1 b').text())-($('.integral').text())
+    }
+	function add(){
+		var a = 0;
+		$(".augment").click(function(){
+			a=$(this).siblings(".text").val();
+			if(a > 1){
+				a--;	
+			}
+			$('.oilbox').text(a)
+			$(this).siblings(".text").val(a);
+		});
+		$(".subtract").click(function(){
+			a=$(this).siblings(".text").val();
+			if(a < 200){
+				a++;	
+			}
+			$('.oilbox').text(a)
+			$(this).siblings(".text").val(a);
+		});
+	}
+</script>

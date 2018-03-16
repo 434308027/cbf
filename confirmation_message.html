@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="x5-orientation" content="portrait" />
+		<meta name="x5-fullscreen" content="true" />
+		<meta name="screen-orientation" content="portrait" />
+		<meta name="full-screen" content="yes" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/layer_mobile.css" />
+		<link rel="stylesheet" type="text/css" href="css/framework7.ios.min.css" />
+		<!--<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">-->
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/confirmation_message.css" />
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/layer_mobile.js"></script>
+		<script type="text/javascript" src="js/vue1.0.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<title>确认信息</title>
+		<style>
+			li.act {
+				width: 3rem;
+				height: 1.68rem;
+				background: url(images/icon/icon_39.png) no-repeat 2.2rem;
+				background-size: 0.96rem 0.96rem;
+			}
+			
+			.phone {
+				width: initial;
+			}
+			
+			.uploader-img {
+				width: 5.6rem;
+				height: 3.6rem;
+			}
+			
+			.uploader-input {
+				opacity: 0;
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- header_头部 -->
+		<header>
+			<div>
+				<a href="javascript:;"></a>
+				<ul>
+					<li><i>基本信息</i><b class="active"></b></li>
+					<li><i>保险信息</i><b></b></li>
+					<li><i>收件信息</i><b></b></li>
+				</ul>
+			</div>
+		</header>
+		<!-- section_骨架 -->
+		<section>
+			<!-- basic_information_基本信息 -->
+			<div class="basic_information">
+				<div>
+					<label><i>姓名:</i><input class="username" type="text" /></label>
+				</div>
+				<div>
+					<label><i>身份证号:</i><input class="idNumber" type="text" /></label>
+				</div>
+				<div>
+					<label><i>银行卡号:</i><input class="bankCardNumber" type="text" /></label>
+				</div>
+				<div>
+					<label><i>银行名称:</i><input class="bank" type="text" /></label>
+				</div>
+				<div>
+					<label><i>银行预留手机:</i><input class="phone" type="text" /></label>
+				</div>
+				<div>
+					<label><i>短信验证码:</i><input class="code" type="text" /><button class="count">获取验证码</button><b></b></label>
+				</div>
+				<p><button class="f1">下一步</button></p>
+			</div>
+			<!-- insurance_information_保险信息 -->
+			<div class="insurance_information">
+				<div class="title"><img src="images/icon/icon_41.png" alt="" /><i>您上传的资料和照片信息必须为现场照片且真实有效</i></div>
+				<div>
+					<h3>基本信息</h3>
+					<p><i>分期类型:</i>
+						<em v-if="dott.stagingType=='THE_FIRST_INSURANCE'">首保</em>
+						<em v-if="dott.stagingType=='RENEWAL_OF_INSURANCE'">续保</em>
+					</p>
+					<p><i>分期险种:</i>
+						<em v-if="dott.loanType=='COMMERCIAL_CAR_STRONG_INSURANCE'">商业险+交强险+车船险</em>
+						<em v-if="dott.loanType=='COMMERCIAL_INSURANCE'">商业险</em>
+					</p>
+					<p><i>保险公司:</i><em>{{dott.insuranceCompany}}</em></p>
+				</div>
+				<div>
+					<h3>保险产品选择</h3>
+					<p><i>交强险:</i>
+						<em v-if="dott.strongInsurance=='BUY'">购买</em>
+						<em v-if="dott.strongInsurance=='NOT_BUY'">不购买</em>
+					</p>
+					<p><i>车船税:</i>
+						<em v-if="dott.carInsurance=='BUY'">购买</em>
+						<em v-if="dott.carInsurance=='NOT_BUY'">不购买</em>
+					</p>
+					<p><i>第三者责任险:</i>
+						<em>{{dott.liabilityInsurance}}</em>
+					</p>
+					<p><i>车辆损失险:</i>
+						<em v-if="dott.vehicleLossInsurance=='BUY'">购买</em>
+						<em v-if="dott.vehicleLossInsurance=='NOT_BUY'">不购买</em>
+					</p>
+					<p><i>不计免赔:</i>
+						<em v-if="dott.noDeductibles=='BUY'">购买</em>
+						<em v-if="dott.noDeductibles=='NOT_BUY'">不购买</em>
+					</p>
+					<p><i>车上人员责任险:</i>
+						<em>{{dott.personnelLiabilityInsurance}}</em>
+					</p>
+					<p><i>全车盗抢险:</i>
+						<em v-if="dott.robberyAndTheftInsurance=='BUY'">购买</em>
+						<em v-if="dott.robberyAndTheftInsurance=='NOT_BUY'">不购买</em>
+					</p>
+					<p><i>玻璃单独破碎险:</i>
+						<em v-if="dott.riskOfGlassBreakage=='BUY'">购买</em>
+						<em v-if="dott.riskOfGlassBreakage=='NOT_BUY'">不购买</em>
+					</p>
+					<p><i>自然损失险:</i>
+						<em v-if="dott.selfIgnitionLossInsurance =='BUY'">购买</em>
+						<em v-if="dott.selfIgnitionLossInsurance =='NOT_BUY'">不购买</em>
+					</p>
+					<p><i>车辆划痕险:</i>
+						<em v-if="dott.vehicleScratchRisk=='BUY'">购买</em>
+						<em v-if="dott.vehicleScratchRisk=='NOT_BUY'">不购买</em>
+					</p>
+				</div>
+				<div>
+					<h3>付款信息</h3>
+					<p><i>商业险价格:</i><em>{{dott.commercialInsuranceMoney}}</em></p>
+					<p><i>交强险价格:</i><em>{{dott.strongInsuranceMoney}}</em></p>
+					<p><i>车船税价格:</i><em>{{dott.vehicleAndVesselTax}}</em></p>
+					<p><i>贷款总额:</i><em>100.00</em></p>
+					<p><i>消费金抵扣:</i><em>100.00</em></p>
+					<p><i>分期期数:</i><em id="number"></em>期</p>
+					<p><i>月供金额:</i><em>100.00</em></p>
+					<p><i>总手续费:</i><em>100.00</em></p>
+				</div>
+				<div>
+					<h3><i class="col">*</i>填写信息</h3>
+					<p><i>购买渠道:</i><input id="purchaseChannel" class="purchaseChannel" value="{{dott.purchaseChannel}}" type="text" /></p>
+					<p><i>汽车品牌型号:</i><input class="carBrand" type="text" placeholder="如车型，型号信息填写" /></p>
+				</div>
+				<div class="picture_information">
+					<h3>照片明细</h3>
+					<div>
+						<h3>行驶证:</h3>
+						<div class="left f1_boe">
+							<input class="uploader-input" accept="image/*" multiple="" type="file">
+							<img id="f1" src="{{dott.originalDrivingLicense}}" class="uploader-img" alt="" />
+						</div>
+						<div class="right f1_boe">
+							<input class="uploader-input" accept="image/*" multiple="" type="file">
+							<img id="f2" src="{{dott.copyOfDrivingLicense}}" class="uploader-img" alt="" />
+						</div>
+					</div>
+					<div>
+						<h3>身份证:</h3>
+						<div class="left f1_boe">
+							<input class="uploader-input" accept="image/*" multiple="" type="file">
+							<img id="f3" src="{{dott.facadeOfIdCard}}" class="uploader-img" alt="" />
+						</div>
+						<div class="right f1_boe">
+							<input class="uploader-input" accept="image/*" multiple="" type="file">
+							<img id="f4" src="{{dott.identityCard}}" class="uploader-img" alt="" />
+						</div>
+					</div>
+					<div>
+						<h3>银行卡:</h3>
+						<div class="left f1_boe">
+							<input class="uploader-input" accept="image/*" multiple="" type="file">
+							<img id="f5" src="{{dott.bankCardFront}}" class="uploader-img" alt="" />
+						</div>
+						<h3>其他照片:</h3>
+						<div class="right f1_boe">
+							<input class="uploader-input" accept="image/*" multiple="" type="file">
+							<img id="f6" src="{{dott.otherPicture}}" class="uploader-img" alt="" />
+						</div>
+					</div>
+				</div>
+				<p><button class="f2">下一步</button></p>
+			</div>
+			<!-- consignee_information_保险信息 -->
+			<div class="consignee_information">
+				<div>
+					<label><i>收货人:</i><input class="consignee" type="text" /></label>
+				</div>
+				<div>
+					<label><i>联系方式:</i><input class="consigneePhone" type="text" /></label>
+				</div>
+				<div>
+					<label><i>所在地区:</i><em></em><input type="text" readonly id="location" name="location"></label>
+				</div>
+				<div>
+					<label><i>详细地址:</i><input class="address" type="text" placeholder="街道、楼盘号等" /></label>
+				</div>
+				<p><button class="f3">保存</button></p>
+			</div>
+		</section>
+	</body>
+
+</html>
+<script type="text/javascript" src="js/framework7.min.js"></script>
+<script type="text/javascript" src="js/regionsObject2.js"></script>
+<script type="text/javascript" src="js/cityPicker.js"></script>
+<!--<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>-->
+<script type="text/javascript">
+	$(function() {
+		if(typeof(FileReader) === 'undefined') { //如果不支持FileReader
+			alert("抱歉，你的浏览器不支持FileReader，请使用现代浏览器操作！");
+			$("#uploader_input").attr('disabled', 'disabled');
+		} else {
+			uploaderChange();
+		}
+
+		//购买渠道
+		$("#purchaseChannel").picker({
+			title: "请选择购买渠道",
+			cols: [{
+				textAlign: 'center',
+				values: ["朋友推广", "销售推广", "4S店推荐", "广告传媒"]
+			}]
+		});
+	});
+	//上传图片
+	function uploaderChange() {
+
+		$(".uploader-input").change(function() {
+			var _this = this;
+			var file = this.files[0];
+			if(!/image\/\w+/.test(file.type)) { //这里我们判断下类型如果不是图片就返回 去掉就可以上传任意文件
+				alert("请确保文件为图像类型");
+				return false;
+			}
+			var reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = function(e) {
+				var fd = new FormData();
+				fd.append('imageFile', file); //上传的文件： 键名，键值
+				fd.append('backet', '3');
+				var url = site + "/up/upload"; //接口
+				url = url ? url : '';
+				var XHR = null;
+				if(window.XMLHttpRequest) {
+					// 非IE内核
+					XHR = new XMLHttpRequest();
+				} else if(window.ActiveXObject) {
+					// IE内核，这里早期IE版本不同，具体可以查下
+					XHR = new ActiveXObject("Microsoft.XMLHTTP");
+				} else {
+					XHR = null;
+				}
+				if(XHR) {
+					XHR.open("POST", url);
+					XHR.onreadystatechange = function() {
+						if(XHR.readyState == 4 && XHR.status == 200) {
+							var resultValue = XHR.responseText;
+							var da = JSON.parse(resultValue);
+							$(_this).next("img").attr("src", da.data.src);
+							XHR = null;
+						}
+					}
+					XHR.send(fd);
+				}
+			}
+		});
+	}
+</script>
+<script>
+	$(function() {
+		var subData = loca_fetch('subData');
+		//		localStorage.removeItem('subData');
+		//不被软键盘顶起来
+		var oHeight = $(document).height(); //浏览器当前的高度
+		$(window).resize(function() {
+			if($(document).height() < oHeight) {
+				$("section>div>p").css("position", "static");
+			} else {
+				$("section>div>p").css("position", "absolute");
+			}
+		});
+
+		//查询实名认证
+		$.ajax({
+			type: "get",
+			url: site + "/Loan/queryMyAuthentication",
+			data: {
+				"userId": loca_fetch('userid')
+			},
+			dataType: 'json',
+			success: function(data) {
+				if(data.code == 1) {
+					$(".username").val(data.data.username);
+					$(".idNumber").val(data.data.idNumber);
+					$(".bank").val(data.data.bank);
+					$(".phone").val(data.data.phone);
+					$(".bankCardNumber").val(data.data.bankCardNumber);
+					$("#number").html(subData.number);
+					$(".carBrand").val(subData.carBrand);
+
+					//分期申请确认
+					$.ajax({
+						type: "get",
+						url: site + "/Loan/queryLoanInfo",
+						data: {
+							id: loca_fetch('dkid')
+						},
+						dataType: 'json',
+						success: function(data) {
+							new Vue({
+								el: '.insurance_information',
+								data: {
+									dott: data.data,
+								}
+							})
+						}
+					});
+				} else {
+					alert(data.msg);
+				}
+			},
+			error: function(data) {
+				if(data.status == 500) {
+					alert("请完成实名认证");
+					window.location.href = "personal_application.html"
+				}
+			}
+		});
+
+		//下一步保险信息
+		$('p button.f1').on('click', function() {
+			//			
+			//			if($('input').val()==''){
+			//				alerts('请填写信息')
+			//			}else{
+			//				alerts('ok')
+			//			}
+			$('header div i').css({
+				'color': '#000'
+			})
+			$('header b').removeClass('active')
+			$('.insurance_information').css('display', 'block');
+			$('header i').eq(1).css({
+				'color': '#ff7676'
+			})
+			$('header b').eq(1).addClass('active')
+			$('header li').eq(0).addClass('act')
+
+		})
+		//下一步收件信息
+		$('p button.f2').on('click', function() {
+			//			
+			//			if($('input').val()==''){
+			//				alerts('请填写信息')
+			//			}else{
+			//				alerts('ok')
+			//			}
+			$('header div i').css({
+				'color': '#000'
+			})
+			$('header b').removeClass('active')
+			$('.insurance_information').css('display', 'none');
+			$('.consignee_information').css('display', 'block')
+			$('header i').eq(2).css({
+				'color': '#ff7676'
+			})
+			$('header b').eq(2).addClass('active')
+			$('header li').eq(1).addClass('act')
+
+		})
+		//跳转分期申请确认
+		$('header a').on('click', function() {
+			window.location.href = './application_checklist.html'
+		})
+		//确认贷款信息
+		$('section button.f3').on('click', function() {
+			var jsons = {
+				id: loca_fetch('dkid'),
+				number: $("#number").html(),
+				numberOfMoney: 1,
+				username: $('.username').val(),
+				idNumber: $('.idNumber').val(),
+				bank: $('.bank').val(),
+				bankCardNumber: $('.bankCardNumber').val(),
+				phone: $('.phone').val(),
+				code: $('.code').val(),
+				purchaseChannel: $('.purchaseChannel').val(),
+				carBrand: $('.carBrand').val(),
+				facadeOfIdCard: $('.facadeOfIdCard').val(),
+				identityCard: $('.identityCard').val(),
+				bankCardFront: $('.bankCardFront').val(),
+				bankCardCounter: $('.bankCardCounter').val(),
+				consignee: $('.consignee').val(),
+				consigneePhone: $('.consigneePhone').val(),
+				address: $('.address').val(),
+				facadeOfIdCard: $("#f1").attr("src"),
+				identityCard: $("#f2").attr("src"),
+				bankCardFront: $("#f3").attr("src"),
+				otherPicture: $("#f4").attr("src"),
+				province: "重庆",
+				city: "重庆市",
+				district: "沙坪坝区"
+			}
+			$.ajax({
+				type: "post",
+				url: site + "/Loan/confirmLoan",
+				dataType: 'json',
+				data: jsons,
+				success: function(data) {
+					if(data.code == 1) {
+						alert(data.msg)
+						window.location.href = './application_checklist_1.html'
+					} else {
+						alert(data.msg)
+					}
+				}
+			});
+		});
+
+		//获取验证码
+		var InterValObj; //timer变量，控制时间
+		var count = 60; //间隔函数，1秒执行
+		var curCount; //当前剩余秒数
+		var processing = false; //开关
+		$(document).on("click", ".count", function() {
+			//		$('.count').click(function() {
+				console.log(1)
+			//向后台发送处理数据
+			$.ajax({
+				type: "get", //用post方式传输
+				url: site + "/login/massage",
+				dataType: "json", //数据格式:JSON
+				data: {
+					phone: $('.phone').val(),
+					mtype: 1,
+				},
+				success: function(data) {
+					if(data.code == 1) {
+						$(".code").val(data.data)
+						alerts(data.msg)
+						curCount = count;
+						//设置button效果，开始计时
+						$(".count").attr("disabled", "true");
+						processing = false;
+						$(".count").text(+curCount + "秒内输入");
+						InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+					} else {
+						alerts(data.msg);
+					}
+				}
+			});
+		})
+		//timer处理函数
+		function SetRemainTime() {
+			if(curCount == 0) {
+				window.clearInterval(InterValObj); //停止计时器    
+				$(".count").removeAttr("disabled"); //启用按钮
+				$(".count").text("重新发送验证码");
+			} else {
+				curCount--;
+				processing = true
+				$(".count").text(+curCount + "秒内输入");
+			}
+		}
+	})
+</script>

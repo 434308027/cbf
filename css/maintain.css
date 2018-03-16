@@ -1,0 +1,21 @@
+@charset "utf-8";
+/* header_头部 */
+header { width: 100%;height: 1.76rem;background: #ffffff;text-align: center; }
+header h3 { line-height: 1.76rem;font-size: 0.72rem;color: #000000; }
+
+
+/* section_内容 */
+section { width: 100%;background: #f8f8f8;padding-bottom: 2rem; }
+section>span { display: block;width: 100%;height: 1.2rem;background: url(../images/icon/icon_48.png) no-repeat center;background-size: 100% 1.2rem; }
+section span i { font-size: 0.4rem;color: #fff;line-height: 1.4rem;display: block;text-indent: 2.5rem; }
+section img { width: 100%;height: 7.6rem;margin-bottom: 0.8rem; }
+section div div { padding: 0 0.4rem 0.6rem 0.4rem;height: 4.6rem;background: url(../images/banner/bg_2.jpg) no-repeat center;background-size: 14.2rem 4.6rem; }
+section div div:nth-of-type(2) { background: url(../images/banner/bg_3.jpg) no-repeat center;background-size: 14.2rem 4.6rem; }
+section div div i { line-height: 0.8rem;font-size: 0.6rem;color: #000000;font-style: normal;display: block;text-align: right; }
+section div div i:nth-of-type(1) { font-weight: bold; }
+section div div i:nth-of-type(2) { color: #ff0101;margin-bottom: 0.45rem; }
+/*section div:nth-of-type(2) a { background: #6e9eff;color: #ffffff; }*/
+section div div a { float: right;width: 3.28rem;height: 1rem;background: #ffc519;line-height: 1rem;text-align: center;box-shadow: 0 0.2rem 0.2rem #e5e5e5;font-size: 0.48rem;color: #000;border-radius: 0.1rem;-webkit-border-radius: 0.1rem;margin-right: -0.4rem; }
+section div div p {padding: 0.8rem 2.28rem 0 0;}
+/* footer_底部 */
+footer ul li a:nth-of-type(3) { color: #ff7676; }

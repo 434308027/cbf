@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="x5-orientation" content="portrait" />
+		<meta name="x5-fullscreen" content="true" />
+		<meta name="screen-orientation" content="portrait" />
+		<meta name="full-screen" content="yes" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/insurance-installment.css" />
+		<link rel="stylesheet" type="text/css" href="css/swiper.min.css" />
+		<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/swiper.min.js"></script>
+		<script type="text/javascript" src="layui/layui.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript" src="js/layer.js"></script>
+		<title>保险分期</title>
+		<style type="text/css">
+			section .title_bg {
+				width: 100%;
+				height: 5.2rem;
+				background: url(images/logo/logo_Bg_3.jpg) no-repeat center;
+				background-size: 100% 5.2rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- header_头部  -->
+		<header>
+			<p>
+				<a href="insurance.html"></a>
+				<i>保险分期</i>
+			</p>
+		</header>
+		<!-- section_骨架 -->
+		<form class="layui-form">
+			<section>
+				<p class="title_bg"></p>
+				<div>
+					<h3>基本信息</h3>
+					<span>
+				<label class="f1">姓名：<input lay-verify="required" class="username" type="text" /></label>
+			</span>
+					<span>
+				<label class="f1">电话：<input lay-verify="required|number" class="phone" type="text" /></label>
+			</span>
+					<span>
+				<label>分期类型：<input lay-verify="required" class="stagingtype" placeholder="请选择" type="text" /></label>
+			</span>
+					<span>
+				<p>分期险种：<i class="loantype">商业险</i></p>
+			</span>
+				</div>
+				<div>
+					<h3>保险产品选择</h3>
+					<span>
+				<label>第三方责任险：<input lay-verify="required" class="liabiinsurance" placeholder="请选择" type="text" readonly /></label>
+			</span>
+					<span class="select">
+				<label>车辆损失险：<input lay-verify="required" class="vehicleinsurance is_buy" placeholder="请选择" type="text" readonly /></label>
+			</span>
+					<span class="select">
+				<label>不计免赔：<input lay-verify="required" class="nodeductibles is_buy" placeholder="请选择" type="text" readonly /></label>
+			</span>
+					<span>
+				<label>车上人员责任险：<input lay-verify="required" class="personeinsurance" placeholder="请选择" type="text" /></label>
+			</span>
+					<span class="select">
+				<label>全车盗抢险：<input lay-verify="required" class="robberinsurance is_buy" placeholder="请选择" type="text" /></label>
+			</span>
+					<span class="select">
+				<label>玻璃单独破损险：<input lay-verify="required" class="riskofbreakage is_buy" placeholder="请选择" type="text" /></label>
+			</span>
+					<span class="select">
+				<label>自然损失险：<input lay-verify="required" class="selfiginsurance is_buy" placeholder="请选择" type="text" /></label>
+			</span>
+					<span class="select">
+				<label>车神划痕失险：<input lay-verify="required" class="vehiclescratchrisk is_buy" placeholder="请选择" type="text" /></label>
+			</span>
+				</div>
+			</section>
+			<!-- uploader_file_上传照片 -->
+			<div class="uploader_file">
+				<p>照片信息</p>
+				<div class="clearfix">
+					<h3>行驶证：</h3>
+					<div class="left">
+						<div class="uploader-box uploader-plus">
+							<input class="uploader-input" accept="image/*" multiple="" type="file">
+							<img id="f1" class="uploader-img" alt="" />
+						</div>
+					</div>
+					<div class="right">
+						<div class="uploader-box uploader-plus">
+							<input class="uploader-input" accept="image/*" multiple="" type="file">
+							<img id="f2" class="uploader-img" alt="" />
+						</div>
+					</div>
+					<span class="left">
+				<h3>示例图:</h3>
+				<img src="images/logo/logo_Bg_11.jpg" alt="" />
+				<img src="images/logo/logo_Bg_12.jpg" alt="" />
+			</span>
+					<div class="left">
+						<h3>其他证件:</h3>
+						<div class="uploader-box uploader-plus">
+							<input class="uploader-input" accept="image/*" multiple="" type="file">
+							<img id="f3" class="uploader-img" alt="" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- footer -->
+			<footer>
+				<button class="layui-btn" lay-submit lay-filter="submit">申请报价</button>
+			</footer>
+		</form>
+	</body>
+
+</html>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+<script type="text/javascript">
+	layui.use(['form', 'layer', 'upload', 'element'], function() {
+		var form = layui.form,
+			layer = parent.layer === undefined ? layui.layer : parent.layer,
+			element = layui.element;
+
+		form.on('submit(submit)', function(data) {
+			var jsons = {
+				userId: loca_fetch('userid'),
+				username: $('.username').val(),
+				stagingType: formatSI($('.stagingType').val()),
+				phone: $('.phone').val(),
+				loanType: 'COMMERCIAL_CAR_STRONG_INSURANCE',
+				strongInsurance: formatIsBuy($(".stronginsurance").val()),
+				carInsurance: formatIsBuy($(".carinsurance").val()),
+				liabilityInsurance: $('.liabiinsurance').val(),
+				vehicleLossInsurance: formatIsBuy($(".vehicleinsurance").val()),
+				noDeductibles: formatIsBuy($(".nodeductibles").val()),
+				personnelLiabilityInsurance: $('.personeinsurance').val(),
+				robberyAndTheftInsurance: formatIsBuy($(".robberinsurance").val()),
+				riskOfGlassBreakage: formatIsBuy($(".riskofbreakage").val()),
+				selfIgnitionLossInsurance: formatIsBuy($(".selfiginsurance").val()),
+				vehicleScratchRisk: formatIsBuy($(".vehiclescratchrisk").val()),
+				originalDrivingLicense: $('#f1').attr('src'),
+				copyOfDrivingLicense: $('#f2').attr('src'),
+				otherDocuments: $('#f3').attr('src'),
+				insuranceDoorId: 5,
+				sourceOfContract: "WECHAT"
+			};
+			$.ajax({
+				type: "post",
+				url: site + "/Loan/applyLoan",
+				dataType: 'json',
+				data: jsons,
+				success: function(data) {
+					if(data.code == 1) {
+						loca_save('dkid', data.data.id);
+						alert("提交申请成功");
+						window.location.href = 'insurance.html';
+					} else {
+						alert(data.msg);
+					}
+				}
+			});
+			return false;
+		});
+	})
+	$(function() {
+		$(".is_buy").focus(function() {
+			$(this).picker({
+				title: "请选择是否购买",
+				cols: [{
+					textAlign: 'center',
+					values: ['不购买', '购买']
+				}]
+			});
+		});
+
+		$(".stagingtype").picker({
+			title: "请选择分期类型",
+			cols: [{
+				textAlign: 'center',
+				values: ['首保', '续保']
+			}]
+		});
+
+		$(".liabiinsurance").focus(function() {
+			var _this = this;
+			$.ajaxSetup({
+				async: false
+			});
+			$.get(site + "/Loan/queryInsuranceMoney", {
+				"insuranceMoneyType": "THIRD_PARTY_LIABILITY_INSURANCE"
+			}, function(da) {
+				if(da.code == 1) {
+					var arr = [],
+						arr2 = [];
+					$(da.data).each(function(i) {
+						arr.push(da.data[i].name);
+						arr2.push(da.data[i].money);
+					});
+					$(_this).picker({
+						title: "请选择",
+						cols: [{
+							textAlign: 'center',
+							values: arr2,
+							displayValues: arr
+						}]
+					});
+				} else {
+					layer.msg(da.msg);
+				}
+			});
+		});
+
+		$(".personeinsurance").focus(function() {
+			var _this = this;
+			$.ajaxSetup({
+				async: false
+			});
+			$.get(site + "/Loan/queryInsuranceMoney", {
+				"insuranceMoneyType": "PERSONNEL_LIABILITY_INSURANCE"
+			}, function(da) {
+				if(da.code == 1) {
+					var arr = [],
+						arr2 = [];
+					$(da.data).each(function(i) {
+						arr.push(da.data[i].name);
+						arr2.push(da.data[i].money);
+					});
+					$(_this).picker({
+						title: "请选择",
+						cols: [{
+							textAlign: 'center',
+							values: arr2,
+							displayValues: arr
+						}]
+					});
+				} else {
+					layer.msg(da.msg);
+				}
+			});
+		});
+	});
+</script>
+<script>
+	$(function() {
+		if(typeof(FileReader) === 'undefined') { //如果不支持FileReader
+			alert("抱歉，你的浏览器不支持FileReader，请使用现代浏览器操作！");
+			$("#uploader_input").attr('disabled', 'disabled');
+		} else {
+			uploaderChange();
+			init();
+		}
+	});
+
+	function init() {
+		$.ajax({
+			type: "get",
+			url: site + "/Loan/queryMyAuthentication",
+			data: {
+				"userId": loca_fetch('userid')
+			},
+			dataType: 'json',
+			success: function(data) {
+				if(data.code == 1) {
+					$("#username").html(data.data.username);
+					$("#phone").html(data.data.phone);
+				} else {
+					alert(data.msg);
+				}
+			},
+			error: function(data) {
+				if(data.status == 500) {
+					alert("没有进行实名认证，请手动填写个人资料");
+				}
+			}
+		});
+	}
+
+	//上传图片
+	function uploaderChange() {
+
+		$(".uploader-input").change(function() {
+			var _this = this;
+			var file = this.files[0];
+			if(!/image\/\w+/.test(file.type)) { //这里我们判断下类型如果不是图片就返回 去掉就可以上传任意文件
+				alert("请确保文件为图像类型");
+				return false;
+			}
+			var reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = function(e) {
+				var fd = new FormData();
+				fd.append('imageFile', file); //上传的文件： 键名，键值
+				fd.append('backet', '3');
+				var url = site + "/up/upload"; //接口
+				url = url ? url : '';
+				var XHR = null;
+				if(window.XMLHttpRequest) {
+					// 非IE内核
+					XHR = new XMLHttpRequest();
+				} else if(window.ActiveXObject) {
+					// IE内核，这里早期IE版本不同，具体可以查下
+					XHR = new ActiveXObject("Microsoft.XMLHTTP");
+				} else {
+					XHR = null;
+				}
+				if(XHR) {
+					//弹出loading
+					var index = top.layer.msg('图片上传中，请稍候', {
+						icon: 16,
+						time: false,
+						shade: 0.8
+					});
+					XHR.open("POST", url);
+					XHR.onreadystatechange = function() {
+						top.layer.close(index);
+						layer.msg("添加图片完成");
+						if(XHR.readyState == 4 && XHR.status == 200) {
+							var resultValue = XHR.responseText;
+							var da = JSON.parse(resultValue);
+							$(_this).next("img").attr("src", da.data.src);
+							XHR = null;
+						}
+					}
+					XHR.send(fd);
+				}
+			}
+		});
+	}
+
+	//显示上传进度
+	function uploading(imgId) {
+		var $img = $("#" + imgId);
+		var interval = setInterval(function() {
+			var progress = parseInt($img.attr("data-progress")) + 1;
+			$img.attr("data-progress", progress + "%");
+			if(progress == 100) {
+				clearInterval(interval);
+				$img.removeClass("uploader-progress");
+				$img.addClass("uploader-item");
+				if($(".uploader-plus").is(":hidden")) {
+					$img.addClass("uploader-delete");
+				}
+			}
+		}, 100);
+	}
+
+	//	选择保险金额
+	//	$('.select input').click(function() {
+	//		$('.insurance_num').css('display', 'block')
+	//
+	//	})
+	//	$('.insurance_num option').on('click', function() {
+	//		$('.select input').val($('.insurance_num option').eq($(this).index()).val())
+	//		$('.insurance_num').css('display', 'none')
+	//	})
+
+	function formatIsBuy(val) {
+		if(val == "购买") {
+			return "BUY";
+		} else {
+			return "NOT_BUY"
+		}
+	}
+
+	function formatSI(val) {
+		if(val == "首保") {
+			return "THE_FIRST_INSURANCE";
+		} else {
+			return "RENEWAL_OF_INSURANCE";
+		}
+	}
+
+	//	function formatLI(val){
+	//		if(val = "首保") {
+	//			return "THE_FIRST_INSURANCE";
+	//		} else {
+	//			return "RENEWAL_OF_INSURANCE";
+	//		}
+	//	}
+</script>

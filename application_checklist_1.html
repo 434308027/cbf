@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="x5-orientation" content="portrait" />
+		<meta name="x5-fullscreen" content="true" />
+		<meta name="screen-orientation" content="portrait" />
+		<meta name="full-screen" content="yes" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" href="css/application_checklist.css" />
+		<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/vue1.0.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<title>确认申请</title>
+	</head>
+
+	<body>
+		<!-- header_头部  -->
+		<header>
+			<p>
+				<a href="personal_application.html"></a>
+				<i>分期申请确认</i>
+			</p>
+		</header>
+		<!-- section_骨架 -->
+		<section>
+			<ul>
+				<li><i>姓名:</i><b id="username"></b></li>
+				<li><i>身份证号:</i><b id="idNumber"></b></li>
+				<li><i>手机号:</i><b id="phone"></b></li>
+				<li><i>银行名称:</i><b id="bank"></b></li>
+				<li class="f1_boa"><i>银行卡号:</i><b id="bankCardNumber"></b></li>
+				<li><i>分期类型:</i>
+					<b v-if="dott.stagingType=='THE_FIRST_INSURANCE'">首保</b>
+					<b v-if="dott.stagingType=='RENEWAL_OF_INSURANCE'">续保</b>
+				</li>
+				<li><i>分期险种:</i>
+					<b v-if="dott.loanType=='COMMERCIAL_CAR_STRONG_INSURANCE'">商业险+交强险+车船险</b>
+					<b v-if="dott.loanType=='COMMERCIAL_INSURANCE'">商业险</b>
+				</li>
+				<li><i>保险公司:</i>
+					<b>{{dott.insuranceCompany}}</b>
+				</li>
+				<li class="f1_bob"><i>保险产品:</i>
+					<p v-if="dott.strongInsurance=='BUY'">交强险购买</p>
+					<p v-if="dott.strongInsurance=='NOT_BUY'">交强险不购买</p>
+					<p v-if="dott.carInsurance =='BUY'">车船险购买</p>
+					<p v-if="dott.carInsurance =='NOT_BUY'">车船险不购买</p>
+					<p>第三方责任险{{dott.liabilityInsurance}}</p>
+					<p v-if="dott.vehicleLossInsurance =='BUY'">车辆损失险购买</p>
+					<p v-if="dott.vehicleLossInsurance =='NOT_BUY'">车辆损失险不购买</p>
+					<p v-if="dott.noDeductibles =='BUY'">不计免赔购买</p>
+					<p v-if="dott.noDeductibles =='NOT_BUY'">不计免赔不购买</p>
+					<p>车上人员责任险每座{{dott.personnelLiabilityInsurance}}</p>
+				</li>
+				<li><i>汽车品牌型号:</i><input id="carBrand" style="text-align: right;float: right; line-height: 2rem;" type="text" /></li>
+				<li><i>商业险:</i><b>{{dott.commercialInsuranceMoney}}元</b></li>
+				<li><i>交强险:</i><b>{{dott.strongInsuranceMoney}}元</b></li>
+				<li><i>车船险:</i><b>{{dott.vehicleAndVesselTax}}元</b></li>
+				<li><i>消费金抵扣:</i><b>1000.00元</b></li>
+				<li><i>保险总额:</i><b>1000.00元</b></li>
+				<li><i>贷款金额:</i><b>1000.00元</b></li>
+				<li><i>手续费:</i><b>1000.00元</b></li>
+				<li><i>分期数:</i><b>{{dott.number}}期</b></li>
+				<li class="f1_boc"><i>月供金额:</i><strong>分期明细</strong><b>1000.00元</b></li>
+			</ul>
+			<p><label><em></em><input type="checkbox" />我已阅读并同意以上<i>《车保分消费分期付款合同》</i>内容</label></p>
+			<p class="skip">
+				<a href="javascript:;">确认申请</a>
+			</p>
+			<div>本协议委托第三方支付公司易极付代为扣款</div>
+		</section>
+		<!-- detail_分期明细 -->
+		<div class="detail">
+			<div>
+				<ul>
+					<li class="title">
+						<i class="close"></i>
+						<p>期数</p>
+						<p>月供金额</p>
+						<p>还款时间</p>
+					</li>
+					<li v-for="item in dott">
+						<i>1</i>
+						<em>￥{{ item.money }}</em>
+						<strong>{{ item.date }}</strong>
+					</li>
+					<li class="state">
+						<p>注：还款日期仅供参考，实际以签约日期为准</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+<script>
+	$(function() {
+		//复选框
+		$("label input").change(function() {
+			if($(this).is(":checked")) {
+				$(this).siblings('em').addClass("dot_f1");
+				$('.skip a').css({
+					'color': '#fff'
+				})
+				$('.skip a').attr('onclick', 'link("personal_center.html")');
+			} else {
+				$(this).siblings('em').removeClass("dot_f1");
+				$('.skip a').css({
+					'color': '#ddd'
+				})
+				$('.skip a').removeAttr('onclick');
+			}
+		});
+	})
+
+	function link(url) {
+		alert("申请成功");
+		//		var jsonData = {};
+		//		jsonData['number'] = $("#number").val();
+		//		jsonData['carBrand'] = $("#carBrand").val();
+		//		loca_save('subData', jsonData)
+		window.location.href = url;
+	}
+
+	//分期明细
+	$('.f1_boc strong').on('click', function(e) {
+		e.preventDefault(); //清除默认事件
+		$('.detail').css({
+			'opacity': '1',
+			'transition': '.5s',
+			'z-index': '11'
+		})
+	})
+	$('.f1_boc strong').on('click', function() {
+		var jsons = {
+			totalMoney: 333,
+			number: 1,
+			serviceCharge: 1,
+			consumerMoney: 1,
+		}
+		$.ajax({
+			type: "get",
+			url: site + "/Loan/queryStagingDetail",
+			dataType: 'json',
+			data: jsons,
+			success: function(data) {
+				var jsons = data.data
+				console.log(data)
+				var vue = new Vue({
+					el: '.detail',
+					data: {
+						dott: jsons,
+					}
+				})
+			}
+		});
+	})
+	//退出分期明细
+	$('.close').on('touchstart', function() {
+		$('.detail').css({
+			'opacity': '0',
+			'transition': '0.5',
+			'z-index': '-1'
+		})
+	})
+
+	$.ajax({
+		type: "get",
+		url: site + "/Loan/queryMyAuthentication",
+		data: {
+			"userId": loca_fetch('userid')
+		},
+		dataType: 'json',
+		success: function(data) {
+			if(data.code == 1) {
+				$("#username").html(data.data.username);
+				$("#idNumber").html(data.data.idNumber);
+				$("#phone").html(data.data.phone);
+				$("#bank").html(data.data.bank);
+				$("#bankCardNumber").html(data.data.bankCardNumber);
+
+				//分期申请确认
+				$.ajax({
+					type: "get",
+					url: site + "/Loan/queryLoanInfo",
+					data: {
+						id: loca_fetch('dkid')
+					},
+					dataType: 'json',
+					success: function(data) {
+						new Vue({
+							el: 'section',
+							data: {
+								dott: data.data,
+							}
+						})
+					}
+				});
+			} else {
+				alert(data.msg);
+			}
+		},
+		error: function(data) {
+			if(data.status == 500) {
+				alert("请完成实名认证");
+				window.location.href = "personal_application.html"
+			}
+		}
+	});
+</script>

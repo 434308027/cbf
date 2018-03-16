@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="x5-orientation" content="portrait" />
+	<meta name="x5-fullscreen" content="true" />
+	<meta name="screen-orientation" content="portrait" />
+	<meta name="full-screen" content="yes" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="css/payment.css"/>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/vue1.0.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<title>支付</title>
+</head>
+<body>
+	<!-- header_头部 -->
+	<header>
+		<p>
+			<a href="personal_maintain.html"></a>
+			<i>选择支付方式</i>
+		</p>
+	</header>
+	<!-- section_骨架 -->
+	<section>
+		<!--<div class="f1">
+			<label><i>支付宝</i><input type="radio" name="b" value="1" class="radio"><label class="radio"></label></label>
+		</div>-->
+		<div class="f2">
+			<label><i>微信</i><input type="radio" name="b" value="0" class="radio" checked><label class="radio"></label></label>
+		</div>
+	</section>
+</body>
+</html>
+<script>
+	function GetQueryString(name)
+	{
+	    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+	    var r = window.location.search.substr(1).match(reg);
+	    if(r!=null)return  unescape(r[2]); return null;
+	}
+	var ids = loca_fetch('totalpri')
+	$('section').append('<p><button>确认支付(¥'+ids+')</button></p>')
+	$('section button').on('click',function(){	
+		var reg_type = $('[name="b"]:checked').val();
+		$.ajax({
+			type:"post",
+			url:site+"/pay/pay",
+			dataType:'json',
+			data:{morderId: loca_fetch('moderid'),type:reg_type,},
+			success:function(data){
+				console.log(data)			
+//				location.href="payment_result.html"
+				function onBridgeReady(){
+				   WeixinJSBridge.invoke(
+				       'getBrandWCPayRequest', {
+				           "appId":data.data.appid,     //公众号名称，由商户传入     
+				           "timeStamp":data.data.timeStamp,         //时间戳，自1970年以来的秒数     
+				           "nonceStr":data.data.noncestr, //随机串     
+				           "package":data.data.prepayid,     
+				           "signType":"HMAC-SHA256",         //微信签名方式：     
+				           "paySign":data.data.sign //微信签名 
+				       },
+				       function(res){     
+				           if(res.err_msg == "get_brand_wcpay_request:ok" ) {}     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。 
+				       }
+				   ); 
+				}
+				if (typeof WeixinJSBridge == "undefined"){
+				   if( document.addEventListener ){
+				       document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+				   }else if (document.attachEvent){
+				       document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+				       document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+				   }
+				}else{
+				   onBridgeReady();
+				}
+				
+			}
+		})
+	})
+</script>

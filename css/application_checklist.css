@@ -1,0 +1,47 @@
+@charset "utf-8";
+
+/*header_头部*/
+header { width: 100%;height: 1.76rem;background: #ffffff;border-bottom: 1px solid #e2e3e4;line-height: 1.76rem;position: absolute;top: 0;left: 0; }
+header a { width: 1.2rem;height: 1.76rem;background: url(../images/icon/icon_14.png) no-repeat center;background-size: 0.46rem 0.58rem;float: left; }
+header i { text-align: center;display: block;font-size: 0.72rem;color: #000000;margin-right: 1.2rem; }
+
+/*section_骨架*/
+section { width: 100%;margin-top: 1.76rem; }
+section ul {  }
+section ul li { width: 100%;height: 2.12rem;border-bottom: 1px solid #dfdfdf;padding: 0 0.4rem;line-height: 2.12rem;box-sizing: border-box;-webkit-box-sizing: border-box;background: #fff; }
+section ul li i { float: left;font-size: 0.52rem;color: #000;font-weight: 600; }
+section ul li b { float: right;font-size: 0.52rem;color: #828282;font-weight: 400; }
+section ul li.f1_boa { margin-bottom: 0.4rem; }
+section ul li.f1_bob {     height: auto; overflow: hidden;}
+section ul li.f1_bob p { font-size: 0.52rem;color: #828282;text-align: right;margin-top: -1.3rem; }
+section ul li.f1_bob p:nth-of-type(1) { margin: 0; }
+section ul li.f1_boc strong { float: right;font-size: 0.52rem;color: #FF7676;font-weight: 0;font-style: normal; }
+section ul li.f1_boc b { margin-right: 0.4rem; }
+section>p { font-size: 0.4rem;color: #D0D0D0;text-align: center;margin: 0.44rem 0 0.8rem 0; }
+section>p i { color: #FF7676; }
+section>p input { opacity: 0; }
+section>p label { position: relative; }
+section>p .dot_f1 { width: 0.5rem;height: 0.48rem;background: url(../images/icon/icon_38.png) no-repeat -0.55rem;background-size: 1rem 0.48rem; }
+section>p label em { position: absolute;top: 0;left: 0;width: 0.5rem;height: 0.48rem;background: url(../images/icon/icon_28.png) no-repeat 0;background-size: 1rem 0.48rem;margin-left: 0.25rem; }
+section .skip { padding: 0 1rem;box-sizing: border-box;-webkit-box-sizing: border-box;margin-bottom: 0.4rem; }
+section .skip a { display: block;width: 100%;height: 1.76rem;background: #FF7676;color: #ddd;font-size: 0.6rem;text-align: center;line-height: 1.76rem;border-radius: 1rem;-webkit-border-radius: 1rem; }
+section>div { font-size: 0.4rem;color: #D0D0D0;text-align: center;margin-bottom: 1rem; }
+
+/*detail_分期明细*/
+.detail { width: 100%;height: 100%;position: absolute;top: 0;left: 0;background: rgba(0,0,0,.3);opacity: 0;z-index: -1; }
+.detail div .close { width: 1.2rem;height: 1.2rem;background: url(../images/icon/icon_40.png) no-repeat center;background-size: 0.46rem 0.42rem;position: absolute;top: 0;right: 0; }
+.detail ul { width: 100%;height: 70%;background: #fff;position: absolute;bottom: 0;left: 0;padding: 0 0.4rem;box-sizing: border-box;-webkit-box-sizing: border-box;padding-top: 2rem;overflow-y: scroll; }
+.detail ul li { display: flex;flex-direction: row;justify-content: space-around; }
+.detail ul li.title { color: #000000;font-size: 0.6rem;background: #e8e8e8;height: 1rem;line-height: 1rem; }
+.detail ul li { height: 1.3rem;border-bottom: 1px solid #DFDFDF;background: #f8f8f8;font-size: 0.55rem;color: #b5b5b5;line-height: 1.3rem;font-style: normal; }
+.detail ul li strong { font-weight: 100;margin-right: -0.7rem; }
+.detail .state { font-size: 0.4rem;color: #FF7676;font-size: 0.45rem;font-style: normal;height: 0;border: 0;float: left;margin-left: 1rem; } 
+
+/*signature_签名*/
+.signature { position: absolute;top: 0;left: 0;background: rgba(0,0,0,.3);z-index: 11;width: 100%;height: 100%;overflow-y: scroll;display: none; }
+.signature>div { background: #fff;width: 100%;height: 14rem;margin-top: 6rem; }
+.signature>div span { padding: 0.48rem 0;display: block; }
+.signature>div span i { font-size: 0.6rem;color: #000;display: block;text-align: center; }
+.signature>div span em { width: 1.6rem;height: 1.6rem;float: right;background: url(../images/icon/icon_40.png) no-repeat center;background-size: 0.46rem 0.42rem;margin-top: -1.25rem; }
+.signature>div img { width: 4.82rem;height: 2.48rem;display: block;margin: 3.56rem auto 4.8rem auto; }
+.signature>div button { display: block;width: 4.48rem;height: 1rem;color: #fff;font-size: 0.48rem;border-radius: 1rem;-webkit-border-radius: 1rem;background: #FF7676;margin: 0 auto; }

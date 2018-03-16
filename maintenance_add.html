@@ -1,0 +1,122 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Amaze UI Admin index Examples</title>
+		<meta name="description" content="这是一个 index 页面">
+		<meta name="keywords" content="index">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<link rel="icon" type="image/png" href="../assets/i/favicon.png">
+		<link rel="apple-touch-icon-precomposed" href="../assets/i/app-icon72x72@2x.png">
+		<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+		<link rel="stylesheet" href="../assets/css/amazeui.min.css" />
+		<link rel="stylesheet" href="../assets/css/admin.css">
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/app.js"></script>
+		<script src="../assets/js/product.js"></script>
+		<script src="../assets/js/public.js"></script>
+		
+
+	</head>
+
+	<body>
+		<!--[if lte IE 9]><p class="browsehappy">升级你的浏览器吧！ <a href="http://se.360.cn/" target="_blank">升级浏览器</a>以获得更好的体验！</p><![endif]-->
+
+		</head>
+
+		<body>
+
+
+
+										<img id="myimg" src="" alt="" />
+										
+			
+
+											<div class="am-form-group am-form-file">
+												<div class="row" style="margin-top: 20px;">
+													<input type="hidden" id="domain" value="http://p28aajnzd.bkt.clouddn.com/">
+													<input type="hidden" id="uptoken_url" value="uptoken">
+													<div class="col-md-12">
+														<div id="container" style="position: relative;">
+															<a class="btn btn-default btn-lg " id="pickfiles" href="http://jssdk.demo.qiniu.io/#" style="position: relative; z-index: 1;">
+																<i class="glyphicon glyphicon-plus"></i>
+																<span>选择文件</span>
+															</a>
+															<div id="html5_1aj3rtennnga1n5h927gjn8343_container" class="moxie-shim moxie-shim-html5" style="position: absolute; top: 0px; left: 0px; width: 171px; height: 46px; overflow: hidden; z-index: 0;"><input id="html5_1aj3rtennnga1n5h927gjn8343" type="file" style="font-size: 999px; opacity: 0; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;" multiple="" accept=""></div>
+															<div id="html5_1aj3rtennnga1n5h927gjn8343_container" class="moxie-shim moxie-shim-html5" style="position: absolute; top: 0px; left: 0px; width: 171px; height: 46px; overflow: hidden; z-index: 0;"><input id="html5_1aj3rtennnga1n5h927gjn8343" type="file" style="font-size: 999px; opacity: 0; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;" multiple="" accept=""></div>															
+														</div>
+													</div>
+												</div>
+</div>												
+
+
+		</body>
+		
+		
+		<script>
+			//图片回显
+			function setimg(imgurl){
+				//图片
+				
+            	var domain=$("#domain").val();
+            	$("#myimg").attr('src', domain+imgurl);
+				$(".photo").val(domain+imgurl);
+			}
+			
+			
+		</script>
+		<!--七牛-->
+		<link href="http://jssdk.demo.qiniu.io/images/favicon.ico" rel="shortcut icon">
+		<link rel="stylesheet" href="./qiniu/bootstrap.css">
+		<link rel="stylesheet" href="./qiniu/main.css">
+		<link rel="stylesheet" href="./qiniu/highlight.css">
+		<link rel="stylesheet" href="../qiniu/my_qiniu.css" />
+		<style type="text/css" adt="123"></style>
+		
+		<script type="text/javascript" src="./qiniu/jquery.min.js"></script>
+		<script type="text/javascript" src="./qiniu/bootstrap.min.js"></script>
+		<script type="text/javascript" src="./qiniu/moxie.js"></script>
+		<script type="text/javascript" src="./qiniu/plupload.dev.js"></script>
+		<!-- <script type="text/javascript" src="bower_components/plupload/js/plupload.full.min.js"></script> -->
+		<script type="text/javascript" src="./qiniu/zh_CN.js"></script>
+		<script type="text/javascript" src="./qiniu/ui.js"></script>
+		<script type="text/javascript" src="./qiniu/qiniu.js"></script>
+		<script type="text/javascript" src="./qiniu/highlight.js"></script>
+		<script type="text/javascript" src="./qiniu/main.js"></script>
+		<script src="./qiniu/my_qiniu.js"></script>
+		<script type="text/javascript">
+			hljs.initHighlightingOnLoad();
+		</script>
+		
+		
+		<script>
+			function add() {
+
+				$.ajax({
+					type: "POST",
+					url: actionurl+"/mseller/addKeepPackage",
+					data: $("#Form").serialize(),
+					dataType: 'json',
+					async: false,
+					cache: false,
+					success: function(data) {
+						if("1" == data.code) {
+							//转跳列表页
+							window.open("maintenance_list.html");
+
+						}
+
+					},
+
+					error: function(XMLHttpRequest, textStatus, errorThrown) {
+						alert("操作无效");
+					}
+				});
+			}
+		</script>
+
+</html>

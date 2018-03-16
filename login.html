@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="x5-orientation" content="portrait" />
+		<meta name="x5-fullscreen" content="true" />
+		<meta name="screen-orientation" content="portrait" />
+		<meta name="full-screen" content="yes" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/layer_mobile.css" />
+		<link rel="stylesheet" type="text/css" href="css/login.css" />
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/layer_mobile.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<title>登录</title>
+	</head>
+
+	<body>
+		<!-- title -->
+		<div class="title">
+			<div class="title_logo"></div>
+			<p>车保分服务欢迎您</p>
+		</div>
+		<!-- from -->
+		<from name="from" action="http://www.baidu.com" method="post">
+			<span class="input_f1">
+			<i></i>
+			<input type="text" class="mobile" placeholder="手机号码" />
+			<em id="mobile_prompt"></em>
+		</span>
+			<span class="input_f1 ">
+			<i></i>
+			<input type="password" class="pwd" placeholder="密码"  />
+		</span>
+			<span input_f3>
+			<input type="button" class="login" value="登录" disabled></input>
+		</span>
+		</from>
+		<!-- footer -->
+		<footer class="logo_footer">
+			<a href="register.html">注册账号</a>
+			<i></i>
+			<a href="forget_the_pass.html">忘记密码</a>
+		</footer>
+	</body>
+
+</html>
+<script type="text/javascript">
+	$('input').bind('input propertychange', function() {
+		if($('.mobile').val() == "" || $('.pwd').val() == "") //如果两个值中只要有一个为空则
+		{
+//<<<<<<< .mine
+		 	$('.login').attr('disabled',true)	
+		 	$('.login').css('background','#ffdada')	
+//=======
+			$('.login').disabled = false
+			$('.login').css('background', '#ffdada')
+		} else {
+			$('.login').removeAttr('disabled')
+			$('.login').css('background', '#f18e8e')
+//>>>>>>> .r41
+		}
+	});
+	//不被软键盘顶起
+	var oHeight = $(document).height();
+	$(window).resize(function() {
+		if($(document).height() < oHeight) {
+			$("footer").css("position", "static");
+		} else {
+			$("footer").css("position", "absolute");
+		}
+	})
+	var iphonetest = /^1(3|4|5|7|8)\d{9}$/; //表示以1开头，第二位可能是3/4/5/7/8等的任意一个,表示数字[0-9]的9位,11位结束。
+	var pwdtest = /^[a-zA-Z]\w{5,17}$/; //匹配 以字母开头，长度在6~18之间，只能包含字符、数字和下划线	
+	//账号密码登录
+	$(".login").click(function() {
+		var mobile = $(".mobile").val(); //账号
+		var pwda = $(".pwd").val(); //密码
+		//正则验证
+		if(!(iphonetest.test(mobile))) {
+			alerts("账号输入有误！");
+			return false;
+		} else if(pwda == '') {
+			alerts("密码不能为空")
+		} else {
+			//ajax提交
+			var json = {
+				'phone': $(".mobile").val(),
+				'userPassword': $(".pwd").val()
+			}
+			$.ajax({
+				type: "post",
+				url: site + "/login/login",
+				datatype: 'json',
+				data: json,
+				success: function(data) {
+					if(data.code == 0) {
+						alerts(data.msg);
+					} else {
+						loca_save('userid', data.data.userId);
+						window.location.href = "./index.html";
+					}
+				}
+			});
+		}
+	});
+</script>

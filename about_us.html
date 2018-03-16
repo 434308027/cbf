@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="x5-orientation" content="portrait" />
+	<meta name="x5-fullscreen" content="true" />
+	<meta name="screen-orientation" content="portrait" />
+	<meta name="full-screen" content="yes" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<style>
+		body { background: #fff; }
+		/*header-头部*/
+		header { width: 100%;height: 1.76rem;background: #ffffff;border-bottom: 1px solid #e2e3e4;line-height: 1.76rem; }
+		header a { width: 1.2rem;height: 1.76rem;background: url(images/icon/icon_14.png) no-repeat center;background-size: 0.46rem 0.58rem;float: left; }
+		header i { text-align: center;display: block;font-size: 0.72rem;color: #000000;margin-right: 1.2rem; }
+		/*section_骨架*/
+		section { background: #fff; width: 100%;padding: 0 0.4rem;box-sizing: border-box;-webkit-box-sizing: border-box; }
+		section p { font-size: 0.6rem;text-indent: 0.6rem; }
+	</style>
+	<title>关于我们</title>
+</head>
+<body>
+	<!-- header_头部 -->
+	<header>
+		<p>
+			<a href="personal_center.html"></a>
+			<i>关于我们</i>
+		</p>
+	</header>
+	<!--section_骨架-->
+	<section>
+		<div class="content">
+			
+		</div>
+	</section>
+</body>
+</html>
+<script>
+	$.ajax({
+		type:"get",
+		url:site+"/user/us",
+		dataType:'json',
+		success:function(data){
+			var datas = data.data
+			console.log(data.data)
+			$.each(datas, function(i,val) {
+				$('.content').append('<p>'+val.txt+'</p>')
+			});
+		}
+	});
+</script>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="x5-orientation" content="portrait" />
+	<meta name="x5-fullscreen" content="true" />
+	<meta name="screen-orientation" content="portrait" />
+	<meta name="full-screen" content="yes" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="css/home_page.css" />
+	<link rel="stylesheet" type="text/css" href="css/swiper.min.css" />
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/swiper.min.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<title>首页</title>
+</head>
+<body>
+	<!-- header -->
+	<header>
+		<h3 class="left">车保分</h3>
+		<!-- share  -->
+		<p class="share right"></p>
+	</header>
+	<!-- share -->
+	<div class="share_popups jianthis_style">
+		<p>
+			<a class="jiathis_button_cqq"><img src="images/logo/logo.png"/></a>
+			<a class="jiathis_button_qzone"><img src="images/logo/logo1.png"/></a>
+			<a class="jiathis_button_weixin"><img src="images/logo/logo2.png"/></a>
+			<a class="jiathis_button_tsina"><img src="images/logo/logo3.png"/></a>
+		</p>
+		<i class="close"></i>
+	</div>
+	<!-- banner -->
+	<div class="swiper-container banner">
+	    <div class="swiper-wrapper f1" >
+	    </div>
+	    <!-- 分页器 -->
+	    <div class="swiper-pagination"></div>
+	</div>
+	<!-- nav -->
+	<nav class="clearfix">
+		<div>
+			<a href="insurance.html"><img src="images/icon/icon_1.gif" alt="" /><i>汽车保险</i></a>
+			<a href="maintain.html"><img src="images/icon/icon_2.gif" alt="" /><i>汽车保养</i></a>
+			<a href="store.html"><img src="images/icon/icon_3.gif" alt="" /><i>汽车商城</i></a>
+			<a href="consumer_gold.html"><img src="images/icon/icon_4.gif" alt="" /><i>消费金</i></a>
+		</div>
+	</nav>
+	<!-- footer -->
+	<footer class="footer">
+		<ul>
+			<li>
+				<a href="javascript:;"><img src="images/icon/icon_6.png" alt="" />首页</a>
+				<a href="insurance.html"><img src="images/icon/icon_7.png" alt="" />保险</a>
+				<a href="maintain.html"><img src="images/icon/icon_8.png" alt="" />保养</a>
+				<a href="store.html"><img src="images/icon/icon_9.png" alt="" />商城</a>
+				<a href="personal_center.html"><img src="images/icon/icon_10.png" alt="" />我的</a>
+			</li>
+		</ul>
+	</footer>
+	<script>
+		//分享的内容
+		var jiathis_config={
+			data_track_clickback:true,
+			url:"http://www.baidu.com",
+			summary:"移动端汽车商战",
+			title:"车宝分 #O(∩_∩)O哈哈~#",
+			shortUrl:false,
+			hideMore:false
+		}
+	</script>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2156913" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		//分享
+		$('.share').on('click',function(){
+			$('.share_popups').css({'opacity':1,'z-index':99,'transition':'.5s'});	
+		})
+		$('.close').on('click',function(){
+			$('.share_popups').css({'opacity':0,'z-index':-1,'transition':'.5s'});	
+		})
+	});
+	//请求banner图
+	$.ajax({
+		type:"get",
+		url:site+'/user/banner',
+		async:true,
+		dataType:'json',
+		data:{bannerType:1},
+		success:function (data){
+				str(data);
+		}
+	});
+	function str(data){
+		let uerbanne  = data.data
+		$.each(uerbanne, function(i,val) {
+			$('.swiper-wrapper').append(' <div class="swiper-slide"><a href=""><img src="'+val.bannerImage+'" alt=""/></a></div>')
+		});
+		var mySwiper = new Swiper ('.banner', {
+	        loop: true,
+	        autoplay : 3000,
+	        autoplayDisableOnInteraction : false,
+	        pagination: '.swiper-pagination',     // 如果需要分页器
+	        observer:true,//修改swiper自己或子元素时，自动初始化swiper
+    	});
+	}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

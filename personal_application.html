@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="x5-orientation" content="portrait" />
+		<meta name="x5-fullscreen" content="true" />
+		<meta name="screen-orientation" content="portrait" />
+		<meta name="full-screen" content="yes" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" href="css/personal_application.css" />
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<title>个人申请</title>
+	</head>
+
+	<body>
+		<!-- header_头部 -->
+		<header>
+			<div>
+				<a href="personal_center.html"></a>
+				<form action="" method="post">
+					<label><i></i><input type="text" value="" placeholder="搜索订单号" /></label>
+				</form>
+			</div> 
+		</header>
+		<!-- section_骨架 -->
+		<section>
+			<ul id="list-box">
+				<script id="list-temp" type="text/html">
+					{{each list as rs i}}
+					<li>
+						<div class="f1_bof" data-id="{{rs.id}}">
+							<div class="appli_title">
+								<em class="left"><span><img src="images/icon/icon_37.png" alt="" /></span><i>{{ rs.username }}</i></em>
+								<p class="right">{{rs.loanStatus|formatLoanStatus}}</p>
+							</div>
+							<div class="appli_center">
+								<div>
+									<p>合同号:<i>{{ rs.contractNumber}}</i></p>
+									<p>申请日期:<i>{{ rs.addTime|getMyDate}}</i></p>
+								</div>
+							</div>
+						</div>
+						{{if rs.loanStatus=="FIRST_TRIAL_PASS"}}
+						<a href="javascript:;" data-id="{{rs.id}}" class="confirm_btn">确认金额</a>
+						{{else if rs.loanStatus=="WAIT_FIRST_CHECK"}}
+						<a href="#" data-id="{{rs.id}}" class="cancel_btn">撤销</a>
+						{{/if}}
+					</li>
+					{{/each}}
+				</script>
+			</ul>
+		</section>
+	</body>
+
+</html>
+<script src="js/template.js" type="text/javascript" charset="utf-8"></script>
+<script>
+	$(function() {
+		//跳转保单详情
+		$(document).on('click', '.f1_bof', function() {
+			var dataId = $(this).attr("data-id");
+			window.location.href = './line_item.html?id=' + dataId;
+		})
+
+		if(loca_fetch('userid') == '') {
+			$('ul').hide()
+		} else {
+			$('ul').show()
+			//贷款详情
+			$.ajax({
+				type: "get",
+				url: site + "/Loan/queryMyApply",
+				dataType: 'json',
+				data: {
+					userId: loca_fetch('userid'),
+					page: 0
+				},
+				success: function(da) {
+					$("#list-box").html(template('list-temp', {
+						list: da.data.content
+					}));
+				}
+			});
+		}
+
+		//确认金额
+		$(document).on("click", ".confirm_btn", function() {
+			localStorage.setItem("dkid", $(this).attr("data-id"));
+			window.location.href = "application_checklist.html";
+		});
+
+		//撤销
+		$(document).on("click", ".cancel_btn", function() {});
+	})
+
+	/*
+	 * 合同状态
+	 * FIRST_TRIAL_PASS【初审通过】
+	 * WAIT_CHECK【待初审】
+	 * UN_PASS【未通过】
+	 * WAIT_SECOND_CHECK【待二审】
+	 * SECOND_CHECK_PASS【二审通过】
+	 * */
+	function formatLoanStatus(val) {
+		var temp;
+		if(val == "FIRST_TRIAL_PASS") {
+			temp = "初审通过";
+		} else if(val == "WAIT_FIRST_CHECK") {
+			temp = "待初审";
+		} else if(val == "WAIT_CHECK") {
+			temp = "待审核";
+		} else if(val == "PASS_CHECK") {
+			temp = "审核通过";
+		} else if(val == "DISMISSAL") {
+			temp = "已驳回";
+		} else if(val == "RESCINDED") {
+			temp = "已撤销";
+		} else if(val == "REPAYMENTS") {
+			temp = "还款中";
+		} else if(val == "ALREADY_INSURED") {
+			temp = "已投保";
+		} else if(val == "COMPLETED") {
+			temp = "已完成";
+		} else {
+			temp = "数据错误";
+		}
+		return temp;
+	}
+</script>

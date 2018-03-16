@@ -1,0 +1,56 @@
+@charset "utf-8";
+
+/*header_头部*/
+header { width: 100%;height: 1.76rem;background: #ffffff;border-bottom: 1px solid #e2e3e4;line-height: 1.76rem;position: absolute;top: 0;left: 0;z-index: 11; }
+header a { width: 1.2rem;height: 1.76rem;background: url(../images/icon/icon_14.png) no-repeat center;background-size: 0.46rem 0.58rem;float: left; }
+header i { text-align: center;display: block;font-size: 0.72rem;color: #000000;margin-right: 1.2rem; }
+
+/*section_骨架*/
+section { width: 100%;overflow-y: scroll;margin-top: 1.76rem;height: 100%;padding-bottom: 2rem; }
+section ul { margin-top: 0.4rem;padding-bottom: 1.76rem; }
+section ul li { width: 100%;background: #fff;margin-bottom: 0.4rem; }
+section ul li div:nth-of-type(1) { width: 100%;height: 3.2rem;padding: 0.6rem 0.4rem;box-sizing: border-box;-webkit-box-sizing: border-box;border-bottom: 1px solid #dfdfdf; }
+section ul li div:nth-of-type(1) p {}
+section ul li div:nth-of-type(1) i { font-size: 0.68rem;color: #0e0e0e;margin-bottom: 0.4rem; }
+section ul li div:nth-of-type(1) em { font-size: 0.6rem;color: #bababa; }
+section ul li div:nth-of-type(1) span { display: block; width: 100%;}
+section ul li div:nth-of-type(1) span input { width: 100%;display: block; }
+section ul li div:nth-of-type(2) { width: 100%;height: 1.8rem;padding-top: 0.52rem;box-sizing: border-box;-webkit-box-sizing: border-box; }
+section ul li div:nth-of-type(2) label { position: relative;margin-top: 0rem; }
+section ul li div:nth-of-type(2) label em { width: 0.64rem;height: 0.64rem;background: url(../images/icon/11.png) no-repeat 0.05rem;background-size: 1.28rem 0.64rem;position: absolute;left: 0;top: 0;margin-left: 0.5rem;margin-top: 0.05rem; }
+section ul li div:nth-of-type(2) label em.act { width: 0.64rem;height: 0.64rem;background: url(../images/icon/11.png) no-repeat -0.64rem;background-size: 1.28rem 0.64rem;position: absolute;left: 0;top: 0;margin-top: 0.37rem;margin-left: 0.5rem;margin-top: 0.05rem; }
+section ul li div:nth-of-type(2) label input { opacity: 0; }
+section ul li div:nth-of-type(2) label i { font-size: 0.56rem;color: #bababa;margin-left: 0.64rem; }
+section ul li div:nth-of-type(2) em { font-size: 0.56rem;color: #BABABA;background;width: 2rem;background: url(../images/icon/icon_43.png) no-repeat left;background-size: 0.6rem 0.74rem;text-align: right;margin-right: 0.72rem; }
+section ul li div:nth-of-type(2) b { font-size: 0.56rem;color: #BABABA;width: 2rem;background: url(../images/icon/icon_44.png) no-repeat left;background-size: 0.7rem 0.72rem;text-align: right;margin-right: 0.4rem;font-weight: normal; }
+section>p { width: 100%;height: 2rem; }
+section>p button { position: absolute;bottom: 0;left: 0;width: 100%;font-size: 0.68rem;color: #fff;background: #ff7676;height: 2rem; }
+
+/*add_sipping_address_添加收货地址*/
+.add_sipping_address { width: 100%;overflow-y: scroll;z-index: 33;background: #f8f8f8;height: 100%;position: fixed;top: 0;left: 0;transform: translateX(100%); }
+.add_sipping_address>p { width: 100%;height: 1.76rem;background: #ffffff;border-bottom: 1px solid #e2e3e4;line-height: 1.76rem;margin-bottom: 0.4rem; }
+.add_sipping_address>p a { width: 1.2rem;height: 1.76rem;background: url(../images/icon/icon_14.png) no-repeat center;background-size: 0.46rem 0.58rem;float: left; }
+.add_sipping_address p>i { text-align: center;display: block;font-size: 0.72rem;color: #000000;margin-right: 1.2rem; }
+.add_sipping_address div:nth-of-type(1) { width: 100%;height: 3.2rem;background: #fff;margin-bottom: 0.4rem; }
+.add_sipping_address div:nth-of-type(1)>i { width: 3.2rem;height: 3.2rem;float: left;font-size: 0.6rem;color: #595d72;margin-left: 0.4rem;padding-top: 0.72rem;box-sizing: border-box;-webkit-box-sizing: border-box; }
+.add_sipping_address div:nth-of-type(1) span { float: right;width: 11.4rem; }
+.add_sipping_address div:nth-of-type(1) .lab_f1 { display: block;height: 2rem;border-bottom: 1px solid #dfdfdf;margin-bottom: 0.2rem; }
+.add_sipping_address div:nth-of-type(1) .lab_f1 input { margin-top: 0.75rem; }
+.add_sipping_address div:nth-of-type(1) .lab_f2 { position: relative;margin-left: -0.45rem;margin-top: -0.15rem; }
+.add_sipping_address div:nth-of-type(1) .lab_f2 input { opacity: 0; }
+.add_sipping_address div:nth-of-type(1) .lab_f2 i { font-size: 0.56rem;color: #FF7676;margin-left: 0.64rem; }
+.add_sipping_address div:nth-of-type(1) .lab_f2 em {  width: 0.64rem;height: 0.64rem;background: url(../images/icon/11.png) no-repeat 0rem;background-size: 1.28rem 0.64rem;position: absolute;left: 0;top: 0;margin-left: 0.5rem; }
+.add_sipping_address div:nth-of-type(1) .lab_f2 em.act { width: 0.64rem;height: 0.64rem;background: url(../images/icon/11.png) no-repeat -0.64rem;background-size: 1.28rem 0.64rem;position: absolute;left: 0;top: 0;margin-left: 0.5rem; }
+.add_sipping_address div:nth-of-type(2) { width: 100%;height: 4rem;padding-left: 0.4rem;box-sizing: border-box;-webkit-box-sizing: border-box;background: #fff;margin-bottom: 0.4rem; }
+.add_sipping_address div:nth-of-type(2) label { width: 100%;height: 2rem;display: block; }
+.add_sipping_address div:nth-of-type(2) label input { font-size: 0.6rem;margin-top: 0.68rem; }
+.add_sipping_address div:nth-of-type(2) label.lab_f3 { border-bottom: 1px solid #DFDFDF; }
+.add_sipping_address div:nth-of-type(2) label.lab_f3 em { width: 1.2rem;height: 2rem;background: url(../images/icon/icon_32.png) no-repeat center;background-size: 0.28rem 0.46rem;float: right; }
+.add_sipping_address div:nth-of-type(2) label i { font-size: 0.6rem;color: #595d72;width: 3.2rem;display: inline-block;margin-top: 0.65rem; }
+.add_sipping_address div:nth-of-type(3) { width: 100%;height: 2rem;background: #fff;padding: 0 0.4rem;box-sizing: border-box;-webkit-box-sizing: border-box; }
+.add_sipping_address div:nth-of-type(3) i { font-size: 0.6rem;color: #595d72;width: 3.2rem;display: inline-block; }
+.add_sipping_address div:nth-of-type(3) input { font-size: 0.6rem; }
+.add_sipping_address button { width: 100%;position: fixed;bottom: 0;left: 0;height: 2rem;background: #FF7676;color: #fff;font-size: 0.68rem;z-index: 11; }
+body { overflow-x: hidden;position: relative;background: #f8f8f8;font-size: initial;line-height: normal; }
+#location { width: 10rem;height: 2rem;background: transparent;color: #595d72;margin-top: 0; }
+.labe { width: 100%;height: 2rem;display: block;line-height: 2rem; }

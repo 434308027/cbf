@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="x5-orientation" content="portrait" />
+	<meta name="x5-fullscreen" content="true" />
+	<meta name="screen-orientation" content="portrait" />
+	<meta name="full-screen" content="yes" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/layer_mobile.css"/>
+	<link rel="stylesheet" type="text/css" href="css/shopping_goods.css"/>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/swiper.min.js"></script>
+	<script type="text/javascript" src="js/layer_mobile.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<title>商城商品</title>
+</head>
+<body>
+	<!-- header_头部 -->
+	<header>
+		<a href="store.html" class="go_back"></a>
+		<div class="tab active">商品</div>
+		<div class="tab">详情</div>
+		<div class="tab">评价</div>
+		<div class="share"></div>
+	</header>
+	<!-- share_分享 -->
+	<div class="share_popups">
+		<p>
+			<a href="javascript:;"><img src="images/logo/logo.png"/></a>
+			<a href="javascript:;"><img src="images/logo/logo1.png"/></a>
+			<a href="javascript:;"><img src="images/logo/logo2.png"/></a>
+			<a href="javascript:;"><img src="images/logo/logo3.png"/></a>
+			<i class="close"></i>
+		</p>
+	</div>
+	<!-- select_models_选择型号 -->
+	<div class="select_models">
+		<div>
+			<h3>选择型号</h3>
+			<p>BC-10号</p>
+			<p>BC-10号</p>
+			<p>BC-10号</p>
+			<p>BC-10号</p>
+			<p>BC-10号</p>
+			<p>BC-11号</p>
+			<button>确认选择</button>
+		</div>
+	</div>
+	<!-- section_骨架 -->
+	<section>
+		<!-- commodity_details_商品 -->
+		<div class="commodity_details">
+			<div class="swiper-container banner">
+				<div class="swiper-wrapper">
+			        <div class="swiper-slide"><a href="javascript:"><img src="images/banner/Bg_7.jpg" alt=""/></a></div>
+			        <div class="swiper-slide"><a href="javascript:"><img src="images/banner/Bg_7.jpg" alt=""/></a></div>
+			        <div class="swiper-slide"><a href="javascript:"><img src="images/banner/Bg_7.jpg" alt=""/></a></div>
+			    </div>
+			    <!-- 分页器 -->
+			    <div class="swiper-pagination"></div>
+			</div>
+			<div class="commodity_details_f1">
+				<h3>测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</h3>
+				<div class="clearfix">
+					<span>￥<i>333</i><b>门市价:￥<strong>111</strong></b></span>
+					<p><i>3333</i>人购买</p>
+				</div>
+			</div>
+			<div class="commodity_details_f2">
+				<div>
+					<h3>测试测试测试测试测试测试测试测试</h3>
+					<p>测试测试测试测试测试测试...</p>
+				</div>	
+				<p>查看</p>
+			</div>
+			<div class="commodity_details_f3">
+				<p class="select">选择型号<i>点击选择</i></p>
+			</div>
+		</div>
+		<!-- details_详情 -->
+		<div class="details">
+			<img src="images/banner/Bg_6.jpg" alt="" />	
+		</div>
+		<!-- appraise_评价 -->
+		<div class="appraise">		
+			<ul class="evaluate">
+				<li>
+					<span>
+						<img class="left" src="images/icon/icon_21.png" alt="" />
+						<i>厉害的小鱼鱼</i>
+						<p>2017/06/16</p>
+					</span>
+					<div>
+						<p>不要赔偿，只要证据做实，确实婚内出轨，家暴，与他人同居等等，就可以判刑！！不要罚款，不要过错方赔偿，只要将过错方判刑就可以！不想过可以离，干嘛这样拖拖拉拉的伤害别人。何况分居两年就可以自动离婚，真想离婚不想过，你也不会坚持不了分居两年之后再找。可恶的某种人。。。</p>
+						<div class="clearfix">
+							<img src="images/icon/icon_22.png" alt="" />
+							<p><i>商家回复：</i>性学家李银河不是大力提倡性开放吗？性学家不是说女人一生应该最少和一百个男人上床才行嘛！</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</section>
+	<!-- footer -->
+	<footer>
+		<ul>
+			<li><a href="javascript:;"><i>在线客服</i></a></li>
+			<li class="cart"><a href="javascript:;"><i>购物车</i></a></li>
+			<li class="add_cart"><a href="javascript:;">加入购物车</a></li>
+			<li><a href="javascript:;">立即购买</a></li>
+		</ul>
+	</footer>
+</body>
+</html>
+<script>
+	//banner
+	banner()
+	//选项卡
+	$('header .tab').on('click',function(){
+		var that = $(this).index()-1;
+		$(this).addClass('active').siblings('.tab').removeClass('active')
+		$('section>div').eq(that).css('display','block').siblings('section>div').css('display','none')
+	})
+	//分享弹出层
+	$('.share').on('touchstart',function(){
+		$('.share_popups').css({'z-index':'444','transition':'.5s','opacity':1})
+		$('.share_popups>p').css({'transform':'translateY(0)','z-index':444,'transition':'.5s'});
+	})
+	$('.close').on('touchstart',function(){
+		$('.share_popups').css({'transition':'.5s','opacity':0}).animate({'z-index':'-1'},500);
+		$('.share_popups>p').css({'transform':'translateY(6.6rem)','z-index':55,'transition':'.5s'});
+	})
+	//选择型号弹出层
+	$('.select').on('click',function(){
+		$('.select_models').css({'z-index':'444','transition':'.5s','opacity':1})
+		$('.select_models>div').css({'transform':'translateY(0)','z-index':444,'transition':'.5s'});
+	})
+	$('.select_models p').on('click',function(){
+		$(this).addClass('act').siblings('p').removeClass('act')
+		$('.select i').text($(this).text())
+	})
+	//退出型号弹出层
+	$('.select_models button').on('click',function(){
+		$('.select_models').css({'transition':'.5s','opacity':0}).animate({'z-index':'-1'},500);
+		$('.select_models>div').css({'transform':'translateY(11.64rem)','z-index':55,'transition':'.5s'});
+	})
+	
+</script>

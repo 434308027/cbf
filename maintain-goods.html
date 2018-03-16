@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="x5-orientation" content="portrait" />
+	<meta name="x5-fullscreen" content="true" />
+	<meta name="screen-orientation" content="portrait" />
+	<meta name="full-screen" content="yes" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+	<link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/jquery-rebox-0.1.0.css"/>
+	<link rel="stylesheet" type="text/css" href="css/RongIMWidget.css"/>
+	<link rel="stylesheet" type="text/css" href="css/maintain-goods.css"/>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/swiper.min.js"></script>
+	<script type="text/javascript" src="js/vue1.0.js"></script>
+	<script type="text/javascript" src="js/dropload.min.js"></script>
+	<script type="text/javascript" src="js/starScore.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<title>保养商品</title>
+	<style>
+		.atar_Show{
+			background:url(images/icon/icon_z.png); 
+			background-size: 0.6rem 0.6rem;
+			width:3rem; height:0.6rem;  
+			position:relative; 
+			float:left; 
+		}
+
+		.atar_Show p{ 
+			background:url(images/icon/icon_x.png);
+			left:0; 
+			height:0.6rem; 
+			width:3rem;
+			background-size: 0.6rem 0.6rem;
+		}
+
+		.show_number li span{ 
+			display:inline-block; 
+			line-height:21px;
+		}
+	</style>
+</head>
+<body>
+	<!-- header_头部 -->
+	<header>
+		<p>
+			<a class="choose_go_back" href="maintain_map.html"></a>
+			<i class="tab active">保养</i>
+			<i class="tab">评价</i>
+			<strong class="share"></strong>
+		</p>
+	</header>
+	<!-- share_分享 -->
+	<div class="share_popups jianthis_style">
+		<p>
+			<a class="jiathis_button_cqq"><img src="images/logo/logo.png"/></a>
+			<a class="jiathis_button_qzone"><img src="images/logo/logo1.png"/></a>
+			<a class="jiathis_button_weixin"><img src="images/logo/logo2.png"/></a>
+			<a class="jiathis_button_tsina"><img src="images/logo/logo3.png"/></a>
+			<i class="close"></i>
+		</p>
+	</div>
+	<!-- container_内容 -->
+	<div class="container_f1">
+		<!-- container_f1_banner -->
+		<div class="container_f2 container">
+			<div class="swiper-container banner">
+				<div class="swiper-wrapper">
+			        <div class="swiper-slide"><a href="javascript:"><img :src="dott.picture" alt=""/></a></div>
+			    </div>
+			    <!-- 分页器 -->
+			    <div class="swiper-pagination"></div>
+		   </div>
+			<div class="intro intro_f1" v-cloak>
+				<h4>{{ dott.priceName }}</h4>
+				<p class="left"><i>￥</i><em>{{ dott.price }}</em>门市价:￥{{ dott.costPrice }}</p>
+				<p class="right"><i>{{ dott.orderNumber }}</i>人购买</p>
+			</div>
+			<div class="intro intro_f2" v-cloak>
+				<h3>{{ dott.sellerName }}</h3>
+				<div class="stars">
+				    <!--<i></i>
+				    <i></i>
+				    <i></i>
+				    <i></i>
+				    <i></i>
+		    		<b>{{ dott.grade }}</b><em>分</em>-->
+    		        <div class="atar_Show">
+			          <!--<p class="p" tip="3.5"></p>-->
+			        </div>
+			        <span></span>
+				</div>
+		        <!--<div id="star_con" class="star-vote stars">
+		            <span id="add_star" class="add-star"></span>
+		            <span id="del_star" class="del-star">{{ dott.grade }}分</span>
+		        </div>-->
+				<div class="business">
+					<a href="javascript:;">{{ dott.address }}</a>
+					<p>营业时间：{{ dott.startTime }}-{{ dott.endTime }}</i></p>
+					<a class="tel" href="tel:{{dott.contact}}"></a>
+					<i></i>
+				</div>
+			</div>
+		</div>
+		<!-- evaluate_评价 -->
+		<div class="evaluate container_f4"></div>
+	</div>
+	<!-- footer -->
+	<footer>
+		<ul>
+			<li>
+				<a class="a_f1" href="javascript:;"><i>在线客服</i></a>
+				<div ng-app="demo">			
+				    <div  ng-controller="main">
+				      	<button ng-click="show()"></button>
+				       	<rong-widget></rong-widget>
+				    </div>
+			  </div>
+			</li>
+			<li><a href="submit_order.html">立即购买</a></li>
+		</ul>
+	</footer>
+	<script type="text/javascript" >
+	//分享
+	var jiathis_config={
+		data_track_clickback:true,
+		url:"http://www.chebaofen.com",
+		summary:"移动端汽车商战",
+		title:"车宝分 #O(∩_∩)O哈哈~#",
+		shortUrl:false,
+		hideMore:false
+	}
+	</script>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2156913" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</body>
+</html>
+<script src="js//angular-1.4.8.js"></script>
+<!-- 融云IMLib -->
+<script src="http://cdn.ronghub.com/RongIMLib-2.2.8.min.js"></script>
+<script src="http://cdn.ronghub.com/RongEmoji-2.2.5.min.js"></script>
+<script src="http://cdn.ronghub.com/Libamr-2.2.5.min.js"></script>
+<script src="http://cdn.ronghub.com/RongIMVoice-2.2.5.min.js"></script>
+<!-- 上传插件 -->
+<script src="js//plupload.full.min-2.1.1.js"></script>
+<script src="js//qiniu-1.0.17.js"></script>
+<!-- 增强体验插件 -->
+<script src="js/jquery-rebox-0.1.0.js"></script>
+<!-- IM插件 -->
+<script src="js/RongIMWidget.js"></script>
+<script src="js/index1.js"></script>
+<script>
+	banner()
+	var page = -2 
+	//每页显示5个
+	var size = 5;
+	page++;
+	//查看评论
+	//dropload
+	$('.evaluate').dropload({
+		scrollArea : window,
+		loadDownFn : function(me){
+			page++
+			//拼接html
+			var result = '';
+			$.ajax({
+				type:"get",
+				url:site+"/upkeep/findComment?page="+page+'&size='+size,
+				dataType:'json',
+				data:{sellerId:loca_fetch('sjid')},
+				success:function(data){
+					var jsons = data.data.content
+					if(jsons.length > 0){
+						$.each(jsons, function(i,val) {
+							//时间戳
+							if(val.sellerSay == null){
+								var dates = getMyDate(val.createTime)
+								result += "<li>\n"
+									+"	<span>\n"
+									+"		<img class=\"left\" src=\""+val.photo+"\" alt=\"\" />\n"
+									+"		<i>"+val.userNickname+"</i>\n"
+									+"		<span class=\"starss\">\n"
+									+"		    <i></i>\n"
+									+"		    <i></i>\n"
+									+"		    <i></i>\n"
+									+"		    <i></i>\n"
+									+"		    <i></i>\n"
+									+"    		<b>"+val.grade+"</b>\n"
+									+"		</span>\n"
+									+"		<b class=\"datas\">"+dates+"</b>\n"
+									+"	</span>\n"
+									+"	<div>\n"
+									+"		<p>"+val.userSay+"</p>\n"
+									+"		<div class=\"clearfix\">\n"
+									+"		</div>\n"
+									+"	</div>\n"
+									+"</li>"
+							}else{
+								var dates = getMyDate(val.createTime)
+								result += "<li>\n"
+										+"	<span>\n"
+										+"		<img class=\"left\" src=\""+val.photo+"\" alt=\"\" />\n"
+										+"		<i>"+val.userNickname+"</i>\n"
+										+"		<span class=\"starss\">\n"
+										+"		    <i></i>\n"
+										+"		    <i></i>\n"
+										+"		    <i></i>\n"
+										+"		    <i></i>\n"
+										+"		    <i></i>\n"
+										+"    		<b>"+val.grade+"</b>\n"
+										+"		</span>\n"
+										+"		<b class=\"datas\">"+dates+"</b>\n"
+										+"	</span>\n"
+										+"	<div>\n"
+										+"		<p>"+val.userSay+"</p>\n"
+										+"		<div class=\"clearfix\">\n"
+										+"			<img src=\"images/icon/icon_22.png\" alt=\"\" />\n"
+										+"			<p><i>商家回复：</i>"+val.sellerSay+"</p>\n"
+										+"		</div>\n"
+										+"	</div>\n"
+										+"</li>"	
+							}
+						});
+					//如果没有数据
+					}else{
+						//锁定
+						me.lock()
+						//无数据
+						me.noData();
+					}
+					setTimeout(function(){
+						//插入数据到页面，放到最后
+						$('.evaluate').append(result);
+						//每次数据插入，必须重置
+						me.resetload();
+					},500);
+					var stars = $('.starss')
+					var Len = stars.length;
+					for(var i=0;i<Len;i++){
+						console.log(i)
+						function clearAll(obj){
+							obj.parent().children('i').removeClass('onc')
+						}
+						stars.eq(i).find('i').text(function(){
+			                var score = $(this).siblings('b').text();
+			              	console.log(score)
+			                for(var b=0;b<score;b++){
+			                   $(this).parent().find('i').eq(b).addClass('onc');  
+			                }
+		           		});
+					}		
+				},
+				error : function(xhr,type){
+					alert('ajax error');
+					//即使加载出错也必须重置
+				}
+			});
+		}
+	})
+	$(function(){
+		$('header .tab').on('click',function(){
+			var that = $(this).index()-1;
+			$(this).addClass('active').siblings('.tab').removeClass('active')
+			$('.container_f1>div').eq(that).css('display','block').siblings('.container_f1>div').css('display','none')
+		})
+		//分享
+		$('.share').on('click',function(){
+			$('.share_popups').css({'z-index':'55','transition':'.5s','opacity':1})
+			$('.share_popups>p').css({'transform':'translateY(0)','z-index':55,'transition':'.5s'});
+		})
+		$('.share_popups>p a').on('click',function(){
+			$('.share_popups').css({'transition':'.5s','opacity':0}).animate({'z-index':'-1'},500);
+			$('.share_popups>p').css({'transform':'translateY(6.6rem)','z-index':55,'transition':'.5s'});
+		})
+		$('.close').on('click',function(){
+			$('.share_popups').css({'transition':'.5s','opacity':0}).animate({'z-index':'-1'},500);
+			$('.share_popups>p').css({'transform':'translateY(6.6rem)','z-index':55,'transition':'.5s'});
+		})
+		//商家详情
+		function GetQueryString(name)
+		{
+		    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		    var r = window.location.search.substr(1).match(reg);
+		    if(r!=null)return  unescape(r[2]); return null;
+		}
+		$.ajax({
+			type:"get",
+			url:site+"/upkeep/sellerDetail",
+			dataType:'json',
+			data:{keepId: loca_fetch('byid'),sellerId: loca_fetch('sjid'),},
+			beforeSend:function(){
+				$('.container_f2').css({'display':'none'})	
+				$("body").append('<div id="pload" style="position:fixed;top:50%;z-index:1200;background:url(images/icon/loading-2.gif) top center no-repeat;width:100%;height:142px;margin:auto auto;"></div>');  
+			},
+          	complete: function () {  
+               $("#pload").remove();  
+               $('.container_f2').css({'display':'block'})
+            }, 
+			success:function(data){
+				var jsons = data.data;
+				loca_save('keepid',jsons.keepPackageId)
+				var vue = new Vue({
+					el:'.container',
+					data:{
+						dott:jsons
+					}
+				})
+//				//n表示后台获取的星数
+//				showStar(jsons.grade)
+//				function showStar(n){
+//				    var con_wid=$("#star_con").width();
+//				    var del_star=$("#del_star");    
+//				    //透明星星移动的像素
+//				    var del_move=(n*con_wid)/160;				    
+//				    del_star.css('backgroundPosition',-del_move+"rem 0px");
+//				    del_star.css('left',del_move+"rem");
+//				}
+//					var stars = $('.stars')
+//					var Len = stars.length;
+//					for(var i=0;i<Len;i++){
+//						console.log(i)
+//						function clearAll(obj){
+//							obj.parent().children('i').removeClass('on')
+//						}
+//						stars.eq(i).find('i').text(function(){
+//			                var score = $(this).siblings('b').text();
+//			              	console.log(score)
+//			                for(var b=0;b<score;b++){
+//			                   $(this).parent().find('i').eq(b).addClass('on');  
+//			                }
+//		           		});
+//					}	
+				$('.atar_Show').append('<p class="p" tip="'+jsons.grade+'"></p>')
+					//显示分数
+				    $(".p").each(function(index, element) {
+				        var num=$(this).attr("tip");
+				        var www=num*1*15;//
+				        $(this).css("width",www);
+				        $(this).parent(".atar_Show").siblings("span").text(num+"分");
+				    });
+			},
+		});
+	})
+	
+	
+
+</script>

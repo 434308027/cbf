@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="x5-orientation" content="portrait" />
+	<meta name="x5-fullscreen" content="true" />
+	<meta name="screen-orientation" content="portrait" />
+	<meta name="full-screen" content="yes" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="css/layer_mobile.css"/>
+	<link rel="stylesheet" type="text/css" href="css/evaluate.css"/>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/layer_mobile.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<title>评价</title>
+</head>
+<body>
+	<!-- header_头部 -->
+	<header>
+		<p>
+			<a class="go_back" href="javascript:;"></a>
+			<i>评价</i>
+		</p>
+	</header>
+	<!-- section_骨架 -->
+	<section>
+		<div class="stars">
+		    <span>总体</span>
+		    <i></i>
+		    <i></i>
+		    <i></i>
+		    <i></i>
+		    <i></i>
+		    <b></b><em></em>
+		</div>
+		<div class="textbox">
+			<textarea placeholder="请在此输入您的评价内容~"></textarea>
+		</div>
+		<p><button>提交</button></p>
+	</section>
+</body>
+</html>
+<script>
+    $(function(){
+    	//不被软键盘顶起来
+    	var oHeight = $(document).height();
+    	$(window).resize(function(){
+    		if($(document).height() < oHeight){
+    			$('section>p').css('position','static')
+    		}else{
+    			$('section>p').css('position','absolute')
+    		}
+    	})
+		//星星
+        var stars = $('.stars');
+        var Len = stars.length;
+        //遍历每个评分的容器
+        for(var i=0;i<Len;i++){
+            //每次触发事件，清除该项父容器下所有子元素的样式所有样式
+            function clearAll(obj){
+                obj.parent().children('i').removeClass('on');
+            }
+            stars.eq(i).find('i').click(function(){
+                var num = $(this).index();
+                clearAll($(this));
+               	//当前包括前面的元素都加上样式
+                $(this).addClass('on').prevAll('i').addClass('on');
+                $(this).siblings('b').text(num);
+            });
+            stars.eq(i).find('i').text(function(){
+                var score = $(this).siblings('b').text();
+                for(i=0;i<score;i++){
+                    $(this).parent().find('i').eq(i).addClass('on');
+                }
+            });
+        }
+        //添加评论
+        $('section button').on('click',function(){
+        	if($('b').text() == ''){
+        		alerts('评星不能为0分')
+        	}else if($('textarea').val() == ''){
+        		alerts('评价不能为空')
+        	}else
+   		 	$.ajax({
+	        	type:"post",
+	        	url:site+"/upkeep/comment",
+	        	dataType:'json',
+	        	data:{morderId:loca_fetch('moderids'),comment:$('textarea').val(),grade:$('.stars b').text(),},
+	        	success:function(data){
+	        		if(data.code == 1){
+		        		console.log(data)
+		        		window.location.href="personal_center.html"
+	        		}else{
+	        			alerts(data.msg)
+	        		}
+	        	}
+	        });
+        })
+    })
+    $('.go_back').on('click',function(){
+    	window.history.go(-1); 
+    })
+</script>

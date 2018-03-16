@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="x5-orientation" content="portrait" />
+		<meta name="x5-fullscreen" content="true" />
+		<meta name="screen-orientation" content="portrait" />
+		<meta name="full-screen" content="yes" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/layer_mobile.css" />
+		<link rel="stylesheet" href="css/personal_center.css" />
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/vue1.0.js"></script>
+		<script type="text/javascript" src="js/layer_mobile.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<title>个人中心</title>
+	</head>
+
+	<body>
+		<!-- header -->
+		<div class="wrap">
+			<header>
+				<h3>个人中心</h3>
+				<div class="top_con"  v-cloak>
+					<a class="top_conle" href="personal_details.html">
+						<div class="top_conimg">
+						</div>
+						<div class="top_contit top_contits">
+							<p>{{dott.userNickname}}</p>
+						</div>
+					</a>
+					<a class="top_conri" href="consumer_gold.html">
+						<img src="images/icon/pw_you.png" />
+						<div class="Consumer">
+							<p>消费金</p>
+							<p>{{dott.experience}}</p>
+						</div>
+					</a>
+				</div>
+			</header>
+			<!---订单-->
+			<div class="dingdan_box">
+				<h3>我的订单</h3>
+				<ul class="ding_box">
+					<li>
+						<a href="personal_maintain.html"><img src="images/icon/pw_a.png" /><span>我的保养</span></a>
+					</li>
+					<li>
+						<a href="personal_commodity.html"><img src="images/icon/icon_33.png" /><span>我的商品</span></a>
+					</li>
+				</ul>
+			</div>
+			<!---功能列表---->
+			<div class="gongneng_box">
+				<ul class="gn_ul">
+					<li>
+						<a href="personal_application.html">
+							<em><img src="images/icon/pw_ula.png"/></em>
+							<div class="gn_uldiv">
+							<p>申请管理</p><em><img src="images/icon/pw_you2.png"/></em></div>
+						</a>
+					</li>
+					<li>
+						<a href="shipping_address.html">
+							<em><img src="images/icon/pw_ulb.png"/></em>
+							<div class="gn_uldiv">
+							<p>收货地址</p><em><img src="images/icon/pw_you2.png"/></em></div>
+						</a>
+					</li>
+					<li>
+						<a class="wa" href="javascript:;">
+							<em><img src="images/icon/pw_ulc.png"/></em>
+							<div class="gn_uldiv gn_uldivs">
+							<p>实名信息</p><em><img src="images/icon/pw_you2.png"/></em></div>
+						</a>
+					</li>
+					<li>
+						<a href="security_settings.html">
+							<em><img src="images/icon/pw_uld.png"/></em>
+							<div class="gn_uldiv">
+							<p>安全设置</p><em><img src="images/icon/pw_you2.png"/></em></div>
+						</a>
+					</li>
+					<li>
+						<a href="feedback.html">
+							<em><img src="images/icon/pw_ule.png"/></em>
+							<div class="gn_uldiv">
+							<p>意见反馈</p><em><img src="images/icon/pw_you2.png"/></em></div>
+						</a>
+					</li>
+					<li>
+						<a href="about_us.html">
+							<em><img src="images/icon/pw_ulf.png"/></em>
+							<div class="gn_uldiv">
+							<p>关于我们</p><em><img src="images/icon/pw_you2.png"/></em></div>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<!-- footer -->
+			<footer class="footer">
+				<ul>
+					<li>
+						<a href="index.html"><img src="images/icon/icon_12.png" alt="" />首页</a>
+						<a href="insurance.html"><img src="images/icon/icon_7.png" alt="" />保险</a>
+						<a href="maintain.html"><img src="images/icon/icon_8.png" alt="" />保养</a>
+						<a href="store.html"><img src="images/icon/icon_9.png" alt="" />商城</a>
+						<a href="javascript:;"><img src="images/icon/pwicon_a.png" alt="" />我的</a>
+					</li>
+				</ul>
+			</footer>
+		</div>
+	</body>
+
+</html>
+<script type="text/javascript">
+	//跳转实名界面
+	$('.wa').on('click', function() {
+		$.ajax({
+			type: "get",
+			url: site + "/Loan/queryMyAuthentication",
+			dataType: 'json',
+			data: {
+				userId: loca_fetch('userid')
+			},
+			success: function(data) {
+				if(data.code == 1) {
+					loca_save('waid', data.data.id);
+				}
+				location.href = "real_information.html";
+			},
+			error: function(data) {
+				location.href = "real_information.html";
+			}
+		});
+	})
+	$(function() {
+		//隐藏手机号
+		var str = $('.phone').text();
+		var str2 = str.substr(0, 3) + "****" + str.substr(7); //隐藏手机号4位
+		$('.phone').text(str2);
+		if(loca_fetch('userid') == '') {
+			window.location.href = './login.html';
+		} else {
+			//获取用户资料
+			$.ajax({
+				type: "get",
+				url: site + "/user/find",
+				dataType: 'json',
+				data: {
+					userId: loca_fetch('userid'),
+				},
+				success: function(data) {
+					var datas = data.data
+					$('.top_contits').append('<p class="phone1">' + datas.phone + '</p>')
+					var str = $('.phone1').text();
+					var str2 = str.substr(0, 3) + "****" + str.substr(7); //隐藏手机号4位
+					$('.phone1').text(str2)
+					console.log(datas)
+					if(datas.userImage == 'http://p28aajnzd.bkt.clouddn.com/user.jpg'){
+						$('.top_conimg').append('<img src="images/photo.png" />')
+					}else{
+						$('.top_conimg').append('<img src="'+datas.userImage+'" />')
+					}		
+					var vue = new Vue({
+						el: 'header',
+						data: {
+							dott: datas,
+						},
+					})
+					if(datas.identity == '2') {
+						$('.gn_uldivs').append('<i>未实名</i>')
+					}else if(datas.identity == '1') {
+						$('.gn_uldivs').append('<i>已实名</i>')
+					}else{
+						$('.gn_uldivs').append('<i>审核中</i>')
+					}
+				}
+			});
+			$('.top_conle').show()
+		}
+	});
+</script>

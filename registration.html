@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="x5-orientation" content="portrait" />
+	<meta name="x5-fullscreen" content="true" />
+	<meta name="screen-orientation" content="portrait" />
+	<meta name="full-screen" content="yes" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+	<link rel="stylesheet" type="text/css" href="css/registration.css"/>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<title>注册协议</title>
+</head>
+<body>
+	<!-- header -->
+	<header>
+		<a class="left" href="register.html"></a>
+		<p class="left">协议</p>
+	</header>
+	<!-- section -->
+	<section>
+		
+	</section>
+	<!-- footer -->
+	<footer>
+		<a href="register.html">我知道了</a>
+	</footer>
+</body>
+</html>
+<script>
+	$.ajax({
+		type:"get",
+		url:site+"/login/registerAgreement",
+		dataType:"json",
+		data:{type:1,},
+		success:function(data){
+			console.log(data)
+			$('section').append('<p>'+data.data.agreementContent+'</p>')
+		}
+	});
+</script>

@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+body { background: #fff; }
+/* header—头部   */
+header { width: 100%;height: 1.76rem;border-bottom: 1px solid #e1e1e1;position: fixed;top: 0;left: 0;background: #ffffff; }
+header a { display: inline-block;text-align: center;width: 1.2rem;height: 1.76rem;line-height: 1.76rem;font-size: 1.76rem;color: #000;background: url(../images/icon/icon_14.png) no-repeat center;background-size: 0.46rem 0.78rem; }
+header p { text-align: center;font-size: 0.72rem;color: #333333;font-weight: 600;display: inline-block;line-height: 1.76rem;text-indent: 5.5rem; }
+
+/* section-内容   */
+section { padding: 2.8rem 0.88rem;padding-bottom: 2.5rem; }
+section p { font-size: 0.48rem;color: #333333; }
+section p:nth-of-type(1) { margin-bottom: 0.76rem; }
+section p:nth-of-type(9) { margin-bottom: 0.8rem; }
+.protocol { font-size: 0.5rem;margin-top: -1rem ; }
+/* footer-底部   */
+footer { position: absolute;bottom: 0;left: 0;padding: 0.32rem 1.32rem;width: 100%;height: 2.4rem;border-top: 1px solid #e1e1e1;background: #fff;box-sizing: border-box;-webkit-box-sizing: border-box;text-align: center; }
+footer a { display: block;padding: 0.45rem 0;background: #ff7676;font-size: 0.6rem;color: #fff;border-radius: 50rem;-webkit-border-radius: 50rem; }
+

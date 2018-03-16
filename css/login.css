@@ -1,0 +1,37 @@
+@charset "utf-8";
+/* 头部   */
+.title { width: 100%;height: 2.6rem;padding: 2.36rem 0 1.6rem 0; }
+.title_logo { width: 100%;height: 2.6rem;background: url(../images/login/text_bg.gif) no-repeat center;background-size: 8.84rem 1.54rem;text-align: center; }
+p { font-size: 0.6rem;color: #ff7676;text-align: center; }
+
+/* 登录  */
+from { width: 100%;padding: 0 1.2rem;display: block;box-sizing: border-box;-webkit-box-sizing: border-box; }
+from .input_f1 input { display: block;width: 100%;height: 2.4rem;text-indent: 1rem;background: url(../images/login/icon.gif) no-repeat left center;background-size: 0.44rem 0.72rem; }
+span:nth-of-type(2) input { border-bottom: 1px solid #ebebeb;border-top: 1px solid #ebebeb;background: url(../images/login/icon_1.gif) no-repeat left center;background-size: 0.52rem 0.62rem;margin-bottom: 1.48rem; }
+from .input_f4 input { background: url(../images/login/icon_2.gif) no-repeat left center;background-size: 0.58rem 0.38rem;margin-bottom: 2.8rem;border-bottom: 1px solid #ebebeb;margin-bottom: 2.8rem; }
+.input_f2 input { background: url(../images/login/icon_1.gif) no-repeat left center;background-size: 0.52rem 0.62rem;border-bottom: 1px solid #ebebeb; }
+from .input_f5 input { background: url(../images/login/icon_1.gif) no-repeat left center;background-size: 0.52rem 0.62rem; }
+from .input_f6 input { margin-bottom: 2.56rem;background: url(../images/login/icon_1.gif) no-repeat left center;background-size: 0.52rem 0.62rem; }
+input.login { width: 100%;text-align: center;background: #ffdada;font-size: 0.6rem;display: block;padding: 0.5rem 0;border-radius: 2rem;-webkit-border-radius: 2rem;font-size: 0.6rem;color: #ffffff;margin-bottom: 0.88rem; }
+.pwd { border-bottom: 1px solid #EBEBEB; }
+input::-webkit-input-placeholder { color: #ebebeb;font-size:0.6rem; }
+input[value] { font-size: 0.6rem; }
+
+
+/* 上一级   */
+/* header—头部   */
+header { width: 100%;height: 1.76rem; }
+header a { display: inline-block;text-align: center;width: 1.2rem;height: 1.76rem;line-height: 1.76rem;font-size: 1.76rem;color: #000;background: url(../images/icon/icon_14.png) no-repeat center;background-size: 0.46rem 0.78rem; }
+header p { text-align: center;font-size: 0.72rem;color: #333333;display: inline-block;line-height: 1.76rem;text-indent: 5.3rem; }
+
+from .input_f2 input { margin: 0; }
+from button { font-style: normal;font-size: 0.6rem;color: #5a5a5a;float: right;margin-top: -2.45rem;height: 2.4rem;line-height: 2.4rem;background: transparent; }
+from p { font-size: 0.44rem;color: #000;margin-right: 0.2rem;text-align: left; }
+from a { font-size: 0.44rem;color: #ff7676;font-style: normal; }
+
+
+/* 底部跳转   */
+footer { width: 100%;text-align: center;border: 0;position: absolute;bottom: 0.8rem;left: 0; }
+footer a { font-size: 0.48rem;color: #a4a4a4; }
+footer a:nth-of-type(2) { color: #ff7676; }
+footer i { width: 1px;height: 0.48rem;background: #e3e3e3;display: inline-block;vertical-align: -0.1rem; }

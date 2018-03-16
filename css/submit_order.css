@@ -1,0 +1,97 @@
+@charset "utf-8";
+
+
+/*header-头部*/
+header { width: 100%;height: 1.76rem;background: #ffffff;border-bottom: 1px solid #e2e3e4;line-height: 1.76rem; }
+header a { width: 1.2rem;height: 1.76rem;background: url(../images/icon/icon_14.png) no-repeat center;background-size: 0.46rem 0.58rem;float: left; }
+header i { text-align: center;display: block;font-size: 0.72rem;color: #000000;margin-right: 1.2rem; }
+
+/*section_骨架*/
+section { wdith: 100%; }
+section ul {  }
+section li { background: #fff;width: 100%;height: 1.76rem;line-height: 1.76rem;padding: 0 0.4rem;box-sizing: border-box;-webkit-box-sizing: border-box; }
+section li>div { width: 100%;border-bottom: 1px solid #e1e1e1;height: 1.76rem;border-bottom: 1px solid #e1e1e1;box-sizing: border-box; }
+section li.f1 { margin: 0.4rem 0;padding: 0 0.4rem;border-bottom: 1px solid #e1e1e1; }
+section li.f1 b { float: right;font-size: 0.6rem;font-weight: normal; }
+section li:last-child { border-bottom: 1px solid #e1e1e1; }
+section li:last-child div { border: 0; }
+section li label { width: 100%;height: 1.76rem;display: block; }
+section li label input { height: 1.76rem; width: 9rem;font-size: 0.6rem;color: #757575;background: transparent;text-align: right;box-sizing: border-box;-webkit-box-sizing: border-box; }
+section li i { font-size: 0.6rem;color: #000;float: left; }
+section li span input { float: right;color: #757575;margin-right: -0.2rem;height: 1.6rem;width: 9rem;text-align: right;font-size: 0.6rem;background: transparent;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; }
+section li span .bill-need { font-weight: normal;float: right;color: #757575;margin-right: -0.2rem;height: 1.6rem;width: 9rem;font-size: 0.6rem;text-align: right; }
+section li span i { float: right;color: #afafaf;margin-right: -0.2rem;height: 1.7rem;text-align: right; }
+section li span b { width: 0.7rem;height: 1.76rem;background: url(../images/icon/icon_50.png) no-repeat left;background-size: 0.96rem 0.96rem;float: right; }
+section p.details { font-size: 0.4rem;color: #afafaf;padding: 0.4rem 0;box-sizing: border-box;margin-left: 0.4rem; }
+section>div { background: #fff;width: 100%;height: 1.76rem;line-height: 1.76rem;padding: 0 0.4rem;box-sizing: border-box;-webkit-box-sizing: border-box;border-top: 1px solid #e1e1e1; }
+section>div:nth-of-type(2) { border-bottom: 1px solid #e1e1e1; }
+section>div i { font-size: 0.6rem;color: #000;float: left; }
+section>div span i { float: right;color: #afafaf;margin-right: -0.2rem; }
+section>div strong { font-size: 0.6rem;color: red;float: right;font-weight: normal; }
+section>div span b { width: 0.7rem;height: 1.76rem;background: url(../images/icon/icon_50.png) no-repeat left;background-size: 0.96rem 0.96rem;float: right; }
+section>div label { width: 100%; height: 1.76rem;display: block; }
+section>div label input { height: 1.76rem;background: transparent;float: right;box-sizing: border-box;-webkit-box-sizing: border-box;text-align: right;width: 11rem; }
+section>div label b { width: 0.7rem;height: 1.76rem;background: url(../images/icon/icon_50.png) no-repeat left;background-size: 0.96rem 0.96rem;float: right; }
+section>div:nth-of-type(3) { margin-top: 0.4rem;border-top: 1px solid #e1e1e1;border-bottom: 1px solid #e1e1e1; }
+section .bottom { width: 100%;padding: 0 1rem;box-sizing: border-box;-webkit-box-sizing: border-box;position: absolute;bottom: 1.3rem;left: 0; }
+section .bottom button { width: 100%;height: 1.76rem;background: #FF7676;color: #fff;font-size: 0.6rem;border-radius: 1rem; }
+section .oilbox { float: right;font-size: 0.6rem;color: #757575;margin-left: 0.5rem; }
+.title_top { text-align: center;font-size: 0.6rem;display: block;width: 100%;height: 1.76rem;background: #fff;border-bottom: 1px solid #ddd;line-height: 1.76rem;position: fixed;top: 0;left: 0; }
+.brand_list { margin-top: 1.76rem; }
+.title_top i { margin-left: -1.2rem; }
+.title_top em { width: 1.2rem;height: 1.76rem;float: left;background: url(../images/icon/icon_14.png) no-repeat center;background-size: 0.46rem 0.58rem; }
+/*车型选择_choice_car*/
+.choice_car { position: absolute;top: 0;left: 0;z-index: 99;background: #fff;width: 100%;background: #f4f4f8;display: none;overflow-y: scroll;height: 100%; }
+.choice_car span { color: #999999;font-size: 0.7rem;margin-left: 0.4rem; }
+.brand_box { background: #fff;padding-left: 0.4rem;box-sizing: border-box;-webkit-box-sizing: border-box;width: 100%;height: 1.76rem; }
+.brand_box i { color: #333333;font-size: 0.6rem;height: 1.76rem;width: 100%;line-height: 1.76rem;border-bottom: 1px solid #e8e5e5;display: block;margin: 1px 0; }
+.letter_list { position: fixed;right: 0;top: 20%; }
+.letter_list li { font-size: 0;margin: 0.2rem 0; }
+.letter_list a { color: #000;font-size: 0.55rem; }
+/*选择机油_select_the_oil*/
+.select_the_oil { position: absolute;top: 0;left: 0;z-index: 999;background: #fff;width: 100%;height: 100%;overflow-y: scroll;display: none; }
+.go_back { width: 100%;height: 1.76rem;background: #ffffff;border-bottom: 1px solid #e2e3e4;line-height: 1.76rem;position: fixed;top: 0;left: 0; }
+.go_back i { width: 1.2rem;height: 1.76rem;background: url(../images/icon/icon_14.png) no-repeat center;background-size: 0.46rem 0.58rem;float: left; }
+.go_back b { text-align: center;display: block;font-size: 0.72rem;color: #000000;margin-right: 1.2rem;font-weight: 100; }
+.select_the_oil ul { margin-top: 1.76rem; }
+.select_the_oil li { width: 100%;height: 4rem;box-sizing: border-box;-webkit-box-sizing: border-box;border-bottom: 1px solid #dfdfdf; }
+.select_the_oil li label { width: 100%;height: 4rem;display: block;padding: 0.4rem;box-sizing: border-box;-webkit-box-sizing: border-box; }
+.select_the_oil label>span { float: left;height: 3.2rem;width: 1.76rem; }
+.select_the_oil label>span i { display: inline-block;width: 0.84rem;height: 0.84rem;background: url(../images/icon/icon_28.png) no-repeat 0;background-size: 1.68rem 0.84rem;margin-top: 1.1rem; }
+.select_the_oil label>span i.active { display: inline-block;width: 0.84rem;height: 0.84rem;background: url(../images/icon/icon_28.png) no-repeat -0.84rem;background-size: 1.68rem 0.84rem;margin-top: 1.1rem; }
+.acti { display: inline-block;width: 0.84rem;height: 0.84rem;background: url(../images/icon/icon_28.png) no-repeat -0.84rem;background-size: 1.68rem 0.84rem;margin-top: 1.1rem; } 
+.select_the_oil label>span input { opacity: 0; }
+.select_the_oil label>div { float: left;width: 12.4rem; }
+.select_the_oil label>div h3 { font-size: 0.65rem;color: #000;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;height: 2rem; }
+.select_the_oil label>div>span {  }
+.select_the_oil label>div>span span { float: left;font-size: 0; }
+.select_the_oil label>div>span button { width: 0.8rem;height: 1rem;background: #f4f5f7;border: 1px solid #ddd;box-sizing: border-box;-webkit-box-sizing: border-box; }
+.select_the_oil label>div>span input { display: inline-block;width: 2.3rem;height: 1rem;box-sizing: border-box;-webkit-box-sizing: border-box;border-top: 1px solid #ddd;border-bottom: 1px solid #ddd;text-align: center; } 
+.select_the_oil label>div>span i { font-size: 0.6rem;color: #848484;float: right;margin-top: 0.15rem; }
+.select_the_oil label>div>span i b { font-weight: 100; }
+.price { font-size: 0.6rem;color: #ff7676;margin-left: 2.4rem; }
+/*oil_filter_选择机油格*/
+.oil_filter { position: absolute;top: 0;left: 0;z-index: 99;background: #fff;width: 100%;height: 100%;overflow-y: scroll;display: none; }
+.oil_filter ul { margin-top: 1.76rem; }
+.oil_filter li { width: 100%;height: 4rem;box-sizing: border-box;-webkit-box-sizing: border-box;border-bottom: 1px solid #dfdfdf; }
+.oil_filter li label { width: 100%;height: 4rem;display: block;padding: 0.4rem;box-sizing: border-box;-webkit-box-sizing: border-box; }
+.oil_filter label>span { float: left;height: 3.2rem;width: 1.76rem; }
+label>span i { display: inline-block;width: 0.84rem;height: 0.84rem;background: url(../images/icon/icon_28.png) no-repeat 0;background-size: 1.68rem 0.84rem;margin-top: 1.1rem; }
+.oil_filter label>span i.active { display: inline-block;width: 0.84rem;height: 0.84rem;background: url(../images/icon/icon_28.png) no-repeat -0.84rem;background-size: 1.68rem 0.84rem;margin-top: 1.1rem; } 
+.oil_filter label>div h3 { font-size: 0.65rem;color: #000;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;height: 2rem; }
+.oil_filter label>div> i { font-size: 0.4rem;color: #848484; }
+.oil_filter label>div> i b { font-weight: 100; }
+.oil_filter label>span input { opacity: 0; }
+body{ overflow-x: hidden;position: inherit; }
+.brand { position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: 100;background: #F4F4F8;display: none;overflow-y: scroll; }
+.brand_lists { margin-top: 1.76rem;padding: 0 0.4rem;box-sizing: border-box;background: #fff; }
+.brand_lists li { color: #333333;font-size: 0.6rem;height: 1.76rem;width: 100%;line-height: 1.76rem;border-bottom: 1px solid #e8e5e5;margin: 1px 0; }
+.series { position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: 100;background: #F4F4F8;display: none;overflow-y: scroll; }
+.series_lists { margin-top: 1.76rem;padding: 0 0.4rem;box-sizing: border-box;background: #fff; }
+.series_lists li { color: #333333;font-size: 0.6rem;height: 1.76rem;width: 100%;line-height: 1.76rem;border-bottom: 1px solid #e8e5e5;margin: 1px 0; }
+.displacement { position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: 100;background: #F4F4F8;display: none;overflow-y: scroll; }
+.displacement_list { margin-top: 1.76rem;padding: 0 0.4rem;box-sizing: border-box;background: #fff; }
+.displacement_list li { color: #333333;font-size: 0.6rem;height: 1.76rem;width: 100%;line-height: 1.76rem;border-bottom: 1px solid #e8e5e5;margin: 1px 0; }
+.specific_car { position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: 100;background: #F4F4F8;display: none;overflow-y: scroll; }
+.specific_car_list { margin-top: 1.76rem;padding: 0 0.4rem;box-sizing: border-box;background: #fff; }
+.specific_car_list li { color: #333333;font-size: 0.6rem;height: 1.76rem;width: 100%;line-height: 1.76rem;border-bottom: 1px solid #e8e5e5;margin: 1px 0; }

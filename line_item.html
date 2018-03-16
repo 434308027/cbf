@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="x5-orientation" content="portrait" />
+		<meta name="x5-fullscreen" content="true" />
+		<meta name="screen-orientation" content="portrait" />
+		<meta name="full-screen" content="yes" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" href="css/line_item.css" />
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<title>保单详情</title>
+		<style>
+			.uploader-img {
+				width: 5.6rem;
+				height: 3.6rem;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<!-- header_头部  -->
+		<header>
+			<p>
+				<a href="personal_application.html"></a>
+				<i>保单详情</i>
+			</p>
+		</header>
+		<!-- section_骨架 -->
+		<section id="temp-box">
+			<script id="temp" type="text/html">
+				<!-- order_information_订单详细信息 -->
+				<div class="order_information">
+					<h3>订单详细信息</h3>
+					<p><i>合同编号:</i><em>{{rs.contractNumber}}</em></p>
+					<p><i>申请时间:</i><em>{{rs.addTime}}</em></p>
+					<p><i>合同状态:</i><em>{{rs.loanStatus|formatLoanStatus}}</em></p>
+				</div>
+				<!-- basic_information_基本信息 -->
+				<div class="basic_information">
+					<h3>基本信息</h3>
+					<p><i>客户名称:</i><em>{{rs.userName}}</em></p>
+					<p><i>证件类型:</i><em>身份证</em></p>
+					<p><i>身份证号:</i><em>{{rs.idNumber}}</em></p>
+					<p><i>手机号:</i><em>{{rs.phone}}</em></p>
+					<p><i>银行名:</i><em>{{rs.bank}}</em></p>
+					<p><i>银行卡号:</i><em>{{rs.bankCardNumber}}</em></p>
+				</div>
+				<!-- insurance_information_保险信息 -->
+				<div class="insurance_information">
+					<h3>保险信息</h3>
+					<p><i>门店:</i><em>{{if rs.insuranceDoor}}{{rs.insuranceDoor.name}}{{/if}}</em></p>
+					<p class="f1_bod"><i>保险产品:</i><em>保险产品</em></p>
+					<p><i>分期险种:</i><em>{{if rs.loanType=='COMMERCIAL_CAR_STRONG_INSURANCE'}}商业险+交强险+车船税{{else/}}商业险{{/if}}</em></p>
+					<p><i>保险业务:</i><em>保险业务</em></p>
+					<p><i>消费金抵扣:</i><em>1</em></p>
+					<p><i>保险总价:</i><em>1</em></p>
+					<p><i>贷款金额:</i><em>1</em></p>
+					<p><i>分期数:</i><em>{{rs.number}}</em></p>
+					<p><i>车架号:</i><em>车架号</em></p>
+					<p><i>保险类型:</i><em>{{if rs.stagingType=='THE_FIRST_INSURANCE'}}首保{{else/}}续保{{/if}}</em></p>
+					<p><i>保险公司:</i><em>{{if rs.insuranceCompany}}{{rs.insuranceCompany.name}}{{/if}}</em></p>
+					<p><i>保单号:</i><em>没有</em></p>
+					<p><i>保单号2:</i><em>没有</em></p>
+					<p><i>商业险金额:</i><em>{{rs.commercialInsuranceMoney}}</em></p>
+					<p><i>车船税金额:</i><em>{{rs.vehicleAndVesselTax}}</em></p>
+					<p><i>汽车品牌型号:</i><em>{{rs.carBrand}}</em></p>
+					<p><i>购买渠道:</i><em>{{rs.purchaseChannel}}</em></p>
+				</div>
+				<!-- detail_分期明细 -->
+				<div class="detail">
+					<h3>分期明细</h3>
+					<ul>
+						<li><i>1</i><em>2018-1-7</em><b>100.00元</b></li>
+						<li><i>1</i><em>2018-1-7</em><b>100.00元</b></li>
+						<li><i>1</i><em>2018-1-7</em><b>100.00元</b></li>
+					</ul>
+				</div>
+				<!-- picture_information_照片信息 -->
+				<div class="picture_information">
+					<h3>照片明细</h3>
+					<div>
+						<h3>行驶证:</h3>
+						<div class="left f1_boe">
+							<img src="{{rs.originalDrivingLicense}}" class="uploader-img" alt="" />
+						</div>
+						<div class="right f1_boe">
+							<img src="{{rs.copyOfDrivingLicense}}" class="uploader-img" alt="" />
+						</div>
+					</div>
+					<div>
+						<h3>身份证:</h3>
+						<div class="left f1_boe">
+							<img src="{{rs.facadeOfIdCard}}" class="uploader-img" alt="" />
+						</div>
+						<div class="right f1_boe">
+							<img src="{{rs.identityCard}}" class="uploader-img" alt="" />
+						</div>
+					</div>
+					<div>
+						<h3>银行卡:</h3>
+						<div class="left f1_boe">
+							<img src="{{rs.bankCardFront}}" class="uploader-img" alt="" />
+						</div>
+						<h3>其他照片:</h3>
+						<div class="right f1_boe">
+							<img src="{{rs.otherPicture}}" class="uploader-img" alt="" />
+						</div>
+					</div>
+					<div>
+						<h3>保单图1:</h3>
+						<div class="left f1_boe">
+							<img class="uploader-img" alt="无字段" />
+						</div>
+						<h3>保单图2:</h3>
+						<div class="right f1_boe">
+							<img class="uploader-img" alt="无字段" />
+						</div>
+					</div>
+					<div>
+						<h3>保单发票2:</h3>
+						<div class="left f1_boe">
+							<img class="uploader-img" alt="无字段" />
+						</div>
+						<h3>购车发票:</h3>
+						<div class="right f1_boe">
+							<img class="uploader-img" alt="无字段" />
+						</div>
+					</div>
+					<div>
+						<h3>其他证或相关单:</h3>
+						<div class="left f1_boe">
+							<img class="uploader-img" alt="无字段" />
+						</div>
+						<h3>其他图片:</h3>
+						<div class="right f1_boe">
+							<img src="{{rs.otherPicture}}" class="uploader-img" alt="" />
+						</div>
+					</div>
+				</div>
+				<!-- basic_information_基本信息 -->
+				<div class="basic_information">
+					<h3>基本信息</h3>
+					<p><i>收货人姓名:</i><em>{{rs.consignee}}</em></p>
+					<p><i>手机号:</i><em>{{rs.phone}}</em></p>
+					<p><i>省:</i><em>无字段</em></p>
+					<p><i>市:</i><em>无字段</em></p>
+					<p><i>区/县:</i><em>无字段</em></p>
+					<p><i>送货地址:</i><em>{{if rs.user}}{{rs.user.address}}{{/if}}</em></p>
+				</div>
+				<!-- basic_information_基本信息 -->
+				<div class="basic_information">
+					<h3>基本信息</h3>
+					<p><i>审核意见:</i><em>无字段</em></p>
+				</div>
+			</script>
+		</section>
+	</body>
+	<script type="text/javascript">
+		$(function() {
+			$.get(site + "/Loan/queryLoanInfo", {
+				id: GetQueryString('id')
+			}, function(da) {
+				$("#temp-box").html(template('temp', {
+					rs: da.data
+				}));
+			});
+		});
+
+		function formatLoanStatus(val) {
+			if(val == "FIRST_TRIAL_PASS") {
+				return "初审通过";
+			} else if(val == "WAIT_FIRST_CHECK") {
+				return "待初审";
+			} else if(val == "WAIT_CHECK") {
+				return "待审核";
+			} else if(val == "PASS_CHECK") {
+				return "审核通过";
+			} else if(val == "DISMISSAL") {
+				return "已驳回";
+			} else if(val == "RESCINDED") {
+				return "已撤销";
+			} else if(val == "REPAYMENTS") {
+				return "还款中";
+			} else if(val == "ALREADY_INSURED") {
+				return "已确认";
+			} else if(val == "COMPLETED") {
+				return "已完成";
+			}
+		}
+
+		function GetQueryString(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+			var r = window.location.search.substr(1).match(reg);
+			if(r != null) return unescape(r[2]);
+			return null;
+		}
+	</script>
+
+</html>

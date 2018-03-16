@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="x5-orientation" content="portrait" />
+	<meta name="x5-fullscreen" content="true" />
+	<meta name="screen-orientation" content="portrait" />
+	<meta name="full-screen" content="yes" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<link rel="stylesheet" href="css/dropload.css" />
+	<link rel="stylesheet" type="text/css" href="css/personal_maintain.css"/>
+	<link rel="stylesheet" type="text/css" href="css/layer_mobile.css"/>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/vue1.0.js"></script>
+	<script type="text/javascript" src="js/layer_mobile.js"></script>
+	<script type="text/javascript" src="js/dropload.min.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<title>我的订单</title>
+</head>
+<body>
+	<!-- header_头部 -->
+	<header>
+		<div>
+			<a href="personal_center.html"></a>
+			<form action="" method="post">		
+				<label><i></i><input class="search" type="text" value="" placeholder="搜索订单号" /></label>
+			</form>
+		</div>
+	</header>
+	<!-- nav_导航条 -->
+	<nav>
+		<div>
+			<a href="personal_maintain.html">全部</a>
+		</div>
+		<div class="active">
+			<a href="personal_main1.html">待付款</a>
+		</div>
+		<div>
+			<a href="personal_main2.html">已付款</a>
+		</div>
+		<div>
+			<a href="personal_main3.html">已完成</a>
+		</div>
+	</nav>
+	<!-- section_订单内容 -->
+	<section>
+		<!-- 代付款 -->
+		<ul class="ullist obligation">
+		</ul>
+	</section>
+</body>
+</html>
+<script>
+	$(function(){
+	$(".search").keyup(function(){
+    	search()
+	});
+	//搜索功能,提交ajax数据到后台
+	var key =  $(".search").val()
+	function search(){
+		page = 0;
+	    var html =''
+	    var key =  $(".search").val()
+	    $.ajax({
+	        url: site+"/upkeep/myOrder",
+	        data: {userId:loca_fetch('userid'),order:key,page:page,type:1},
+	        type: 'get',
+	        dataType: 'json',
+	        beforeSend:function(){
+					$('ul li').css({'display':'none'})	
+					$("body").append('<div id="pload" style="position:fixed;top:50%;z-index:1200;background:url(images/icon/loading-2.gif) top center no-repeat;width:100%;height:142px;margin:auto auto;"></div>');  
+				},
+	        complete: function () {  
+	               $("#pload").remove();  
+	               $('ul li').css({'display':'block'})
+	               
+	        }, 
+	        success: function (data) {
+	        	var jsons = data.data.content
+	            if(data.code==1){
+	                $.each(jsons,function(i,val){
+	                	var dates = getMyDate(val.createTime)
+	                    //这一步是显示数据的关键，each方法可以操作二维数组数据
+	                    //data.data：php返回的数据；
+	                    //no：键值；
+	                    //items:内层数组内容
+	                    var url = site+"/upkeep/myOrder?user_id="+loca_fetch('userid');
+	                    //拼接数据
+						html += 
+							"<li class=\"go\" data-moder="+val.morderId+">\n"
+							+"	<div class=\"indent_title\">\n"
+							+"		<img class=\"left\" src=\"images/icon/icon_35.png\" alt=\"\" />\n"
+							+"		<i class=\"right\">待付款</i>\n"
+							+"	</div>\n"
+							+"	<div class=\"indent_main\">\n"
+							+"		<em class=\"left\"><img src=\""+val.photo+"\" alt=\"\" /></em>\n"
+							+"		<span class=\"left\">\n"
+							+"			<i>"+ val.goodsName +"</i>\n"
+							+"			<b>"+ dates +"<i></i><strong>下单</strong></b>\n"
+							+"			<strong>实付:<i>¥"+ val.totalPrice +"</i></strong>\n"
+							+"		</span>\n"
+							+"		<div class=\"right1\">\n"
+							+"			<p class=\"indent_num\">x"+ val.boxNumber +"</p>\n"
+							+"			<a class='payment' data-moder="+val.morderId+" href=\"javascript:;\">去付款</a>\n"
+							+"			<em data-moder="+val.morderId+" class=\"remove_moder\">删除订单</em>\n"
+							+"		</div>\n"
+							+"	</div>\n"
+							+"</li>"
+	                        
+	                });
+	                $('.obligation').html(html)//显示数据，同时覆盖上一次搜索的数据
+					$('.payment').on('click',function(){
+						var str = $(this).attr('data-moder');
+						var int = str*1;
+						loca_save('moderid',parseInt(str))
+						window.location.href='./payment_details.html'
+					})
+					remove()
+	            }
+	        },
+	    });
+	}	
+    // 页数
+    var page = -1;
+    if(loca_fetch('userid') == ''){
+    	$('section').hide()
+    }else{
+    	$('section').show()
+	    // dropload
+	    $('section').dropload({
+	        scrollArea : window,
+	        loadDownFn : function(me){
+	            page++;
+	            //拼接html
+	            var result = '';
+	            //获取待付款数据
+	            $.ajax({
+	                type:"get",
+	                url:"http://52.80.81.212:9333/upkeep/myOrder?page="+page+'&type='+1,
+	                dataType:'json',
+	                data:{userId:loca_fetch('userid'),order:key},
+	                success:function(data){
+	                    var jsons = data.data.content   
+	                    console.log(jsons)
+	                    if(jsons.length > 0){
+	                        $.each(jsons, function(i,val) {
+	                            //时间戳
+		                        var dates = getMyDate(val.createTime)
+	                            result += 
+	                                "<li class=\"go\" data-moder="+val.morderId+">\n"
+									+"	<div class=\"indent_title\">\n"
+									+"		<img class=\"left\" src=\"images/icon/icon_35.png\" alt=\"\" />\n"
+									+"		<i class=\"right\">待付款</i>\n"
+									+"	</div>\n"
+									+"	<div class=\"indent_main\">\n"
+									+"		<em class=\"left\"><img src=\""+val.photo+"\" alt=\"\" /></em>\n"
+									+"		<span class=\"left\">\n"
+									+"			<i>"+ val.goodsName +"</i>\n"
+									+"			<b>"+ dates +"<i></i><strong>下单</strong></b>\n"
+									+"			<strong>实付:<i>¥"+ val.totalPrice +"</i></strong>\n"
+									+"		</span>\n"
+									+"		<div class=\"right1\">\n"
+									+"			<p class=\"indent_num\">x"+ val.boxNumber +"</p>\n"
+									+"			<a class='payment' data-moder="+val.morderId+" href=\"javascript:;\">去付款</a>\n"
+									+"			<em data-moder="+val.morderId+" class=\"remove_moder\">删除订单</em>\n"
+									+"		</div>\n"
+									+"	</div>\n"
+									+"</li>"
+	                        });
+	                    //如果没有数据
+	                    }else{
+	                        //锁定
+	                        me.lock()
+	                        //无数据
+	                        me.noData();
+	                    }
+	                    setTimeout(function(){
+	                        //插入数据到页面，放到最后
+	                        $('.obligation').append(result);
+	                        $('.go').on('click',function(){
+	                            var str = $(this).attr('data-moder');
+	                            var int = str*1;
+	                            loca_save('moderid',parseInt(str))
+	                            window.location.href='./payment_details.html'
+	                        })
+	                        remove()
+	                        //每次数据插入，必须重置
+	                        me.resetload();
+	                    });
+	                },
+	                error : function(xhr,type){
+	                    //即使加载出错也必须重置
+	                    me.resetload();
+	                }
+	            });
+	        }
+	    })
+	}
+});	
+	function remove(){
+   		//删除订单 		
+	    $('.remove_moder').on('click',function(e){
+	    	e.stopPropagation()	    	
+			var str = $(this).attr('data-moder');
+			var int = str*1;
+			loca_save('moderid',parseInt(str))
+			btnremove()
+    	})
+	}   
+    
+</script>

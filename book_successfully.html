@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="x5-orientation" content="portrait" />
+	<meta name="x5-fullscreen" content="true" />
+	<meta name="screen-orientation" content="portrait" />
+	<meta name="full-screen" content="yes" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<link rel="stylesheet" href="css/book_successfully.css" />
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/vue1.0.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<title>预约成功</title>
+</head>
+<body>
+	<div class="section" v-cloak>
+		<h3 class="book-title">预约成功</h3>
+		<div class="book-successfully">
+			<span class="book-photo"><img :src="item.photo" alt="" /></span>
+			<p class="book-keep">{{ item.goodsName }}</p>
+			<p class="book-price">¥{{ item.totalPrice }}</p>
+		</div>
+		<p class="book-address">保养地址：<i>{{ item.adress }}</i></p>
+		<p class="book-time">预约时间：<i>{{ item.createTime | time }}</i></p>
+		<p class="book-affirm"><button>确认</button></p>
+	</div>
+</body>
+</html>
+<script>
+	//跳转首页
+	time()
+	$('.book-affirm').on('click',function(){
+		location.href="index.html"
+	})
+	$.ajax({
+		type:"get",
+		url:site+"/upkeep/redeem",
+		dataType:'json',
+		data:{orderId:loca_fetch('moders')},
+		success:function(data){
+			var jsons = data.data
+			console.log(jsons)
+			var vue = new Vue({
+				el:'.section',
+				data:{item:jsons}
+			})
+		}
+	});
+</script>

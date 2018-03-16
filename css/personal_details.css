@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+/*header-头部*/
+header { width: 100%;height: 1.76rem;background: #ffffff;border-bottom: 1px solid #e2e3e4;line-height: 1.76rem; }
+header a { width: 1.2rem;height: 1.76rem;background: url(../images/icon/icon_14.png) no-repeat center;background-size: 0.46rem 0.58rem;float: left; }
+header i { text-align: center;display: block;font-size: 0.72rem;color: #000000;margin-right: 1.2rem; }
+
+/*section_骨架*/
+section { width: 100%; }
+section ul { background: #fff; }
+section ul li { width: 100%;height: 1.8rem;line-height: 1.8rem;padding-left: 0.4rem;box-sizing: border-box;-webkit-box-sizing: border-box; }
+section ul li div { height: 1.8rem;margin: 0 0.4rem;border-bottom: 1px solid #e1e1e1;box-sizing: border-box;-webkit-box-sizing: border-box; }
+section ul li div span { float: right;width: 1.5rem;height: 1.5rem;border-radius: 2rem;-webkit-border-radius: 2rem;margin: 0.1rem 0 0.15rem 0;overflow: hidden; }
+section ul li div span img { max-width: 1.5rem;height: 1.5rem; }
+section ul li div i { float: left;font-size: 0.56rem;color: #1a1a1a;font-weight: 600; }
+section ul li div input { float: right;font-size: 0.56rem;color: #1a1a1a;font-weight: 600;height: 1.7rem;background: transparent;text-align: right; }
+section ul li div strong { font-weight: normal; float: right;font-size: 0.56rem;color: #1a1a1a;font-weight: 600;height: 1.7rem;width: 10rem;text-align: right; }
+section ul li>div>img { width: 0.28rem;height: 0.46rem;float: right;margin: 0.6rem 0.1rem 0.6rem 0.4rem; }
+section ul li:nth-of-type(4) div { border: 0; } 
+#preview { margin: 0; }
+#userface { float: left; }

@@ -1,0 +1,20 @@
+@charset "utf-8";
+
+/*header_头部*/
+header { width: 100%;height: 1.76rem;background: #ffffff;border-bottom: 1px solid #e2e3e4;line-height: 1.76rem; }
+header a { width: 1.2rem;height: 1.76rem;background: url(../images/icon/icon_14.png) no-repeat center;background-size: 0.46rem 0.58rem;float: left; }
+header i { text-align: center;display: block;font-size: 0.72rem;color: #000000;margin-right: 1.2rem; }
+
+/*section_骨架*/
+section { width: 100%;background: #fff;margin-top: 0.2rem; }
+section	.stars { width: 100%;height: 1.88rem;padding: 0 0.4rem; line-height: 1.88rem;box-sizing: border-box;-webkit-box-sizing: border-box;border-bottom: 1px solid #dfdfdf; }
+section	.stars span{ float: left;font-size: 0.56rem;color: #000;margin-right: 0.84rem; }
+section	.stars i{ width: 0.72rem;height: 1.88rem;float: left;background: url(../images/icon/icon_z.png) no-repeat center;background-size: 0.72rem 0.66rem;margin-right: 0.16rem; }
+section	.stars .on{ background: url(../images/icon/icon_x.png) no-repeat center;background-size: 0.72rem 0.66rem; }
+section .stars b { font-size: 0.56rem;color: #ff9d06;font-weight: normal;vertical-align: middle; }
+section .stars em { font-size: 0.56rem;color: #ff9d06;font-style: normal; }
+section .textbox { width: 100%;height: 8.2rem;padding: 0.52rem 0.36rem;box-sizing: border-box;-webkit-box-sizing: border-box; }
+section .textbox textarea { resize: none;width: 100%;height: 100%;border: 0;outline: none; }
+section>p { position: absolute;bottom: 0.84rem;left: 0;padding: 0 1.2rem;box-sizing: border-box;width: 100%; }
+section>p button { width: 100%;height: 1.72rem;background: #ff7676;border-radius: 1rem;-webkit-border-radius: 1rem;font-size: 0.6rem;color: #fff; }
+

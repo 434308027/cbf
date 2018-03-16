@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="x5-orientation" content="portrait" />
+	<meta name="x5-fullscreen" content="true" />
+	<meta name="screen-orientation" content="portrait" />
+	<meta name="full-screen" content="yes" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="css/layer_mobile.css"/>
+    <link rel="stylesheet" type="text/css" href="css/framework7.ios.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<link rel="stylesheet" href="css/shipping_address.css" />
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/layer_mobile.js"></script>
+	<script type="text/javascript" src="js/vue1.0.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<title>收货地址</title>
+</head>
+<body>
+	<!-- header_头部  -->
+	<header>
+		<p>
+			<a href="javascript:;" class="go_back" ></a>
+			<i>收货地址</i>
+		</p>
+	</header>
+	<!-- section_骨架 -->
+	<section>
+		<ul>
+			<li v-for="item in dott" v-cloak>
+				<div><p class="clearfix"><i class="left">{{ item.people }}</i><em class="right">{{ item.mobile }}</em></p><span><input readonly type="text" placeholder="{{ item.addr }}" /></span></div>
+				<div class="clearfix">
+					<label :data-adds="item.adressId" @click="addclick($event)" class="left ss"><em></em><input type="radio" name="a" class="defaults" value="{{ item.defaul }}" /><i class="act_f1">默认地址</i></label>
+					<b class="right" :data-rem= "item.adressId" @click="remove($event)" >删除</b>
+					<em class="right edit" :data-addr="item.addr" :data-people="item.people" :data-mobile="item.mobile" :data-add="item.adressId" @click="address($event)">修改</em>
+				</div>
+			</li>
+		</ul>
+		<p><button class="buttom">添加收货地址</button></p>
+	</section>
+	<!-- add_sipping_address_添加收货地址 -->
+	<div class="add_sipping_address">
+		<p class="addr">
+			<a href="javascript:;"></a>
+		</p>
+		<div>
+			<i>收货人</i>
+			<span>
+				<label class="lab_f1"><input type="text" class="consignee" value="{{people}}" placeholder="请输入收货人姓名" /></label>
+				<label class="lab_f2"><em></em><input class="default" type="checkbox" value="0" /><i>设为默认</i></label>
+			</span>
+		</div>
+		<div>
+			<label class="lab_f3"><i class="left">收货地址</i><em></em><input type="text" readonly id="location" name="location"></label>
+			<label class="lab_f4"><i class="left">详细地址</i><input class="left addre" value="{{addr}}" type="text" placeholder="请输入详细地址" /></label>
+		</div>
+		<div><label class="labe"><i>联系方式</i><input type="text" class="phones" value="{{mobile}}" placeholder="请输入手机号码" /></label></div>
+		<button class="buttom buttom-off">保存地址</button>
+		<button class="buttom-odd">保存地址</button>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="js/framework7.min.js"></script>
+<script type="text/javascript" src="js/regionsObject2.js"></script>
+<script type="text/javascript" src="js/cityPicker.js"></script>
+<script>
+	$(function(){
+		//不被软键盘顶起
+	    var h=$(window).height();
+	    $(window).resize(function() {
+	        if($(window).height()<h){
+	            $('.add_sipping_address .buttom').hide();
+	        }
+	        if($(window).height()>=h){
+	            $('.add_sipping_address .buttom').show();
+	        }
+	    });
+	    var h=$(window).height();
+	    $(window).resize(function() {
+	        if($(window).height()<h){
+	            $('.add_sipping_address .buttom-odd').hide();
+	        }
+	        if($(window).height()>=h){
+	            $('.add_sipping_address .buttom-odd').show();
+	        }
+	    });
+		//显示隐藏数据
+		if(loca_fetch('userid') == ''){
+			$('section').css('display','none')
+		}else{
+			$('section').css('display','block')
+		}
+		//修改收货地址
+		$('.buttom-odd').on('click',function(){
+			$(this).remove('buttom-off')
+			if($('.consignee').val() == ''){
+				alerts('请输入收货人')
+			}else if($('.addre').val() == ''){
+				alerts('请输入收货地址')
+			}else if($('.phones').val() == ''){
+				alerts('请输入联系方式')
+			}else{
+				var reg_type = $('.default').val()
+				var json = {
+					adressId:loca_fetch('addressid'),
+					addr:$('.addre').val(),
+					people:$('.consignee').val(),
+					mobile:$('.phones').val(),
+				}
+				$.ajax({
+					type:"post",
+					url:site+"/mall/changeAddr",
+					dataType:'json',
+					data:json,
+					success:function(data){
+						alerts(data.msg)
+						window.location.href="shipping_address.html"
+						$('.buttom-off').show()	
+					}
+				});	
+			}
+		})
+		//查询收货列表
+		$.ajax({
+			type:"get",
+			url:site+"/mall/allAddress",
+			dataType:'json',
+			data:{userId:loca_fetch('userid')},
+			success:function(data){
+				var jsons = data.data
+				console.log(jsons)
+				var vue = new Vue({
+					el:'section',
+					data:{
+						dott:jsons
+					},
+					methods:{
+						remove(e){
+							var remove = e.srcElement.getAttribute('data-rem')
+							$.ajax({
+								type:"post",
+								url:site+"/mall/deleAddr",
+								dataType:'json',
+								data:{adressId:remove},
+								success:function(data){
+								$(e.target).parent().parent().remove()
+								if(data.code == 1){
+										alerts('删除成功')
+									}else{
+										alerts('删除失败')
+									}
+								}
+							});	
+						},
+						address(e){
+							$('.add_sipping_address').css({'transform':'translateX(0)','transition':'.5s'})
+							var add = e.srcElement.getAttribute('data-add')
+							loca_save('addressid',parseInt(add))
+							var addr = e.currentTarget.getAttribute('data-addr')
+							loca_save('addr',addr)
+							var mobile = e.currentTarget.getAttribute('data-mobile')
+							loca_save('mobile',mobile)
+							var people = e.currentTarget.getAttribute('data-people')
+							loca_save('people',people)
+							$('.buttom-off').hide()
+							$('.addr').append('<i>修改地址</i>')
+							var vue = new Vue({
+								el:'.add_sipping_address',
+								data:{
+									addr:loca_fetch('addr'),
+									people:loca_fetch('people'),
+									mobile:loca_fetch('mobile')
+								}
+							})					
+						},
+						addclick(e){
+							var  adds = e.currentTarget.getAttribute('data-adds')
+							console.log(adds)
+							loca_save('addresid',parseInt(adds))
+							var stk = e.currentTarget
+							console.log(stk)
+							$.ajax({
+								type:'post',
+								url:site+"/mall/changeDefaul",
+								dataType:'json',
+								data:{adressId:loca_fetch('addresid')},
+								success:function(data){						
+									if(data.code == 0){
+										alerts(data.msg)
+									}else{
+										$('.ss em').removeClass('act')
+										$('.ss input').val(2)
+										$('input:checked').siblings('em').addClass('act')
+									}
+								}
+							})
+						}
+					}
+				})
+				//默认选中事件
+				$('.ss input').each(function(i,val){
+					if($(this).val() == 1){
+						$(this).attr('checked',true)
+						$(this).siblings('em').addClass('act')
+					}
+				})
+			}	
+		});
+		//添加收货地址
+		$('.buttom-off').on('click',function(){
+			if($('.consignee').val() == ''){
+				alerts('请输入收货人')
+			}else if($('.addre').val() == ''){
+				alerts('请输入收货地址')
+			}else if($('.phones').val() == ''){
+				alerts('请输入联系方式')
+			}else{
+				var reg_type = $('.default').val()
+				var json = {
+					userId:loca_fetch('userid'),
+					addr:$('.addre').val(),
+					people:$('.consignee').val(),
+					mobile:$('.phones').val(),
+					defaul:reg_type
+				}
+				$.ajax({
+					type:"post",
+					url:site+"/mall/addAddress",
+					dataType:'json',
+					data:json,
+					success:function(data){
+						alerts(data.msg)
+						window.location.href="shipping_address.html"
+						$('.buttom-odd').show()
+					}					 
+				});	
+			}
+		})
+		//设为默认地址
+		$(".lab_f2 input").change(function(){
+			if($(this).is(":checked")){
+				$(this).siblings('em').addClass("act");
+				$('.default').val(1)
+			}else{
+				$(this).siblings('em').removeClass("act");
+				$('.default').val(0)
+			}
+		});
+		$('section>p').on('touchstart',function(e){
+			e.preventDefault()
+			$('input').val('')
+			$('.addr').append('<i>添加地址</i>')
+			$('.add_sipping_address').css({'transform':'translateX(0)','transition':'.5s'})
+			$('.buttom-odd').hide()
+		})
+		$('.add_sipping_address>p a').on('click',function(){
+			window.location.href="shipping_address.html"
+			$('.buttom-odd').show();
+			$('.buttom-off').show();
+		})
+		//返回
+		$('.go_back').on('click',function(){
+			window.location.href='personal_center.html'
+		})
+	})
+
+</script>

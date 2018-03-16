@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="x5-orientation" content="portrait" />
+	<meta name="x5-fullscreen" content="true" />
+	<meta name="screen-orientation" content="portrait" />
+	<meta name="full-screen" content="yes" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<link rel="stylesheet" href="css/application_checklist.css" />
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<title>确认申请一</title>
+</head>
+<body>
+	<!-- header_头部  -->
+	<header>
+		<p>
+			<a href="personal_application.html"></a>
+			<i>分期申请确认</i>
+		</p>
+	</header>
+	<!-- section_骨架 -->
+	<section>
+		<ul>
+			<li><i>姓名:</i><b>哈哈</b></li>
+			<li><i>身份证号:</i><b>333333333333333</b></li>
+			<li><i>手机号:</i><b>3333333333</b></li>
+			<li><i>银行名称:</i><b>哈哈银行</b></li>
+			<li class="f1_boa"><i>银行卡号:</i><b>33333333</b></li>
+			<li><i>分期类型:</i><b>哈哈</b></li>
+			<li><i>分期险种:</i><b>商业险+加强线+车船险</b></li>
+			<li><i>保险公司:</i><b>哈哈车险</b></li>
+			<li class="f1_bob"><i>保险产品:</i><p>交强险购买；车船险购买；第三方责任险50万</p><p>车辆损失险购买；不计免赔购买；</p><p>车上人员责任险每座1万</p></li>
+			<li><i>汽车品牌型号:</i><b>大众帕沙特</b></li>
+			<li><i>商业险:</i><b>10000.00元</b></li>
+			<li><i>交强险:</i><b>1000.00元</b></li>
+			<li><i>车船险:</i><b>1000.00元</b></li>
+			<li><i>消费金抵扣:</i><b>1000.00元</b></li>
+			<li><i>保险总额:</i><b>1000.00元</b></li>
+			<li><i>贷款金额:</i><b>1000.00元</b></li>
+			<li><i>手续费:</i><b>1000.00元</b></li>
+			<li><i>分期数:</i><b>6期</b></li>
+			<li class="f1_boc"><i>月供金额:</i><strong>分期明细</strong><b>1000.00元</b></li>
+		</ul>
+		<p><label><em></em><input type="checkbox" />我已阅读并同意以上<i>《车保分消费分期付款合同》</i>内容</label></p>
+		<p class="skip"><a href="personal_center.html">确认申请</a></p>
+		<div>本协议委托第三方支付公司易极付代为扣款</div>
+	</section>
+	<!-- signature_签名 -->
+	<div class="signature">
+		<div>
+			<span><i>请签名</i><em></em></span>
+			<img src="images/logo/logo_Bg_17.jpg" alt="" />
+			<button>确认</button>
+		</div>
+	</div>
+</body>
+</html>
+<script>
+	$(function(){
+		//复选框
+		$("label input").change(function(){
+			if($(this).is(":checked")){
+				$(this).siblings('em').addClass("dot_f1");
+				$('.skip a').css({'color':'#fff'})
+				$('.signature').show();
+			}else{
+				$(this).siblings('em').removeClass("dot_f1");
+				$('.skip a').css({'color':'#ddd'})
+			}
+		});
+		
+		$('.signature button').on('click',function(){
+			$('.signature').hide();
+		})
+		$('.signature em').on('click',function(){
+			$('.signature').hide();
+		})
+	})
+</script>
+
+
+
+
+
+
+
+
+
+
+

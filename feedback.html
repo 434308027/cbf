@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="x5-orientation" content="portrait" />
+	<meta name="x5-fullscreen" content="true" />
+	<meta name="screen-orientation" content="portrait" />
+	<meta name="full-screen" content="yes" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="css/layer_mobile.css"/>
+	<link rel="stylesheet" href="css/feedback.css" />
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/layer_mobile.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<title>意见反馈</title>
+</head>
+<body>
+	<!-- header_头部  -->
+	<header>
+		<p>
+			<a href="personal_center.html"></a>
+			<i>意见反馈</i>
+		</p>
+	</header>
+	<!-- section_骨架 -->
+	<section>
+		<div>
+			<textarea class="content" placeholder="请填写您的意见或建议"></textarea>
+		</div>
+		<span><label><input class="phone" type="text" placeholder="请输入您的联系方式,QQ、微信、电话" /><i></i></label></span>
+		<p><button>提交</button></p>
+	</section>
+</body>
+</html>
+<script>
+	$(function(){
+		//不被软键盘顶起
+	    var h=$(window).height();
+	    $(window).resize(function() {
+	        if($(window).height()<h){
+	            $('section>p').hide();
+	        }
+	        if($(window).height()>=h){
+	            $('section>p').show();
+	        }
+	    });
+		$('input').bind('input propertychange', function(){
+			 if($('.phone').val()==""||$('.content').val()=="") //如果两个值中只要有一个为空则
+			{
+			 	$('section p button').disabled = false		
+			 	$('section p button').css('background','#ffdada')	
+			}
+			else{
+				$('section p button').removeAttr('disabled')
+				$('section p button').css('background','#f18e8e')	
+			}	      	      
+		});
+		//提交意见反馈
+		$('section p').on('click',function(){
+			var phone= $(".phone").val();//账号
+			if($('.content').val() == ''){
+				alerts('内容不能为空')
+			}else{					
+				$.ajax({
+					type:"post",
+					url:site+"/user/feedback",
+					data:{content:$('.content').val(),phone:phone,type:1},
+					dataType:'json',
+					success:function(data){
+						alerts(data.msg)
+						location.href="personal_center.html"
+					}
+				});
+			}
+		})
+	})
+</script>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="x5-orientation" content="portrait" />
+	<meta name="x5-fullscreen" content="true" />
+	<meta name="screen-orientation" content="portrait" />
+	<meta name="full-screen" content="yes" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="css/payment_details.css"/>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/vue1.0.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<title>代付款订单详情</title>
+</head>
+<body>
+	<!-- header_头部 -->
+	<header>
+		<p>
+			<a class="go_back" href="javascript:;"></a>
+			<i>订单详情</i>
+		</p>
+	</header>
+	<!-- section_骨架 -->
+    <section>
+    	<div class="title">
+    		<span><img v-bind:src="dott.photo" alt="" /></span>
+    		<div>
+    			<h3>{{ dott.goodsName }}</h3>
+    			<span><i>{{ dott.grade }}分</i><strong></strong><b>{{ dott.adress }}</b></span>
+    			<p>¥<i>{{ dott.goodsPrice }}</i></p>
+    		</div>
+    	</div>
+		<div class="top"><p>订单明细</p></div>
+		<ul>
+			<li><i>订单编号</i><em>{{ dott.morderCode }}</em></li>
+			<li><i>下单时间</i><em class="ti">{{ dott.createTime | time }}</em></li>
+			<li><i>预约时间</i><em>{{ parseInt(dott.appointmentTime) | time }}</em></li>
+			<li><i>商家名称</i><em>{{ dott.sellerName }}</em></li>
+			<li><i>商家地址</i><em>{{ dott.adress }}</em></li>
+			<li><i>手机号</i><em>{{ dott.phone }}</em></li>
+			<li><i>数量</i><em>x{{ dott.boxNumber }}</em></li>
+			<li><i>车型</i><em>{{ dott.car }}</em></li>
+			<li><i>车辆识别号</i><em>{{ dott.vin }}</em></li>
+			<li><i>机油数量</i><em>{{ dott.oilNumber }}L</em></li>
+			<li><i>机油类型</i><em>{{ dott.oil }}</em></li>
+			<li><i>机油格类型</i><em>{{ dott.oilBox }}</em></li>
+			<li><i>是否需要发票</i><em class="fi"></em></li>
+			<li><i>消费金</i><em>-{{ dott.exp }}</em></li>
+			<li><i>总价</i><em>{{ dott.totalPrice }}</em></li>
+		</ul>
+		<div class="bottom"><p>待付款:¥{{ dott.totalPrice }}</p></div>
+		<p><button  class="go" :data-totlpri = "dott.totalPrice" @click="go($event)" >去付款</button></p>
+    </section>
+</body>
+</html>
+<script>
+	//时间戳转换时间
+	Vue.filter('time',
+		function(value) {
+		var date = new Date(value);
+		Y = date.getFullYear(),
+		m = date.getMonth() + 1,
+		d = date.getDate(),
+		H = date.getHours(),
+		i = date.getMinutes(),
+		s = date.getSeconds();
+		if (m < 10) {
+		m = '0' + m;
+		}
+		if (d < 10) {
+		d = '0' + d;
+		}
+		if (H < 10) {
+		H = '0' + H;
+		}
+		if (i < 10) {
+		i = '0' + i;
+		}
+		if (s < 10) {
+		s = '0' + s;
+		}
+		var t = Y+'-'+m+'-'+d+' '+H+':'+i;
+//		var t = Y + '-' + m + '-' + d;
+		return t;
+	});
+	function GetQueryString(name)
+	{
+	    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+	    var r = window.location.search.substr(1).match(reg);
+	    if(r!=null)return  unescape(r[2]); return null;
+	}
+	//订单详情
+	//待付款
+	$.ajax({
+		type:"get",
+		url:site+"/upkeep/redeem",
+		data:{orderId:loca_fetch('moderid')},
+		dataType:'json',
+		beforeSend:function(){
+		$('section').css({'display':'none'})
+			$("body").append('<div id="pload" style="position:fixed;top:10%;z-index:1200;background:url(images/icon/loading-2.gif) top center no-repeat;width:100%;height:142px;margin:auto auto;"></div>');  
+		},
+      	complete: function () {  
+           $("#pload").remove();  
+           $('section').css({'display':'block'})
+        }, 		
+		success:function(data){
+			console.log(data)
+			var jsons = data.data;
+			if(data.data.needTicket == '0')
+				$('.fi').text('否')
+			else if(data.data.needTicket == '1'){
+				$('.fi').text('是')
+			}
+//			var num = parseInt(jsons.appointmentTime)
+//			$('.ti').text(num)
+			var vue = new Vue({
+				el:'section',
+				data:{
+					dott:jsons,
+				},
+				methods:{
+					go(e){
+						var str = e.srcElement.getAttribute('data-totlpri')
+						var int = str*1					
+						loca_save('totalpri',parseFloat(str))
+						window.location.href='./payment.html'
+					}
+				}
+			})
+		}
+	});
+	$('.go_back').on('click',function(){
+    	window.history.go(-1); 
+    })
+</script>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="x5-orientation" content="portrait" />
+		<meta name="x5-fullscreen" content="true" />
+		<meta name="screen-orientation" content="portrait" />
+		<meta name="full-screen" content="yes" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/layer_mobile.css" />
+		<link rel="stylesheet" type="text/css" href="css/mobileSelect.css">
+		<link rel="stylesheet" href="css/real_information.css" />
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/layer_mobile.js"></script>
+		<script type="text/javascript" src="js/vue1.0.js"></script>
+		<script src="js/mobileSelect.js" type="text/javascript"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<title>实名信息</title>
+	</head>
+
+	<body>
+		<!-- header_头部  -->
+		<header>
+			<p>
+				<a href="personal_center.html"></a>
+				<i>实名信息</i>
+			</p>
+		</header>
+		<!--section_骨架-->
+		<section>
+			<span><label><i>姓名:</i><input class="username" type="text" value="{{ dott.username }}" /></label></span>
+			<span><label><i>身份证号:</i><input class="usercar" type="text" value="{{ dott.idNumber }}" /></label></span>
+			<span><label><i>银行卡号:</i><input class="bankcar" type="text" value="{{ dott.bankCardNumber }}" /></label></span>
+			<!--<span><label><i>开户银行:</i><button class="bank" id="deposit_bank">{{ dott.bank }}</button></label></span>-->
+			<span class="bankss"><label><i>开户银行:</i><button class="banks">获取银行名称</button><strong></strong><input class="get_bank" type="text" value="{{ dott.bank }}" /></label></span>
+			<span><label><i>银行预留手机:</i><input class="bankphone" type="text" value="{{ dott.phone }}" /></label></span>
+			<span class="counts"><label><i>短信验证码:</i><button class="count">获取验证码</button><strong></strong><input class="auth_code" type="text" /></label></span>
+			<span><label><i>现居地:</i><input class="residentialAddress" type="text" value="{{ dott.residentialAddress }}" /></label></span>
+			<span><label><i>工作单位:</i><input class="companyName" type="text" value="{{ dott.companyName }}" /></label></span>
+			<span><label><i>通讯地址:</i><input class="postalAddress" type="text" value="{{ dott.postalAddress }}" /></label></span>
+			<span><label><i>户籍地址:</i><input class="permanentAddress" type="text" value="{{ dott.permanentAddress }}" /></label></span>
+			<span><label><i>通讯地址邮编:</i><input class="correspondenceAddress" type="text" value="{{ dott.correspondenceAddress }}" /></label></span>
+			<span><label><i>现居地址邮编:</i><input class="zipCode" type="text" value="{{ dott.zipCode }}" /></label></span>
+			<span><label><i>还款银行卡编码:</i><input class="bankCardTypeCode" type="text" value="{{ dott.bankCardTypeCode }}" /></label></span>
+			<p><button>保存</button></p>
+		</section>
+	</body>
+
+</html>
+<script>
+	$(function() {
+		//不被软键盘顶起
+		var h = $(window).height();
+		$(window).resize(function() {
+			if($(window).height() < h) {
+				$('section p').hide();
+			}
+			if($(window).height() >= h) {
+				$('section p').show();
+			}
+		});
+		//获取认证信息
+		if(loca_fetch('waid') == '') {
+			$('input').val('')
+			$('.bank').text('')
+			$('section>p').on('click', function() {
+				if($('input').val() == '') {
+					alerts('内容不能为空')
+				} else {
+					var jsons = {
+						userId: loca_fetch('userid'), //用户id
+						username: $('.username').val(), //姓名
+						idNumber: $('.usercar').val(), //身份证号
+						bankCardNumber: $('.bankcar').val(), //银行卡号
+						phone: $('.bankphone').val(), //银行预留手机
+						code: $('.auth_code').val(), //短信验证码
+						residentialAddress: $('.residentialAddress').val(), //现居地
+						postalAddress: $('.postalAddress').val(), //通讯地址
+						companyName: $('.companyName').val(), //工作单位
+						permanentAddress: $('.permanentAddress').val(), //户籍地址
+						correspondenceAddress: $('.correspondenceAddress').val(), //通讯地址邮编
+						zipCode: $('.zipCode').val(), //现居地邮编
+						bankName: $('.get_bank').val(), //开户银行
+						bankCardTypeCode: $('.bankCardTypeCode').val() //还款银行卡编码
+					}
+					$.ajax({
+						type: "post",
+						url: site + "/Loan/authentication",
+						dataType: 'json',
+						data: jsons,
+						success: function(data) {
+							loca_save('waid', data.data.id)
+							window.location.href = "personal_center.html"
+						}
+					});
+				}
+			})
+		} else {
+			$('input').val('')
+			$.ajax({
+				type: "get",
+				url: site + "/Loan/queryMyAuthentication",
+				datType: 'json',
+				data: {
+					userId: loca_fetch('userid')
+				},
+				success: function(data) {
+					var jsons = data.data
+					loca_save('waid', jsons.id)
+					if(jsons.applyStatus == 'PASS') {
+						alerts('审核通过')
+						$('.username').attr('disabled', true)
+						$('.usercar').attr('disabled', true)
+						var vue = new Vue({
+							el: 'section',
+							data: {
+								dott: jsons
+							}
+						})
+					} else if(jsons.applyStatus == 'WAIT_CHECK') {
+						alerts('待审核')
+						var vue = new Vue({
+							el: 'section',
+							data: {
+								dott: jsons
+							}
+						})
+					} else {
+						//实名认证
+						alerts('未通过')
+						loca_save('waid', jsons.id)
+						var vue = new Vue({
+							el: 'section',
+							data: {
+								dott: jsons
+							}
+						})
+						$('section>p').on('click', function() {
+							if($('input').val() == '') {
+								alerts('内容不能为空')
+							} else {
+								var jsons = {
+									userId: loca_fetch('userid'), //用户id
+									username: $('.username').val(), //姓名
+									idNumber: $('.usercar').val(), //身份证号
+									bankCardNumber: $('.bankcar').val(), //银行卡号
+									phone: $('.bankphone').val(), //银行预留手机
+									code: $('.auth_code').val(), //短信验证码
+									residentialAddress: $('.residentialAddress').val(), //现居地
+									postalAddress: $('.postalAddress').val(), //通讯地址
+									companyName: $('.companyName').val(), //工作单位
+									permanentAddress: $('.permanentAddress').val(), //户籍地址
+									correspondenceAddress: $('.correspondenceAddress').val(), //通讯地址邮编
+									zipCode: $('.zipCode').val(), //现居地邮编
+									bankName: $('.get_bank').val(), //开户银行
+									bankCardTypeCode: $('.bankCardTypeCode').val() //还款银行卡编码
+								}
+								$.ajax({
+									type: "post",
+									url: site + "/Loan/authentication",
+									dataType: 'json',
+									data: jsons,
+									success: function(data) {
+										console.log(data)
+										window.location.href = "personal_center.html"
+									}
+								});
+							}
+						})
+					}
+					$('section>p').on('click', function() {
+						if($('input').val() == '') {
+							alerts('内容不能为空')
+						} else {
+							var jsons = {
+								userId: loca_fetch('userid'), //用户id
+								username: $('.username').val(), //姓名
+								idNumber: $('.usercar').val(), //身份证号
+								bankCardNumber: $('.bankcar').val(), //银行卡号
+								phone: $('.bankphone').val(), //银行预留手机
+								code: $('.auth_code').val(), //短信验证码
+								residentialAddress: $('.residentialAddress').val(), //现居地
+								postalAddress: $('.postalAddress').val(), //通讯地址
+								companyName: $('.companyName').val(), //工作单位
+								permanentAddress: $('.permanentAddress').val(), //户籍地址
+								correspondenceAddress: $('.correspondenceAddress').val(), //通讯地址邮编
+								zipCode: $('.zipCode').val(), //现居地邮编
+								bankName: $('.get_bank').val(), //开户银行
+								bankCardTypeCode: $('.bankCardTypeCode').val() //还款银行卡编码
+							}
+							$.ajax({
+								type: "post",
+								url: site + "/Loan/authentication",
+								dataType: 'json',
+								data: jsons,
+								success: function(data) {
+									if(data.code != 1) {
+										return alert(data.msg);
+									}
+									window.location.href = "personal_center.html"
+								}
+							});
+						}
+					})
+				}
+			});
+		}
+		//获取验证码
+		var InterValObj; //timer变量，控制时间
+		var count = 60; //间隔函数，1秒执行
+		var curCount; //当前剩余秒数
+		var processing = false; //开关
+		$('.count').click(function() {
+			//向后台发送处理数据
+			$.ajax({
+				type: "get", //用post方式传输
+				url: site + "/login/massage",
+				dataType: "json", //数据格式:JSON
+				data: {
+					phone: $('.bankphone').val(),
+					mtype: 5,
+				},
+				success: function(data) {
+					if(data.code == 1) {
+						alerts(data.msg);
+						curCount = count;
+						//设置button效果，开始计时
+						$(".count").attr("disabled", "true");
+						processing = false;
+//						$('.auth_code').val(data.data);
+						$(".count").text(+curCount + "秒内输入");
+						InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+					} else {
+						alerts(data.msg);
+					}
+				}
+			});
+		})
+
+		//获取银行卡信息
+		$('.banks').click(function() {
+			$.get(site + "/Loan/bankCardBinQuery", {
+				"bankCardNo": $(".bankcar").val()
+			}, function(da) {
+				if(da.code == 1) {
+					alerts("成功");
+					$(".get_bank").val(da.data.bankName);
+				} else {
+					return alert(da.msg);
+				}
+			})
+		});
+
+		//timer处理函数
+		function SetRemainTime() {
+			if(curCount == 0) {
+				window.clearInterval(InterValObj); //停止计时器
+				$(".count").removeAttr("disabled"); //启用按钮
+				$(".count").text("重新发送");
+			} else {
+				curCount--;
+				processing = true
+				$(".count").text(+curCount + "秒内输入");
+			}
+		}
+
+		//		$.ajax({
+		//			type: "post",
+		//			url: site + "/user/findBank",
+		//			dataType: 'json',
+		//			success: function(data) {
+		//				var jsons = data.data
+		//				var jso = []
+		//				$.each(jsons, function(i, val) {
+		//					js = val.bankName
+		//					jso.push(js)
+		//				});
+		//				mobileSelect1.updateWheel(0, jso);
+		//			}
+		//		});
+	})
+</script>

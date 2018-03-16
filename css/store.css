@@ -1,0 +1,33 @@
+@charset "utf-8";
+
+body { background: #fff; }
+/*header_头部*/
+header { width: 100%;height: 1.76rem;background: #ffffff;border-bottom: 1px solid #e2e3e4;line-height: 1.76rem;position: absolute;top: 0;left: 0;z-index: 11; }
+header 1a { width: 1.2rem;height: 1.76rem;background: url(../images/icon/icon_14.png) no-repeat center;background-size: 0.46rem 0.58rem;float: left; }
+header i { text-align: center;display: block;font-size: 0.72rem;color: #000000; }
+
+/*section_骨架*/
+section { width: 100%;margin-top: 1.76rem;padding-bottom: 2rem; }
+section>span { display: block;width: 100%;height: 1.2rem;background: url(../images/icon/icon_48.png) no-repeat center;background-size: 100% 1.2rem;box-sizing: border-box;-webkit-box-sizing: border-box;padding-top: 0.3rem; }
+section>span>i { font-size: 0.4rem;color: #fff;display: block;text-indent: 2.5rem; }
+/*store_tab_标签*/
+section .store_tab { width: 100%;height: 1.8rem;border-bottom: 1px solid #e2e3e4; }
+.store_tab ul { display: flex;flex-direction: row;justify-content: space-around; }
+.store_tab li { font-size: 0.48rem;color: #a5a5a5;display: block;line-height: 1.8rem; }
+.store_tab li.active { color: #4a4a4a;font-weight: 600; }
+/*store_list_列表*/
+section .store_list { width: 100%;padding: 0 0.4rem;box-sizing: border-box;-webkit-box-sizing: border-box; }
+.store_list li a { width: 100%;height: 5.2rem;border-bottom: 1px solid #efefef;padding: 0.4rem 0;box-sizing: border-box;-webkit-box-sizing: border-box;display: block; }
+.store_list li div { float: left;overflow: hidden;width: 4.2rem;height: 4.2rem; }
+.store_list li div img { width: 4.2rem;height: 4.28rem; }
+.store_list li a>span { float: left;margin-left: 0.4rem; }
+.store_list li span h3 { font-size: 0.56rem;color: #727272;margin-bottom: 1.6rem;width: 9.52rem; }
+.store_list li span>span.clearfix { width: 100%; }
+.store_list li span>span { float: left;font-size: 0.4rem;color: #ff4a26; }
+.store_list li span>span i { font-size: 0.8rem; }
+.store_list li span>span b { font-size: 0.44rem;color: #c6c6c6; }
+.store_list li span>strong { float: right;color: #828282;font-size: 0.48rem;margin-top: 0.3rem; }
+
+
+/*footer*/
+.footer ul li a:nth-of-type(4) { color: #FF7676; }

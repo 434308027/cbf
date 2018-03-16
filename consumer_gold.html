@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="x5-orientation" content="portrait" />
+	<meta name="x5-fullscreen" content="true" />
+	<meta name="screen-orientation" content="portrait" />
+	<meta name="full-screen" content="yes" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<title>消费金记录</title>
+	<style>
+		.Consumer_gold_record{
+			width: 100%;
+			background: #f6f6f6;
+			overflow-y: scroll;
+			
+		}
+		.Consumer_gold_record>p {
+			width: 100%;
+			height: 1.76rem;
+			background: #fff;
+			border-bottom: 1px solid #e1e1e1;
+		}
+		.Consumer_gold_record>p a{
+			display: inline-block;
+			width: 1.2rem;
+			height: 1.76rem;
+			background: url(images/icon/icon_14.png) no-repeat center;
+			background-size: 0.46rem 0.58rem;
+			float: left;
+		}
+		.Consumer_gold_record>p i{
+			text-align: center;
+			display: block;
+			font-size: 0.76rem;
+			line-height: 1.76rem;
+			color: #000000;
+			margin-right: 1.2rem;
+		}
+		.Consumer_gold_record ul{
+			background: #ffffff;
+		}
+		.Consumer_gold_record li{
+			width: 100%;
+			height: 2.44rem;
+			padding: 0.5rem 0.64rem 0.36rem 0.64rem;
+			border-bottom: 1px solid #e1e1e1;
+			box-sizing: border-box;
+			-webkit-box-sizing:border-box;
+		}
+		.Consumer_gold_record li .record_left{
+			float: left;
+		}
+		.Consumer_gold_record li .record_left>i{
+			font-size: 0.68rem;
+			color: #505050;
+			display: block;
+		}
+		.Consumer_gold_record li .record_left>b{
+			font-size: 0.48rem;
+			color: #828282;
+			display: block;
+		}
+		.Consumer_gold_record li .record_left>b i:nth-of-type(2){
+			margin-left: 0.3rem;
+		}
+		.Consumer_gold_record li .record_right{
+			float: right;
+		}
+		.Consumer_gold_record li .record_right p:nth-of-type(1){
+			font-size: 0.6rem;
+			color: #FF7676;
+			margin-bottom: 0.24rem;
+		}
+		.Consumer_gold_record li .record_right p:nth-of-type(2){
+			font-size: 0.48rem;
+			color: #828282;
+		}
+	</style>
+</head>
+<body>
+	<!-- Consumer_gold_record_消费金记录 -->
+	<div class="Consumer_gold_record">
+		<p>
+			<a href="personal_center.html" class="Consumer_none"></a>
+			<i>消费金记录</i>
+		</p>
+		<ul class="gold_item">
+			<!--<li>
+				<div class="record_left">
+					<i>积分消费</i>
+					<b><i>2017/6/05</i><i>11:30</i></b>
+				</div>
+				<div class="record_right">
+					<p>-2,200</p>
+					<p>1,222</p>
+				</div>
+			</li>-->
+		</ul>
+	</div>
+</body>
+</html>
+<script>
+		//消费金记录
+		$.ajax({
+			type:"get",
+			url:site+"/user/selIntegral",
+			dataType:'json',
+			data:{userId:loca_fetch('userid'),page:0},
+			success:function(data){
+				var jsons = data.data.content
+				console.log(jsons)
+
+				$.each(jsons, function(i,val) {
+					var dates = getMyDate(val.createTime)
+					if(val.inOrOut == '1'){
+						if(val.way == '1'){
+							$('.gold_item').append('<li><div class="record_left"><i>积分获取-保险</i><b>'+dates+'</b></div><div class="record_right"><p>+'+val.integra+'</p><p>'+val.experience+'</p></div></li>')
+						}else if(val.way == '2'){
+							$('.gold_item').append('<li><div class="record_left"><i>积分获取-保养</i><b>'+dates+'</b></div><div class="record_right"><p>+'+val.integra+'</p><p>'+val.experience+'</p></div></li>')
+						}else if(val.way == '3'){
+							$('.gold_item').append('<li><div class="record_left"><i>积分获取-商城 </i><b>'+dates+'</b></div><div class="record_right"><p>+'+val.integra+'</p><p>'+val.experience+'</p></div></li>')
+						}else if(val.way == '4'){
+							$('.gold_item').append('<li><div class="record_left"><i>积分获取-分享朋友消费</i><b>'+dates+'</b></div><div class="record_right"><p>+'+val.integra+'</p><p>'+val.experience+'</p></div></li>')
+						}else{
+							$('.gold_item').append('<li><div class="record_left"><i>积分获取-注册账号</i><b>'+dates+'</b></div><div class="record_right"><p>+'+val.integra+'</p><p>'+val.experience+'</p></div></li>')
+						}
+					}else{
+						if(val.way == '1'){
+							$('.gold_item').append('<li><div class="record_left"><i>积分获取-保险</i><b>'+dates+'</b></div><div class="record_right"><p>-'+val.integra+'</p><p>'+val.experience+'</p></div></li>')
+						}else if(val.way == '2'){
+							$('.gold_item').append('<li><div class="record_left"><i>积分获取-保养</i><b>'+dates+'</b></div><div class="record_right"><p>-'+val.integra+'</p><p>'+val.experience+'</p></div></li>')
+						}else if(val.way == '3'){
+							$('.gold_item').append('<li><div class="record_left"><i>积分获取-商城 </i><b>'+dates+'</b></div><div class="record_right"><p>-'+val.integra+'</p><p>'+val.experience+'</p></div></li>')
+						}else if(val.way == '4'){
+							$('.gold_item').append('<li><div class="record_left"><i>积分获取-分享朋友消费</i><b>'+dates+'</b></div><div class="record_right"><p>-'+val.integra+'</p><p>'+val.experience+'</p></div></li>')
+						}else{
+							$('.gold_item').append('<li><div class="record_left"><i>积分获取-注册账号</i><b>'+dates+'</b></div><div class="record_right"><p>-'+val.integra+'</p><p>'+val.experience+'</p></div></li>')
+						}
+					}
+					
+				});
+			}
+		});
+</script>

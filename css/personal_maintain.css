@@ -1,0 +1,38 @@
+@charset "utf-8";
+
+html { overflow: inherit; }
+body { overflow: inherit; }
+/*header_头部*/
+header { background: #fff; }
+header div { width: 100%;height: 1.76rem;border-bottom: 1px solid #e1e1e1; }
+header div a{ height: 1.76rem;width: 1.2rem;float: left;background: url(../images/icon/icon_14.png) no-repeat center;background-size: 0.46rem 0.78rem; }
+header div form { padding: 0.28rem 0;margin-left: 1.8rem;float: left; }
+header div label { width: 9.2rem;height: 1.12rem;border-radius: 1rem;background: #f6f6f6;display: block; }
+header div label input { background: transparent;padding-left: 0.2rem;box-sizing: border-box;vertical-align: 0.13rem; }
+header div label i { width: 0.46rem;height: 1.12rem;float: left;background: url(../images/icon/icon_34.png) no-repeat center;background-size: 0.46rem 0.46rem;margin-left: 0.48rem; }
+
+/*nav_导航条*/
+nav { width: 100%; height: 1.6rem;display: flex;flex-direction: row;justify-content: space-around;background: #fff;line-height: 1.6rem; }
+nav div a{ font-size: 0.56rem;color: #4f4f4f;box-sizing: border-box;display: block; }
+nav div.active { border-bottom: 2px solid #FF7676; }
+
+/*section_订单内容*/
+section	{ width: 100%; }
+section ul { width: 100%; }
+section ul li { background: #fff;width: 100%;height: 6.04rem;padding-left: 0.4rem;box-sizing: border-box;-webkit-box-sizing: border-box;margin-top: 0.24rem; }section li .indent_title { border-bottom: 1px solid #dfdfdf;box-sizing: border-box;-webkit-box-sizing: border-box;height: 1.48rem;line-height: 1.48rem;padding-right: 0.4rem; }
+section li .indent_title img { width: 1.92rem;height: 0.58rem;margin-top: 0.52rem; }section li .indent_title i { font-size: 0.52rem;color: #999999; }
+section li .indent_main { width: 100%;padding: 0.8rem 0.4rem;box-sizing: border-box; -webkit-box-sizing: border-box;}
+section li .indent_main>em { width: 2.74rem;height: 2.74rem;overflow: hidden; }
+section li .indent_main em img { width: 3.84rem;height: 2.96rem; }
+section li .indent_main span { margin-left: 0.8rem; }
+section li .indent_main span>i { font-size: 0.64rem;color: #505050;display: block;width: 4rem;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; }
+section li .indent_main span b { font-size: 0.48rem;color: #828282;display: block;margin: 0.2rem 0; }
+section li .indent_main span b>i { margin: 0 0.24rem; }
+section li .indent_main span b>strong {  }
+section li .indent_main span>strong { font-size: 0.52rem;color: #393939;display: block; }
+section li .indent_main span>strong i { color: #ff4a26;margin-left: 0.48rem; }
+section li .indent_main div p { font-size: 0.52rem;color: #393939;text-align: right;margin-bottom: 0.8rem; }
+section li .indent_main div a { float: right;width: 3rem;height: 1.12rem;border-radius: 0.2rem;border: 1px solid #ff254e;text-align: center;line-height: 1.12rem;color: #ff254e;font-size: 0.52rem;margin-left: 0.1rem;margin-top: 0.68rem; }
+.payments { display: block;width: 100%;height: 6.04rem; }
+.remove_moder { float: right;width: 2.5rem;height: 1.12rem;border-radius: 0.2rem;border: 1px solid #ff254e;text-align: center;line-height: 1.12rem;color: #ff254e;font-size: 0.52rem;margin-top: -0.5rem; }
+.paymentss { height: 100%; } 

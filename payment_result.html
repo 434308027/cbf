@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<meta name="x5-orientation" content="portrait" />
+	<meta name="x5-fullscreen" content="true" />
+	<meta name="screen-orientation" content="portrait" />
+	<meta name="full-screen" content="yes" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="css/payment_result.css"/>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/vue1.0.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<title>支付结果</title>
+</head>
+<body>
+	<!-- header_头部 -->
+	<header>
+		<p>
+			<a href="maintain.html"></a>
+			<i>支付结果</i>
+		</p>
+	</header>
+	<!-- section_骨架 -->
+	<section>
+		<div>
+			<span><h3>测试测试测试测试测试测试厕所</h3></span>
+			<div class="coin clearfix"><i class="left">兑换券01:</i><em class="right">5899711033962</em></div>
+			<div class="code"><img src="" alt="" /></div>
+			<p>向商家出示以上券码既可消费</p>
+		</div>
+		<p><button>完成</button></p>
+	</section>
+</body>
+</html>
+<script>
+	$(function(){
+		$('section>p').on('click',function(){
+			location.href="maintain.html"
+		})
+	})
+</script>
